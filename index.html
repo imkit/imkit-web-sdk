@@ -17,8 +17,7 @@
       @keyframes spin-pageload {
         0% { transform: rotate(0deg); }
         100% { transform: rotate(360deg); }
-      }</style><link href=static/css/app.69d57ed9eb2585af49484cfa8db76c78.css rel=stylesheet></head><body><div id=imkc></div><script type=text/javascript src=static/js/app.d52a4b60f48ce15c9d2e.js></script></body><script type=text/javascript>const AdminToken = 'token249'; // 隨意一個有效的 client token 及可
-    // 隨機產生兩個client + 1個房間的資訊
+      }</style><link href=static/css/app.69d57ed9eb2585af49484cfa8db76c78.css rel=stylesheet></head><body><div id=imkc></div><script type=text/javascript src=static/js/app.d52a4b60f48ce15c9d2e.js></script></body><script type=text/javascript>// 隨機產生兩個client + 1個房間的資訊
     const timeStamp = new Date().getTime();
     const client1 = newClientInfo(timeStamp);
     const client2 = newClientInfo(timeStamp+1);
@@ -43,23 +42,26 @@
     }
 
     const config = {
-      url: 'https://chat.kagulu.com/',
+      url: 'https://chat.fangho.com/',
+      authUrl: 'https://auth.fangho.com',
       domain: '',
-      clientKey: 'kagulu_imkit_0226_2018_001_clientkey',
-      apiKey: 'kagulu_imkit_0226_2018_001_apikey',
-      bucketName: 'imkit-kagulu'
+      clientKey: 'fangho_imkit_0412_2018_001_clientkey',
+      apiKey: 'fangho_imkit_0412_2018_001_apikey',
+      bucketName: 'chatserver-upload'
     }
 
     // 建立API物件
     const APILib = IMKC.getAPILib({
-      ...config,
-      authToken: AdminToken
+      ...config
     })
 
     // 呼叫 API 建立 client + room，並將 client 加入 room
     createClientAndRoom()
 
     async function createClientAndRoom() {
+      let AdminTokenRes = await APILib.platform.sign('gagu'); // 先登入一個管理者
+      let AdminToken = AdminTokenRes.token
+
       // 要用管理者建立 client 與 room
       await APILib.auth.chatIn(AdminToken);
 
@@ -91,18 +93,18 @@
       console.log(createRoomRes);
 
       // 綁定 1 號 client 的 token
-      let bindToken1Res = await APILib.platform.bindToken(
-        client1.clientToken,
+      let bindToken1Res = await APILib.platform.sign(
         client1.clientId
       );
       console.log(bindToken1Res);
+      client1.clientToken = bindToken1Res.token;
 
       // 綁定 2 號 client 的 token
-      let bindToken2Res = await APILib.platform.bindToken(
-        client2.clientToken,
+      let bindToken2Res = await APILib.platform.sign(
         client2.clientId
       );
       console.log(bindToken2Res);
+      client2.clientToken = bindToken2Res.token;
 
       // 1 號 client 加入 Room (要先 chatIn client1)
       await APILib.auth.chatIn(client1.clientToken);
