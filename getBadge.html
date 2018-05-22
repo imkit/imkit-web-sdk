@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>IMKit Demo</title>
+    <base href=/ >
+  </head>
+  <body>
+    <div id="badge"></div>
+    <script type=text/javascript src=static/js/app.a40905a6d0eef3b4097e.js></script>
+  </body>
+  <script type=text/javascript>
+    const token = 'demoUser1525426233635'; // 要監聽的 token
+    const config = {
+      url: 'https://chat.kagulu.com/',
+      clientKey: 'kagulu_imkit_0226_2018_001_clientkey'
+    }
+    const defaultHandler = {
+      // 收到新訊息時執行
+      receiveMsg: async function (msg) {
+        checkBadge()
+      }
+    }
+
+    // 建立API物件
+    const APILib = IMKC.getAPILib({
+      ...config,
+      ...defaultHandler,
+      authToken: token
+    })
+    chatIn()
+
+    async function chatIn() {
+      await APILib.auth.chatIn(token)
+      checkBadge()
+    }
+
+    async function checkBadge() {
+      let res = await APILib.me.getBadge()
+      document.getElementById('badge').innerText = res.badge
+    }
+
+  </script>
+</html>

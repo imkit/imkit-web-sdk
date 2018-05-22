@@ -1,0 +1,168 @@
+<!DOCTYPE html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0"><title>IMKit Demo</title><base href=/ ><link rel=manifest href=static/manifest.json><style>body > .v-spinner{
+        top: calc(50% - 15px) !important;
+      }
+      body .v-spinner > .v-clip{
+        height: 30px !important;
+        width: 30px !important;
+        border-width: 3px !important;
+        border-color: #ccc #ccc transparent !important;
+        -webkit-animation: spin-pageload 0.75s linear infinite !important;
+        animation: spin-pageload 0.75s linear infinite !important;
+      }
+      @-webkit-keyframes spin-pageload {
+        0% { -webkit-transform: rotate(0deg); }
+        100% { -webkit-transform: rotate(360deg); }
+      }
+
+      @keyframes spin-pageload {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }</style><link href=static/css/app.69d57ed9eb2585af49484cfa8db76c78.css rel=stylesheet></head><body><div id=imkc></div><script type=text/javascript src=static/js/app.d52a4b60f48ce15c9d2e.js></script></body><script type=text/javascript>const AdminToken = 'token249'; // 隨意一個有效的 client token 及可
+    // 隨機產生兩個client + 1個房間的資訊
+    const timeStamp = new Date().getTime();
+    const client1 = newClientInfo(timeStamp);
+    const client2 = newClientInfo(timeStamp+1);
+    const room = newRoomInfo(timeStamp);
+
+    function newClientInfo(_timeStamp){
+      return {
+        clientId: 'demoUser' + _timeStamp,
+        clientToken: 'demoUser' + _timeStamp,
+        clientName: 'demoUser' + _timeStamp,
+        clientEmail: 'demo@funtek.co',
+        clientAvatar: '//fakeimg.pl/100x100/?text=Auto',
+      }
+    }
+    function newRoomInfo(_timeStamp){
+      return {
+        roomId: null,
+        roomName: null,
+        roomCover: '//fakeimg.pl/100x100/?text=Auto',
+        roomDescription: 'Demo A1 B1'
+      }
+    }
+
+    const config = {
+      url: 'https://chat.kagulu.com/',
+      domain: '',
+      clientKey: 'kagulu_imkit_0226_2018_001_clientkey',
+      apiKey: 'kagulu_imkit_0226_2018_001_apikey',
+      bucketName: 'imkit-kagulu'
+    }
+
+    // 建立API物件
+    const APILib = IMKC.getAPILib({
+      ...config,
+      authToken: AdminToken
+    })
+
+    // 呼叫 API 建立 client + room，並將 client 加入 room
+    createClientAndRoom()
+
+    async function createClientAndRoom() {
+      // 要用管理者建立 client 與 room
+      await APILib.auth.chatIn(AdminToken);
+
+      // 建立 1 號 client
+      let updateClient1Res = await APILib.platform.updateClient(
+        client1.clientEmail,
+        client1.clientName,
+        client1.clientId,
+        client1.clientAvatar
+      );
+      console.log(updateClient1Res);
+
+      // 建立 2 號 client
+      let updateClient2Res = await APILib.platform.updateClient(
+        client2.clientEmail,
+        client2.clientName,
+        client2.clientId,
+        client2.clientAvatar
+      );
+      console.log(updateClient2Res);
+
+      // 建立 room，取得 roomId (第二個參數是是否將管理者加入 room)
+      let createRoomRes = await APILib.room.createRoom({
+        name: room.roomName,
+        cover: room.roomCover,
+        description: room.roomDescription
+      }, false);
+      room.roomId = createRoomRes.id;
+      console.log(createRoomRes);
+
+      // 綁定 1 號 client 的 token
+      let bindToken1Res = await APILib.platform.bindToken(
+        client1.clientToken,
+        client1.clientId
+      );
+      console.log(bindToken1Res);
+
+      // 綁定 2 號 client 的 token
+      let bindToken2Res = await APILib.platform.bindToken(
+        client2.clientToken,
+        client2.clientId
+      );
+      console.log(bindToken2Res);
+
+      // 1 號 client 加入 Room (要先 chatIn client1)
+      await APILib.auth.chatIn(client1.clientToken);
+      let joinRoom1Res = await APILib.room.joinRoom(room.roomId);
+      console.log(joinRoom1Res);
+
+      // 2 號 client 加入 Room (要先 chatIn client2)
+      await APILib.auth.chatIn(client2.clientToken);
+      let joinRoom2Res = await APILib.room.joinRoom(room.roomId);
+      console.log(joinRoom2Res);
+
+      openChat();
+    }
+    function openChat() {
+      const imkit = IMKC.init({
+        debug: true,
+        lang: 'tw', // default language
+        url: config.url,
+        room: {
+          id: room.roomId
+        },
+        domain: config.domain,
+        clientKey: config.clientKey,
+        authToken: client1.clientToken,
+        bucketName: config.bucketName, // S3 bucketName
+        googleApiKey: 'AIzaSyCimtHXyW8GfZ50Vx_YcFFmaBu7G2Wm2cw', // AIzaSyB4ZoKa7v8C8blV-9CSW1JJxwqU9YgMQ8M
+        rightPage: {
+          url:'static/right.html',
+          query: {
+            roomId: 'rid',
+          }
+        },
+        events: {
+          onUnreadChange: function(unread){
+            // alert(unread)
+          }
+        },
+        useReply: false,
+        skins: ['default', 'invert'],
+        skin: 'default',
+        pictureViewModel: 'rich', // simple or rich
+        maxUploadFileSize: 2, // (MB)
+        layout: {
+          list: true,
+          info: true
+        },
+        listSetting: {
+          showMemberCount: false
+        },
+        supportMsgType: {
+          emoji: "傳送表情符號",
+          sticker: "傳送貼圖",
+          image: "傳送圖片",
+          audio: "傳送音頻",
+          video: "傳送影片",
+          location: "傳送位置"
+        },
+        supportMsgInfo: {
+          readReceipt: false
+        },
+        runForMobileDevice: false
+      })
+    }</script></html>
