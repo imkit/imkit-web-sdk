@@ -7,10 +7,10 @@
   </head>
   <body>
     <div id="badge"></div>
-    <script type=text/javascript src=static/js/app.a40905a6d0eef3b4097e.js></script>
+    <script type=text/javascript src=static/js/app.js></script>
   </body>
   <script type=text/javascript>
-    const client = 'demoUser1525426233635'; // 要監聽的 client id
+    const client = 'demoUser1532433950031'; // 要監聽的 client id
     const config = {
       url: 'https://chat.fangho.com/',
       authUrl: 'https://auth.fangho.com',
@@ -18,9 +18,13 @@
     }
     const defaultHandler = {
       // 收到新訊息時執行
-      receiveMsg: async function (msg) {
+      receiveMsg: function (msg) {
         checkBadge()
-      }
+      },
+      // 已讀時執行
+      receiveRoom: function (msg) {
+        checkBadge()
+      },
     }
 
     // 建立API物件
@@ -32,7 +36,7 @@
 
     async function chatIn() {
       let tokenRes = await APILib.platform.sign(client);
-      let token = AdminTokenRes.token
+      let token = tokenRes.token
       await APILib.auth.chatIn(token)
       checkBadge()
     }

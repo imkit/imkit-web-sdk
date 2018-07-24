@@ -7,20 +7,20 @@ importScripts('https://www.gstatic.com/firebasejs/3.9.0/firebase-app.js')
 // Initialize the Firebase app in the service worker by passing in the
 // messagingSenderId.
 var config = {
-    apiKey: 'AIzaSyA7zQF5lkQFICRpt-74QIlIEeOlAmZPQFA',
-    authDomain: 'web-pn.firebaseapp.com',
-    databaseURL: 'https://web-pn.firebaseio.com',
-    projectId: 'web-pn',
-    storageBucket: 'web-pn.appspot.com',
-    messagingSenderId: '208722133164'
+  apiKey: 'AIzaSyDH6fgpRFaH7vIqAcGQi48wgvNf8BJ9q1I',
+  authDomain: 'fir-chat-server.firebaseapp.com',
+  databaseURL: 'https://fir-chat-server.firebaseio.com',
+  projectId: 'fir-chat-server',
+  storageBucket: 'fir-chat-server.appspot.com',
+  messagingSenderId: '970263218499'
 }
 
 firebase.initializeApp(config)
 
 self.addEventListener('push', e => {
-    // self.postMessage('qqqqqqqqqqqqqqqq from worker')    
+    // self.postMessage('qqqqqqqqqqqqqqqq from worker')
     let j
-    
+
     if (e.data && e.data.json) {
         try {
             j = e.data.json()
@@ -28,7 +28,7 @@ self.addEventListener('push', e => {
         }
     }
     console.log('push', j)
-    
+
     const notificationTitle = j.notification && j.notification.title || 'IMKit'
     const notificationOptions = {
         body: j.notification && j.notification.body || 'Received Message',
@@ -53,7 +53,7 @@ self.addEventListener('notificationclick', (event) => {
             includeUncontrolled: true
         })
         if (!cs || cs.length === 0) {
-            clients.openWindow('http://localhost:8081')
+            clients.openWindow('/')
         } else {
             cs.forEach(el => {
                 if (!el.focused) {

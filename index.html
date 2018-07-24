@@ -1,23 +1,5 @@
-<!DOCTYPE html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0"><title>IMKit Demo</title><base href=/ ><link rel=manifest href=static/manifest.json><style>body > .v-spinner{
-        top: calc(50% - 15px) !important;
-      }
-      body .v-spinner > .v-clip{
-        height: 30px !important;
-        width: 30px !important;
-        border-width: 3px !important;
-        border-color: #ccc #ccc transparent !important;
-        -webkit-animation: spin-pageload 0.75s linear infinite !important;
-        animation: spin-pageload 0.75s linear infinite !important;
-      }
-      @-webkit-keyframes spin-pageload {
-        0% { -webkit-transform: rotate(0deg); }
-        100% { -webkit-transform: rotate(360deg); }
-      }
-
-      @keyframes spin-pageload {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-      }</style><link href=static/css/app.69d57ed9eb2585af49484cfa8db76c78.css rel=stylesheet></head><body><div id=imkc></div><script type=text/javascript src=static/js/app.d52a4b60f48ce15c9d2e.js></script></body><script type=text/javascript>// 隨機產生兩個client + 1個房間的資訊
+<!DOCTYPE html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0"><title>IMKit | in-app chat solution</title><base href=/ ><link rel=manifest href=static/manifest.json><link href=static/css/custom.css rel=stylesheet><link href=static/css/app.css rel=stylesheet></head><body><div id=imkc></div><script type=text/javascript src=static/js/app.js></script></body><script type=text/javascript>const AdminToken = '70'; // 隨意一個有效的 client token 及可
+    // 隨機產生兩個client + 1個房間的資訊
     const timeStamp = new Date().getTime();
     const client1 = newClientInfo(timeStamp);
     const client2 = newClientInfo(timeStamp+1);
@@ -72,7 +54,6 @@
         client1.clientId,
         client1.clientAvatar
       );
-      console.log(updateClient1Res);
 
       // 建立 2 號 client
       let updateClient2Res = await APILib.platform.updateClient(
@@ -81,7 +62,6 @@
         client2.clientId,
         client2.clientAvatar
       );
-      console.log(updateClient2Res);
 
       // 建立 room，取得 roomId (第二個參數是是否將管理者加入 room)
       let createRoomRes = await APILib.room.createRoom({
@@ -90,37 +70,32 @@
         description: room.roomDescription
       }, false);
       room.roomId = createRoomRes.id;
-      console.log(createRoomRes);
 
       // 綁定 1 號 client 的 token
       let bindToken1Res = await APILib.platform.sign(
         client1.clientId
       );
-      console.log(bindToken1Res);
       client1.clientToken = bindToken1Res.token;
 
       // 綁定 2 號 client 的 token
       let bindToken2Res = await APILib.platform.sign(
         client2.clientId
       );
-      console.log(bindToken2Res);
       client2.clientToken = bindToken2Res.token;
 
       // 1 號 client 加入 Room (要先 chatIn client1)
       await APILib.auth.chatIn(client1.clientToken);
       let joinRoom1Res = await APILib.room.joinRoom(room.roomId);
-      console.log(joinRoom1Res);
 
       // 2 號 client 加入 Room (要先 chatIn client2)
       await APILib.auth.chatIn(client2.clientToken);
       let joinRoom2Res = await APILib.room.joinRoom(room.roomId);
-      console.log(joinRoom2Res);
 
       openChat();
     }
     function openChat() {
       const imkit = IMKC.init({
-        debug: true,
+        debug: false,
         lang: 'tw', // default language
         url: config.url,
         room: {
@@ -131,12 +106,7 @@
         authToken: client1.clientToken,
         bucketName: config.bucketName, // S3 bucketName
         googleApiKey: 'AIzaSyCimtHXyW8GfZ50Vx_YcFFmaBu7G2Wm2cw', // AIzaSyB4ZoKa7v8C8blV-9CSW1JJxwqU9YgMQ8M
-        rightPage: {
-          url:'static/right.html',
-          query: {
-            roomId: 'rid',
-          }
-        },
+        rightPage: null,
         events: {
           onUnreadChange: function(unread){
             // alert(unread)
@@ -162,9 +132,28 @@
           video: "傳送影片",
           location: "傳送位置"
         },
+        actionIconPos: 'right', // right, bottom
         supportMsgInfo: {
-          readReceipt: false
+          readReceipt: true
         },
-        runForMobileDevice: false
+        runForMobileDevice: false,
+        showJoinMessage: false,
+        showTodayMessage: false,
+        showInfoEdit: false,
+        messageColor: {
+          background: '#5CB8B2',
+          color: '#FFF'
+        },
+        useNotification: true,
+        urlPreviewApi: 'https://chatkit.co/url',
+        appName: 'IMKit Demo',
+        firebaseConfig: {
+          apiKey: 'AIzaSyDH6fgpRFaH7vIqAcGQi48wgvNf8BJ9q1I',
+          authDomain: 'fir-chat-server.firebaseapp.com',
+          databaseURL: 'https://fir-chat-server.firebaseio.com',
+          projectId: 'fir-chat-server',
+          storageBucket: 'fir-chat-server.appspot.com',
+          messagingSenderId: '970263218499'
+        }
       })
     }</script></html>

@@ -1,0 +1,20 @@
+body > .v-spinner{
+  top: calc(50% - 15px) !important;
+}
+body .v-spinner > .v-clip{
+  height: 30px !important;
+  width: 30px !important;
+  border-width: 3px !important;
+  border-color: #ccc #ccc transparent !important;
+  -webkit-animation: spin-pageload 0.75s linear infinite !important;
+  animation: spin-pageload 0.75s linear infinite !important;
+}
+@-webkit-keyframes spin-pageload {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin-pageload {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
