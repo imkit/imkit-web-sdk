@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset=utf-8>
+  <title>IMKit Demo</title>
+  <base href=/>
+</head>
+
+<body>
+  <div>clientId:
+    <span id="clientId"></span>
+  </div>
+  <div>roomId:
+    <span id="roomId"></span>
+  </div>
+  <script type=text/javascript src=static/js/app.js></script>
+</body>
+<script type=text/javascript>
+let time = new Date().getTime();
+let clientId = 'DemoUser' + time;
+let roomId = 'DemoRoom' + time;
+document.getElementById('clientId').innerText = clientId;
+document.getElementById('roomId').innerText = roomId;
+
+init();
+async function init() {
+
+  // ### 建立 APILib
+  const APILib = IMKC.getAPILib({
+    url: "https://chat.fangho.com/", // chat server
+    authUrl: "https://auth.fangho.com", // auth server
+    clientKey: "fangho_imkit_0412_2018_001_clientkey",
+    apiKey: "fangho_imkit_0412_2018_001_apikey"
+  });
+
+  // ### 登入管理者
+  let adminClientId = 'gagu';
+  let AdminTokenRes = await APILib.platform.sign(adminClientId);
+  let AdminToken = AdminTokenRes.token;
+
+  await APILib.auth.chatIn(AdminToken);
+
+  // ### 建立 chat user
+  await APILib.platform.updateClient(
+    'aa@aa.aa',
+    'nickname',
+    clientId,
+    'http://'
+  );
+
+  // ### 建立 chat room
+  let room = {
+    _id: roomId,
+    name: '房間名稱，可傳空字串',
+    cover: '',
+    description: '房間描述，可傳空字串'
+  }
+  let autoJoin = false; // 是否將管理者加入房間
+  let createRoomRes = await APILib.room.createRoom(room, autoJoin);
+
+  room.id = createRoomRes.id; //取得房間 id
+
+  // ### 將 chat user 加入 chat room
+  if (room.id) {
+    // 取得房間資訊
+    let roomInfo = await APILib.room.searchOneRoom(room.id);
+
+    // 檢查 chat user 是否已經在 chat room
+    let find = roomInfo.members.find(member => {
+      return member.id === clientId;
+    });
+    // 如果沒有，加入房間
+    if (!find) {
+      let tokenRes = await APILib.platform.sign(clientId);
+      let token = tokenRes.token;
+
+      await APILib.auth.chatIn(token);
+      await APILib.room.joinRoom(room.id);
+    }
+  }
+}
+
+</script>
+
+</html>

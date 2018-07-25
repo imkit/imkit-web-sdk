@@ -1,50 +1,50 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset=utf-8>
-    <title>IMKit Demo</title>
-    <base href=/ >
-  </head>
-  <body>
-    <div id="badge"></div>
-    <script type=text/javascript src=static/js/app.js></script>
-  </body>
-  <script type=text/javascript>
-    const client = 'demoUser1532433950031'; // 要監聽的 client id
-    const config = {
-      url: 'https://chat.fangho.com/',
-      authUrl: 'https://auth.fangho.com',
-      clientKey: 'fangho_imkit_0412_2018_001_clientkey',
-    }
-    const defaultHandler = {
-      // 收到新訊息時執行
-      receiveMsg: function (msg) {
-        checkBadge()
-      },
-      // 已讀時執行
-      receiveRoom: function (msg) {
-        checkBadge()
-      },
-    }
 
-    // 建立API物件
-    const APILib = IMKC.getAPILib({
-      ...config,
-      ...defaultHandler
-    })
-    chatIn()
+<head>
+  <meta charset=utf-8>
+  <title>IMKit Demo</title>
+  <base href=/>
+</head>
 
-    async function chatIn() {
-      let tokenRes = await APILib.platform.sign(client);
-      let token = tokenRes.token
-      await APILib.auth.chatIn(token)
-      checkBadge()
+<body>
+  <div id="badge"></div>
+  <script type=text/javascript src=static/js/app.js></script>
+</body>
+<script type=text/javascript>
+init();
+async function init() {
+  // ### 建立 APILib
+  const APILib = IMKC.getAPILib({
+    url: "https://chat.fangho.com/", // chat server
+    authUrl: "https://auth.fangho.com", // auth server
+    clientKey: "fangho_imkit_0412_2018_001_clientkey",
+    // 收到新訊息時執行
+    receiveMsg: function(msg) {
+      checkBadge();
+    },
+    // 已讀時執行
+    receiveRoom: function(msg) {
+      checkBadge();
     }
+  });
 
-    async function checkBadge() {
-      let res = await APILib.me.getBadge()
-      document.getElementById('badge').innerText = res.badge
-    }
+  // ### 登入 char user
+  let clientId = 'gagu';
+  let tokenRes = await APILib.platform.sign(clientId);
+  let token = tokenRes.token;
 
-  </script>
+  await APILib.auth.chatIn(token);
+  checkBadge()
+
+  // ### 取得 badge
+  async function checkBadge() {
+    let res = await APILib.me.getBadge();
+    console.log(res.badge);
+    document.getElementById('badge').innerText = res.badge;
+  }
+}
+
+</script>
+
 </html>

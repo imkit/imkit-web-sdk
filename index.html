@@ -1,159 +1,102 @@
-<!DOCTYPE html><html><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0"><title>IMKit | in-app chat solution</title><base href=/ ><link rel=manifest href=static/manifest.json><link href=static/css/custom.css rel=stylesheet><link href=static/css/app.css rel=stylesheet></head><body><div id=imkc></div><script type=text/javascript src=static/js/app.js></script></body><script type=text/javascript>const AdminToken = '70'; // 隨意一個有效的 client token 及可
-    // 隨機產生兩個client + 1個房間的資訊
-    const timeStamp = new Date().getTime();
-    const client1 = newClientInfo(timeStamp);
-    const client2 = newClientInfo(timeStamp+1);
-    const room = newRoomInfo(timeStamp);
+<!DOCTYPE html>
+<html>
 
-    function newClientInfo(_timeStamp){
-      return {
-        clientId: 'demoUser' + _timeStamp,
-        clientToken: 'demoUser' + _timeStamp,
-        clientName: 'demoUser' + _timeStamp,
-        clientEmail: 'demo@funtek.co',
-        clientAvatar: '//fakeimg.pl/100x100/?text=Auto',
-      }
+<head>
+  <meta charset=utf-8>
+  <meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
+  <title>IMKit | in-app chat solution</title>
+  <base href=/>
+  <link rel=manifest href=static/manifest.json>
+  <link href=static/css/custom.css rel=stylesheet>
+  <link href=static/css/app.css rel=stylesheet>
+</head>
+
+<body>
+  <div id=imkc></div>
+  <script type=text/javascript src=static/js/app.js></script>
+</body>
+<script type=text/javascript>
+init();
+async function init() {
+  // ### 建立 APILib
+  const APILib = IMKC.getAPILib({
+    url: "https://chat.fangho.com/", // chat server
+    authUrl: "https://auth.fangho.com" // auth server
+  });
+
+  // ### Get user token
+
+  let clientId = 'DemoUser1532495879956';
+  let tokenRes = await APILib.platform.sign(clientId);
+  let token = tokenRes.token;
+
+  // ### 開啟聊天室
+  const imkit = IMKC.init({
+    debug: false,
+    lang: "tw", // 'en' or 'tw'
+    url: "https://chat.fangho.com/", // chat server url
+    room: {
+      id: 'DemoRoom1532495879956'
+    },
+    domain: "", // 聊天室頁面 url
+    clientKey: "fangho_imkit_0412_2018_001_clientkey",
+    authToken: token,
+    bucketName: "chatserver-upload", // S3 bucketName
+    googleApiKey: "AIzaSyCimtHXyW8GfZ50Vx_YcFFmaBu7G2Wm2cw", // need google map
+    rightPage: null,
+    // rightPage: {
+    //   url: "/static/right.html",
+    //   query: {
+    //     roomId: "rid"
+    //   }
+    // }, // use custom page replace default info UI (/static/right.html?rid=${roomId})
+    useReply: false, // 開啟回覆功能
+    skins: ["default"],
+    skin: "default",
+    pictureViewModel: "rich", // simple or rich
+    maxUploadFileSize: 2, // (MB)
+    layout: {
+      list: true,
+      info: true
+    },
+    listSetting: {
+      showMemberCount: false // 列表是否顯示房間人數
+    },
+    supportMsgType: {
+      // 可移除不需要的功能
+      emoji: "傳送表情符號",
+      sticker: "傳送貼圖",
+      image: "傳送圖片",
+      audio: "傳送音頻",
+      video: "傳送影片",
+      location: "傳送位置"
+    },
+    actionIconPos: "right", // right, bottom
+    supportMsgInfo: {
+      readReceipt: true // 是否顯示已讀
+    },
+    runForMobileDevice: false,
+    showJoinMessage: false, // 是否顯示加入房間的訊息
+    showTodayMessage: false, // 是否顯示 today 標籤
+    showInfoEdit: false, // 是否可以編輯房間名稱及移除房間成員
+    messageColor: {
+      // 自己發出的訊息顏色
+      background: "#5CB8B2",
+      color: "#FFF"
+    },
+    useNotification: true, // 是否啟用推播
+    urlPreviewApi: "https://chatkit.co/url", // url 預覽 API
+    appName: "IMKit Demo",
+    firebaseConfig: {
+      apiKey: "AIzaSyDH6fgpRFaH7vIqAcGQi48wgvNf8BJ9q1I",
+      authDomain: "fir-chat-server.firebaseapp.com",
+      databaseURL: "https://fir-chat-server.firebaseio.com",
+      projectId: "fir-chat-server",
+      storageBucket: "fir-chat-server.appspot.com",
+      messagingSenderId: "970263218499"
     }
-    function newRoomInfo(_timeStamp){
-      return {
-        roomId: null,
-        roomName: null,
-        roomCover: '//fakeimg.pl/100x100/?text=Auto',
-        roomDescription: 'Demo A1 B1'
-      }
-    }
+  });
+}
+</script>
 
-    const config = {
-      url: 'https://chat.fangho.com/',
-      authUrl: 'https://auth.fangho.com',
-      domain: '',
-      clientKey: 'fangho_imkit_0412_2018_001_clientkey',
-      apiKey: 'fangho_imkit_0412_2018_001_apikey',
-      bucketName: 'chatserver-upload'
-    }
-
-    // 建立API物件
-    const APILib = IMKC.getAPILib({
-      ...config
-    })
-
-    // 呼叫 API 建立 client + room，並將 client 加入 room
-    createClientAndRoom()
-
-    async function createClientAndRoom() {
-      let AdminTokenRes = await APILib.platform.sign('gagu'); // 先登入一個管理者
-      let AdminToken = AdminTokenRes.token
-
-      // 要用管理者建立 client 與 room
-      await APILib.auth.chatIn(AdminToken);
-
-      // 建立 1 號 client
-      let updateClient1Res = await APILib.platform.updateClient(
-        client1.clientEmail,
-        client1.clientName,
-        client1.clientId,
-        client1.clientAvatar
-      );
-
-      // 建立 2 號 client
-      let updateClient2Res = await APILib.platform.updateClient(
-        client2.clientEmail,
-        client2.clientName,
-        client2.clientId,
-        client2.clientAvatar
-      );
-
-      // 建立 room，取得 roomId (第二個參數是是否將管理者加入 room)
-      let createRoomRes = await APILib.room.createRoom({
-        name: room.roomName,
-        cover: room.roomCover,
-        description: room.roomDescription
-      }, false);
-      room.roomId = createRoomRes.id;
-
-      // 綁定 1 號 client 的 token
-      let bindToken1Res = await APILib.platform.sign(
-        client1.clientId
-      );
-      client1.clientToken = bindToken1Res.token;
-
-      // 綁定 2 號 client 的 token
-      let bindToken2Res = await APILib.platform.sign(
-        client2.clientId
-      );
-      client2.clientToken = bindToken2Res.token;
-
-      // 1 號 client 加入 Room (要先 chatIn client1)
-      await APILib.auth.chatIn(client1.clientToken);
-      let joinRoom1Res = await APILib.room.joinRoom(room.roomId);
-
-      // 2 號 client 加入 Room (要先 chatIn client2)
-      await APILib.auth.chatIn(client2.clientToken);
-      let joinRoom2Res = await APILib.room.joinRoom(room.roomId);
-
-      openChat();
-    }
-    function openChat() {
-      const imkit = IMKC.init({
-        debug: false,
-        lang: 'tw', // default language
-        url: config.url,
-        room: {
-          id: room.roomId
-        },
-        domain: config.domain,
-        clientKey: config.clientKey,
-        authToken: client1.clientToken,
-        bucketName: config.bucketName, // S3 bucketName
-        googleApiKey: 'AIzaSyCimtHXyW8GfZ50Vx_YcFFmaBu7G2Wm2cw', // AIzaSyB4ZoKa7v8C8blV-9CSW1JJxwqU9YgMQ8M
-        rightPage: null,
-        events: {
-          onUnreadChange: function(unread){
-            // alert(unread)
-          }
-        },
-        useReply: false,
-        skins: ['default', 'invert'],
-        skin: 'default',
-        pictureViewModel: 'rich', // simple or rich
-        maxUploadFileSize: 2, // (MB)
-        layout: {
-          list: true,
-          info: true
-        },
-        listSetting: {
-          showMemberCount: false
-        },
-        supportMsgType: {
-          emoji: "傳送表情符號",
-          sticker: "傳送貼圖",
-          image: "傳送圖片",
-          audio: "傳送音頻",
-          video: "傳送影片",
-          location: "傳送位置"
-        },
-        actionIconPos: 'right', // right, bottom
-        supportMsgInfo: {
-          readReceipt: true
-        },
-        runForMobileDevice: false,
-        showJoinMessage: false,
-        showTodayMessage: false,
-        showInfoEdit: false,
-        messageColor: {
-          background: '#5CB8B2',
-          color: '#FFF'
-        },
-        useNotification: true,
-        urlPreviewApi: 'https://chatkit.co/url',
-        appName: 'IMKit Demo',
-        firebaseConfig: {
-          apiKey: 'AIzaSyDH6fgpRFaH7vIqAcGQi48wgvNf8BJ9q1I',
-          authDomain: 'fir-chat-server.firebaseapp.com',
-          databaseURL: 'https://fir-chat-server.firebaseio.com',
-          projectId: 'fir-chat-server',
-          storageBucket: 'fir-chat-server.appspot.com',
-          messagingSenderId: '970263218499'
-        }
-      })
-    }</script></html>
+</html>
