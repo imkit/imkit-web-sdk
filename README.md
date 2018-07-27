@@ -35,7 +35,7 @@ await APILib.auth.chatIn(AdminToken);
 await APILib.platform.updateClient(
     email, // email
     nickname, // 暱稱
-    clientId, // 如果 ID 已存在會 update，不存在會 create
+    clientId, // 每個 chat user 具有唯一值 clientId，以識別身分，如果 clientId 已存在會 update user，不存在會 create user
     avatar // Image url
 );
 ```
@@ -228,3 +228,9 @@ const imkit = IMKC.init({
   }
 });
 ```
+
+## 多人聊天
+
+- 建立多個 chat user，並加入到同一個 room 中
+- 建立多個 html，以不同的 clientId 做 get token 並開啟聊天室
+- 使用多個瀏覽器或分頁開啟 html，即可測試多人聊天
