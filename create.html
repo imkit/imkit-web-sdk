@@ -24,7 +24,7 @@ document.getElementById('clientId').innerText = clientId;
 document.getElementById('roomId').innerText = roomId;
 
 init();
-async function init() {
+function init() {
 
   // ### 建立 APILib
   const APILib = IMKC.getAPILib({
@@ -36,49 +36,62 @@ async function init() {
 
   // ### 登入管理者
   let adminClientId = 'gagu';
-  let AdminTokenRes = await APILib.platform.sign(adminClientId);
-  let AdminToken = AdminTokenRes.token;
+  APILib.platform.sign(adminClientId).then(function(res){
+    let AdminTokenRes = res;
+    let AdminToken = AdminTokenRes.token;
 
-  await APILib.auth.chatIn(AdminToken);
+    APILib.auth.chatIn(AdminToken).then(function(){
+      // ### 建立 chat user
+      APILib.platform.updateClient(
+        'aa@aa.aa',
+        'nickname',
+        clientId,
+        'http://'
+      ).then(function(){
+        // ### 建立 chat room
+        let room = {
+          _id: roomId,
+          name: '房間名稱，可傳空字串',
+          cover: '',
+          description: '房間描述，可傳空字串'
+        }
+        let autoJoin = false; // 是否將管理者加入房間
+        APILib.room.createRoom(room, autoJoin).then(function(res){
+          let createRoomRes = res;
+          room.id = createRoomRes.id; //取得房間 id
 
-  // ### 建立 chat user
-  await APILib.platform.updateClient(
-    'aa@aa.aa',
-    'nickname',
-    clientId,
-    'http://'
-  );
+          // ### 將 chat user 加入 chat room
+          if (room.id) {
+            // 取得房間資訊
+            APILib.room.searchOneRoom(room.id).then(function (res){
+              let roomInfo = res;
+              
+              // 檢查 chat user 是否已經在 chat room
+              let find = null;
+              for (let idx = 0; idx < roomInfo.members.length; idx++) {
+                if (roomInfo.members[idx].id === clientId) {
+                  find = roomInfo.members[idx];
+                }
+              }
 
-  // ### 建立 chat room
-  let room = {
-    _id: roomId,
-    name: '房間名稱，可傳空字串',
-    cover: '',
-    description: '房間描述，可傳空字串'
-  }
-  let autoJoin = false; // 是否將管理者加入房間
-  let createRoomRes = await APILib.room.createRoom(room, autoJoin);
-
-  room.id = createRoomRes.id; //取得房間 id
-
-  // ### 將 chat user 加入 chat room
-  if (room.id) {
-    // 取得房間資訊
-    let roomInfo = await APILib.room.searchOneRoom(room.id);
-
-    // 檢查 chat user 是否已經在 chat room
-    let find = roomInfo.members.find(member => {
-      return member.id === clientId;
+              // 如果沒有，加入房間
+              if (!find) {
+                APILib.platform.sign(clientId).then(function(res) {
+                  let tokenRes = res;
+                  let token = tokenRes.token;
+                  APILib.auth.chatIn(token).then(function() {
+                    APILib.room.joinRoom(room.id).then(function() {
+                      console.log('done');
+                    });
+                  });
+                });
+              }
+            });
+          }
+        });
+      });
     });
-    // 如果沒有，加入房間
-    if (!find) {
-      let tokenRes = await APILib.platform.sign(clientId);
-      let token = tokenRes.token;
-
-      await APILib.auth.chatIn(token);
-      await APILib.room.joinRoom(room.id);
-    }
-  }
+  });
 }
 
 </script>

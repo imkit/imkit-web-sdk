@@ -17,7 +17,7 @@
 </body>
 <script type=text/javascript>
 init();
-async function init() {
+function init() {
   // ### 建立 APILib
   const APILib = IMKC.getAPILib({
     url: "https://chat.fangho.com/", // chat server
@@ -26,75 +26,77 @@ async function init() {
 
   // ### Get user token
 
-  let clientId = 'DemoUser1532495879956';
-  let tokenRes = await APILib.platform.sign(clientId);
-  let token = tokenRes.token;
+  let clientId = 'gagu';
+  APILib.platform.sign(clientId).then(function(res){
+    let tokenRes = res;
+    let token = tokenRes.token;
 
-  // ### 開啟聊天室
-  const imkit = IMKC.init({
-    debug: false,
-    lang: "tw", // 'en' or 'tw'
-    url: "https://chat.fangho.com/", // chat server url
-    room: {
-      id: 'DemoRoom1532495879956'
-    },
-    domain: "", // 聊天室頁面 url
-    clientKey: "fangho_imkit_0412_2018_001_clientkey",
-    authToken: token,
-    bucketName: "chatserver-upload", // S3 bucketName
-    googleApiKey: "AIzaSyCimtHXyW8GfZ50Vx_YcFFmaBu7G2Wm2cw", // need google map
-    rightPage: null,
-    // rightPage: {
-    //   url: "/static/right.html",
-    //   query: {
-    //     roomId: "rid"
-    //   }
-    // }, // use custom page replace default info UI (/static/right.html?rid=${roomId})
-    useReply: false, // 開啟回覆功能
-    skins: ["default"],
-    skin: "default",
-    pictureViewModel: "rich", // simple or rich
-    maxUploadFileSize: 2, // (MB)
-    layout: {
-      list: true,
-      info: true
-    },
-    listSetting: {
-      showMemberCount: false // 列表是否顯示房間人數
-    },
-    supportMsgType: {
-      // 可移除不需要的功能
-      emoji: "傳送表情符號",
-      sticker: "傳送貼圖",
-      image: "傳送圖片",
-      audio: "傳送音頻",
-      video: "傳送影片",
-      location: "傳送位置"
-    },
-    actionIconPos: "right", // right, bottom
-    supportMsgInfo: {
-      readReceipt: true // 是否顯示已讀
-    },
-    runForMobileDevice: false,
-    showJoinMessage: false, // 是否顯示加入房間的訊息
-    showTodayMessage: false, // 是否顯示 today 標籤
-    showInfoEdit: false, // 是否可以編輯房間名稱及移除房間成員
-    messageColor: {
-      // 自己發出的訊息顏色
-      background: "#5CB8B2",
-      color: "#FFF"
-    },
-    useNotification: true, // 是否啟用推播
-    urlPreviewApi: "https://chatkit.co/url", // url 預覽 API
-    appName: "IMKit Demo",
-    firebaseConfig: {
-      apiKey: "AIzaSyDH6fgpRFaH7vIqAcGQi48wgvNf8BJ9q1I",
-      authDomain: "fir-chat-server.firebaseapp.com",
-      databaseURL: "https://fir-chat-server.firebaseio.com",
-      projectId: "fir-chat-server",
-      storageBucket: "fir-chat-server.appspot.com",
-      messagingSenderId: "970263218499"
-    }
+    // ### 開啟聊天室
+    const imkit = IMKC.init({
+      debug: false,
+      lang: "tw", // 'en' or 'tw'
+      url: "https://chat.fangho.com/", // chat server url
+      room: {
+        id: 'DemoRoom1532495879956'
+      },
+      domain: "", // 聊天室頁面 url
+      clientKey: "fangho_imkit_0412_2018_001_clientkey",
+      authToken: token,
+      bucketName: "chatserver-upload", // S3 bucketName
+      googleApiKey: "AIzaSyCimtHXyW8GfZ50Vx_YcFFmaBu7G2Wm2cw", // need google map
+      rightPage: null,
+      // rightPage: {
+      //   url: "/static/right.html",
+      //   query: {
+      //     roomId: "rid"
+      //   }
+      // }, // use custom page replace default info UI (/static/right.html?rid=${roomId})
+      useReply: false, // 開啟回覆功能
+      skins: ["default"],
+      skin: "default",
+      pictureViewModel: "rich", // simple or rich
+      maxUploadFileSize: 2, // (MB)
+      layout: {
+        list: true,
+        info: true
+      },
+      listSetting: {
+        showMemberCount: false // 列表是否顯示房間人數
+      },
+      supportMsgType: {
+        // 可移除不需要的功能
+        emoji: "傳送表情符號",
+        sticker: "傳送貼圖",
+        image: "傳送圖片",
+        audio: "傳送音頻",
+        video: "傳送影片",
+        location: "傳送位置"
+      },
+      actionIconPos: "right", // right, bottom
+      supportMsgInfo: {
+        readReceipt: true // 是否顯示已讀
+      },
+      runForMobileDevice: false,
+      showJoinMessage: false, // 是否顯示加入房間的訊息
+      showTodayMessage: false, // 是否顯示 today 標籤
+      showInfoEdit: false, // 是否可以編輯房間名稱及移除房間成員
+      messageColor: {
+        // 自己發出的訊息顏色
+        background: "#5CB8B2",
+        color: "#FFF"
+      },
+      useNotification: true, // 是否啟用推播
+      urlPreviewApi: "https://chatkit.co/url", // url 預覽 API
+      appName: "IMKit Demo",
+      firebaseConfig: {
+        apiKey: "AIzaSyDH6fgpRFaH7vIqAcGQi48wgvNf8BJ9q1I",
+        authDomain: "fir-chat-server.firebaseapp.com",
+        databaseURL: "https://fir-chat-server.firebaseio.com",
+        projectId: "fir-chat-server",
+        storageBucket: "fir-chat-server.appspot.com",
+        messagingSenderId: "970263218499"
+      }
+    });
   });
 }
 </script>

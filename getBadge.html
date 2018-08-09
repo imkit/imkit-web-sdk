@@ -13,7 +13,7 @@
 </body>
 <script type=text/javascript>
 init();
-async function init() {
+function init() {
   // ### 建立 APILib
   const APILib = IMKC.getAPILib({
     url: "https://chat.fangho.com/", // chat server
@@ -31,17 +31,20 @@ async function init() {
 
   // ### 登入 char user
   let clientId = 'gagu';
-  let tokenRes = await APILib.platform.sign(clientId);
-  let token = tokenRes.token;
+  APILib.platform.sign(clientId).then(function (res){
+    let tokenRes = res;
+    let token = tokenRes.token;
 
-  await APILib.auth.chatIn(token);
-  checkBadge()
-
+    APILib.auth.chatIn(token).then(function(){
+      checkBadge()
+    });
+  });
   // ### 取得 badge
-  async function checkBadge() {
-    let res = await APILib.me.getBadge();
-    console.log(res.badge);
-    document.getElementById('badge').innerText = res.badge;
+  function checkBadge() {
+    APILib.me.getBadge().then(function(res){
+      console.log(res.badge);
+      document.getElementById('badge').innerText = res.badge;
+    });
   }
 }
 
