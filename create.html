@@ -34,61 +34,53 @@ function init() {
     apiKey: "fangho_imkit_0412_2018_001_apikey"
   });
 
-  // ### 登入管理者
-  let adminClientId = 'gagu';
-  APILib.platform.sign(adminClientId).then(function(res){
-    let AdminTokenRes = res;
-    let AdminToken = AdminTokenRes.token;
 
-    APILib.auth.chatIn(AdminToken).then(function(){
-      // ### 建立 chat user
-      APILib.platform.updateClient(
-        'aa@aa.aa',
-        'nickname',
-        clientId,
-        'http://'
-      ).then(function(){
-        // ### 建立 chat room
-        let room = {
-          _id: roomId,
-          name: '房間名稱，可傳空字串',
-          cover: '',
-          description: '房間描述，可傳空字串'
+  // ### 建立 chat user
+  APILib.platform.updateClient(
+    'aa@aa.aa',
+    'nickname',
+    clientId,
+    'http://'
+  ).then(function(){
+    // 取得 user 的 token
+    APILib.platform.sign(clientId).then(function(res) {
+      let tokenRes = res;
+      let token = tokenRes.token;
+      APILib.auth.setToken(token);
+      // ### 建立 chat room
+      let room = {
+        _id: roomId,
+        name: '房間名稱，可傳空字串',
+        cover: '',
+        description: '房間描述，可傳空字串'
+      }
+      let autoJoin = false; // 是否自動加入房間
+      APILib.room.createRoom(room, autoJoin).then(function(res){
+        let createRoomRes = res;
+        room.id = createRoomRes.id; //取得房間 id
+
+        // ### 將 chat user 加入 chat room
+        if (room.id) {
+          // 取得房間資訊
+          APILib.room.searchOneRoom(room.id).then(function (res){
+            let roomInfo = res;
+            
+            // 檢查 chat user 是否已經在 chat room
+            let find = null;
+            for (let idx = 0; idx < roomInfo.members.length; idx++) {
+              if (roomInfo.members[idx].id === clientId) {
+                find = roomInfo.members[idx];
+              }
+            }
+
+            // 如果沒有，加入房間
+            if (!find) {
+              APILib.room.joinRoom(room.id).then(function() {
+                console.log('done');
+              });
+            }
+          });
         }
-        let autoJoin = false; // 是否將管理者加入房間
-        APILib.room.createRoom(room, autoJoin).then(function(res){
-          let createRoomRes = res;
-          room.id = createRoomRes.id; //取得房間 id
-
-          // ### 將 chat user 加入 chat room
-          if (room.id) {
-            // 取得房間資訊
-            APILib.room.searchOneRoom(room.id).then(function (res){
-              let roomInfo = res;
-              
-              // 檢查 chat user 是否已經在 chat room
-              let find = null;
-              for (let idx = 0; idx < roomInfo.members.length; idx++) {
-                if (roomInfo.members[idx].id === clientId) {
-                  find = roomInfo.members[idx];
-                }
-              }
-
-              // 如果沒有，加入房間
-              if (!find) {
-                APILib.platform.sign(clientId).then(function(res) {
-                  let tokenRes = res;
-                  let token = tokenRes.token;
-                  APILib.auth.chatIn(token).then(function() {
-                    APILib.room.joinRoom(room.id).then(function() {
-                      console.log('done');
-                    });
-                  });
-                });
-              }
-            });
-          }
-        });
       });
     });
   });

@@ -19,19 +19,6 @@ const APILib = IMKC.getAPILib({
 });
 ```
 
-### 登入管理者
-
-```javascript
-let adminClientId = "gagu";
-APILib.platform.sign(adminClientId).then(function(res) {
-  let AdminTokenRes = res;
-  let AdminToken = AdminTokenRes.token;
-  APILib.auth.chatIn(AdminToken).then(function() {
-    // do something else
-  });
-});
-```
-
 ### 建立 chat user
 
 ```javascript
@@ -47,6 +34,16 @@ APILib.platform
   });
 ```
 
+### 將執行者切換成新 user (取得 token 並設定 token)
+
+```javascript
+APILib.platform.sign(clientId).then(function(res) {
+  let tokenRes = res;
+  let token = tokenRes.token;
+  APILib.auth.setToken(token);
+});
+```
+
 ### 建立 chat room
 
 ```javascript
@@ -56,7 +53,7 @@ let room = {
   cover: "Image url",
   description: "房間描述"
 };
-let autoJoin = false; // 是否將管理者加入房間
+let autoJoin = false; // 是否將建立者加入房間
 APILib.room.createRoom(room, autoJoin).then(function(res) {
   let createRoomRes = res;
   room.id = createRoomRes.id; // 取得房間 id
@@ -80,20 +77,14 @@ if (room.id) {
 
     // 如果沒有，加入房間
     if (!find) {
-      // 方法一，管理者必須是房間成員
+      // 方法一，執行者必須是房間成員(邀請其他人到房間)
       APILib.room.addMember(room.id, clientId).then(function() {
         // do something else
       });
 
-      // 方法二，chatIn 到 chat user 身分，執行 join
-      APILib.platform.sign(clientId).then(function(res) {
-        let tokenRes = res;
-        let token = tokenRes.token;
-        APILib.auth.chatIn(token).then(function() {
-          APILib.room.joinRoom(room.id).then(function() {
-            // do something else
-          });
-        });
+      // 方法二，執行 join (把自己加入房間)
+      APILib.room.joinRoom(room.id).then(function() {
+        // do something else
       });
     }
   });
