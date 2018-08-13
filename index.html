@@ -27,7 +27,7 @@ function init() {
   // ### Get user token
 
   let clientId = 'gagu';
-  APILib.platform.sign(clientId).then(function(res){
+  APILib.platform.sign({id: clientId}).then(function(res){
     let tokenRes = res;
     let token = tokenRes.token;
 

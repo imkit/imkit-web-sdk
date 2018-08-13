@@ -19,29 +19,21 @@ const APILib = IMKC.getAPILib({
 });
 ```
 
-### 建立 chat user
+### 建立 chat user 並取得 token
 
 ```javascript
 APILib.platform
-  .updateClient(
-    email, // email
-    nickname, // 暱稱
-    clientId, // 每個 chat user 具有唯一值 clientId，以識別身分，如果 clientId 已存在會 update user，不存在會 create user
-    avatar // Image url
-  )
+  .sign({
+    id: clientId,
+    email: 'aa@aa.aa',
+    nickname: clientId,
+    avatar: 'http://'
+  })
   .then(function() {
-    // do something else
+    let tokenRes = res;
+    let token = tokenRes.token;
+    APILib.auth.setToken(token);
   });
-```
-
-### 將執行者切換成新 user (取得 token 並設定 token)
-
-```javascript
-APILib.platform.sign(clientId).then(function(res) {
-  let tokenRes = res;
-  let token = tokenRes.token;
-  APILib.auth.setToken(token);
-});
 ```
 
 ### 建立 chat room
@@ -121,7 +113,7 @@ const APILib = IMKC.getAPILib({
 
 ```javascript
 let clientId = "gagu";
-APILib.platform.sign(clientId).then(function(res) {
+APILib.platform.sign({id: clientId}).then(function(res) {
   let tokenRes = res;
   let token = tokenRes.token;
   APILib.auth.chatIn(token).then(function() {
@@ -172,7 +164,7 @@ const APILib = IMKC.getAPILib({
 
 ```javascript
 let clientId = "gagu";
-APILib.platform.sign(clientId).then(function(res) {
+APILib.platform.sign({id: clientId}).then(function(res) {
   let tokenRes = res;
   let token = tokenRes.token;
   // do something else

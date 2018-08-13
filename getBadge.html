@@ -31,7 +31,7 @@ function init() {
 
   // ### 登入 char user
   let clientId = 'gagu';
-  APILib.platform.sign(clientId).then(function (res){
+  APILib.platform.sign({id: clientId}).then(function (res){
     let tokenRes = res;
     let token = tokenRes.token;
 
