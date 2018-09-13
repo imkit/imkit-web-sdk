@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="Shortcut Icon" type="image/x-icon" href="../static/logo.png">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <link rel="stylesheet" href="../static/css/index.css">
+  <style>
+    body,
+    input {
+      font-family: Helvetica Neue, Microsoft JhengHei, Helvetica, Arial, sans-serif;
+    }
+
+    header {
+      padding: 10px;
+      background-color: #f26f21;
+      color: #fff;
+      font-size: 20px;
+    }
+
+    form {
+      padding: 10px;
+      box-sizing: border-box;
+      width: 300px;
+      margin: 0 auto;
+    }
+
+    input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 5px;
+      display: block;
+      margin: 10px 0;
+      font-size: 16px;
+    }
+
+    input[type=submit] {
+      background-color: #eee;
+      cursor: pointer;
+      border: none;
+      outline: none;
+    }
+
+    input[type=submit]:hover {
+      background-color: #ddd;
+    }
+
+    .loading {
+      display: none;
+      text-align: center;
+    }
+
+    form.isLoading input[type=submit] {
+      display: none;
+    }
+
+    form.isLoading .loading {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>IMKit</h1>
+  </header>
+  <form onsubmit="login(event)" id="form">
+    <input type="text" placeholder="Client" id="clientID" required>
+    <input type="text" placeholder="Room" id="roomID">
+    <input type="submit" value="GO">
+    <div class="loading">
+      <div class="loader"></div>
+    </div>
+  </form>
+</body>
+<script src="//cdnjs.cloudflare.com/ajax/libs/qs/6.5.2/qs.min.js"></script>
+<script src="../demo/imkit-js-api-v3.min.js"></script>
+<script src="../static/config.js"></script>
+<script>
+  var form = document.getElementById('form');
+  var inputClientID = document.getElementById('clientID');
+  var inputRoomID = document.getElementById('roomID');
+
+  if (getParameterByName('room')) {
+    inputRoomID.value = getParameterByName('room');
+  }
+
+  var api = new IMKitApi({
+    domain: config.domain,
+    clientKey: config.clientKey,
+    authBase: config.authBase
+  });
+
+  var clientID;
+  var roomID;
+  function login(event) {
+    event.preventDefault();
+    form.classList.add('isLoading');
+
+    clientID = inputClientID.value;
+    roomID = inputRoomID.value;
+
+    sign();
+    // sign 拿 token
+    // 是否有填房間
+    //  沒填：轉址
+    //  有填：getRoom 確認房間是否存在
+    //   不存在：createRoom 建房間並加入
+    //   存在：確認clientID是否為成員
+    //    是：轉址
+    //    不是：加入房間後轉址
+  }
+
+  function sign() {
+    api.auth.sign({
+      id: clientID,
+      nickname: clientID
+    }).then(function (data) {
+      api.config.token = data.token;
+      if (roomID) {
+        getRoom();
+      } else {
+        document.location.href = '../?authClientId=' + clientID
+      }
+    });
+  }
+
+  function getRoom() {
+    api.room.getRoom(roomID).then(function (data) {
+      for (var i = 0; i < data.members.length; i++) {
+        var member = data.members[i];
+        if (member.id === clientID) {
+          document.location.href = '../?authClientId=' + clientID + '&room=' + roomID
+        }
+      }
+      joinRoom();
+    }).catch(function (error) {
+      createRoom();
+    });
+  }
+
+  function joinRoom() {
+    api.room.joinRoom(roomID).then(function (data) {
+      document.location.href = '../?authClientId=' + clientID + '&room=' + roomID
+    });
+  }
+
+  function createRoom() {
+    api.room.createRoom({
+      _id: roomID,
+      name: roomID
+    }).then(function (data) {
+      joinRoom();
+    })
+  }
+
+  function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+      results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
+  }
+</script>
+
+</html>

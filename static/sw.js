@@ -1,68 +1,105 @@
-// Give the service worker access to Firebase Messaging.
-// Note that you can only use Firebase Messaging here, other Firebase libraries
-// are not available in the service worker.
-importScripts('https://www.gstatic.com/firebasejs/3.9.0/firebase-app.js')
-// importScripts('https://www.gstatic.com/firebasejs/3.9.0/firebase-messaging.js')
+// [START initialize_firebase_in_sw]
+// Import and configure the Firebase SDK
+// These scripts are made available when the app is served or
+// deployed on Firebase Hosting
+// If you do not serve/host your project using Firebase Hosting
+// see https://firebase.google.com/docs/web/setup
 
-// Initialize the Firebase app in the service worker by passing in the
-// messagingSenderId.
-var config = {
-  apiKey: 'AIzaSyDH6fgpRFaH7vIqAcGQi48wgvNf8BJ9q1I',
-  authDomain: 'fir-chat-server.firebaseapp.com',
-  databaseURL: 'https://fir-chat-server.firebaseio.com',
-  projectId: 'fir-chat-server',
-  storageBucket: 'fir-chat-server.appspot.com',
+importScripts('https://www.gstatic.com/firebasejs/5.0.0/firebase-app.js');
+// importScripts('https://www.gstatic.com/firebasejs/5.0.0/firebase-messaging.js');
+
+firebase.initializeApp({
   messagingSenderId: '970263218499'
-}
+});
 
-firebase.initializeApp(config)
+// const messaging = firebase.messaging();
+// [END initialize_firebase_in_sw]
 
+// chat server 丟過來的 click_action 不 OK，可是我不能複寫他...
+// messaging.setBackgroundMessageHandler(function(payload) {
+//   var notification = payload.notification;
+//   var notificationTitle = notification.title;
+//   var notificationOptions = {
+//     body: notification.body,
+//     icon: 'static/logo.png',
+//     data: {
+//       room: {
+//         id: payload.data.type.split(':')[1]
+//       }
+//     },
+//     click_action: '?room=' + payload.data.type.split(':')[1]
+//   };
+
+//   return self.registration.showNotification(
+//     notificationTitle,
+//     notificationOptions
+//   );
+// });
+
+// 只好自己寫了
 self.addEventListener('push', e => {
-    // self.postMessage('qqqqqqqqqqqqqqqq from worker')
-    let j
+  // 是否開啟中
+  e.waitUntil(
+    (async function() {
+      let cs = await clients.matchAll({
+        includeUncontrolled: true
+      });
+      if (!cs || cs.length === 0) {
+        // 未開啟，處理推播
+        let payload;
 
-    if (e.data && e.data.json) {
-        try {
-            j = e.data.json()
-        } catch (error) {
+        if (e.data && e.data.json) {
+          try {
+            payload = e.data.json();
+          } catch (error) {}
         }
-    }
-    console.log('push', j)
 
-    const notificationTitle = j.notification && j.notification.title || 'IMKit'
-    const notificationOptions = {
-        body: j.notification && j.notification.body || 'Received Message',
-        icon: '/static/logo.png',
-        data: {
+        const notificationTitle =
+          (payload.notification && payload.notification.title) || 'IMKit';
+        const notificationOptions = {
+          body:
+            (payload.notification && payload.notification.body) ||
+            'Received Message',
+          icon:
+            (payload.notification && payload.notification.icon) || 'logo.png',
+          data: {
             room: {
-                id: j.data.type.split(':')[1]
+              id: payload.data.type.split(':')[1]
             }
-        }
-    }
+          }
+        };
 
-    e.waitUntil(self.registration.showNotification(notificationTitle, notificationOptions))
-})
+        e.waitUntil(
+          self.registration.showNotification(
+            notificationTitle,
+            notificationOptions
+          )
+        );
+      } else {
+        // 開啟中，不處理
+      }
+    })()
+  );
+});
 
-self.addEventListener('notificationclick', (event) => {
-    console.log('[Service Worker] Notification click Received.')
+self.addEventListener('notificationclick', e => {
+  e.notification.close();
 
-    event.notification.close()
-
-    event.waitUntil(async function() {
-        let cs = await clients.matchAll({
-            includeUncontrolled: true
-        })
-        if (!cs || cs.length === 0) {
-            clients.openWindow('/')
-        } else {
-            cs.forEach(el => {
-                if (!el.focused) {
-                    el.focus()
-                }
-                // console.log(event)
-                el.postMessage(event.notification.data.room)
-            })
-        }
-
-    }())
-})
+  e.waitUntil(
+    (async function() {
+      let cs = await clients.matchAll({
+        includeUncontrolled: true
+      });
+      if (!cs || cs.length === 0) {
+        clients.openWindow('../?room=' + e.notification.data.room.id);
+      } else {
+        cs.forEach(el => {
+          if (!el.focused) {
+            el.focus();
+          }
+          el.postMessage(e.notification.data.room.id);
+        });
+      }
+    })()
+  );
+});
