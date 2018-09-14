@@ -1,4 +1,28 @@
-<!DOCTYPE html><html><head><base href=/ ><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0"><title>IMKit Demo</title><link rel="Shortcut Icon" type=image/x-icon href=static/logo.png><link rel=manifest href=static/manifest.json><link href=static/css/reset.css rel=stylesheet><link href=static/css/index.css rel=stylesheet><link href=/static/css/app.css rel=stylesheet></head><body><div id=IMKitApp><div class="loader appLoader"></div></div><script type=text/javascript src=/static/js/manifest.js></script><script type=text/javascript src=/static/js/vendor.js></script><script type=text/javascript src=/static/js/app.js></script></body><script src=static/config.js></script><script>// 處理 query string
+<!DOCTYPE html>
+<html>
+
+<head>
+  <base href="/">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0">
+  <title>IMKit Demo</title>
+  <link rel="Shortcut Icon" type="image/x-icon" href="static/logo.png">
+  <link rel="manifest" href="static/manifest.json">
+  <link href="static/css/reset.css" rel="stylesheet">
+  <link href="static/css/index.css" rel="stylesheet">
+  <link href="static/css/app.css" rel="stylesheet">
+</head>
+
+<body>
+  <div id="IMKitApp">
+    <div class="loader appLoader"></div>
+  </div>
+  <script type="text/javascript" src="static/js/manifest.js"></script>
+  <script type="text/javascript" src="static/js/vendor.js"></script>
+  <script type="text/javascript" src="static/js/app.js"></script>
+</body>
+<script src="static/config.js"></script>
+<script>// 處理 query string
   let room = getParameterByName('room');
   let chatActionsPosition = getParameterByName('chatActionsPosition');
   let authClientId = getParameterByName('authClientId');
@@ -34,4 +58,6 @@
     if (!results) return null;
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, ' '));
-  }</script></html>
+  }</script>
+
+</html>
