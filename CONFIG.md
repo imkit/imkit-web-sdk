@@ -5,7 +5,7 @@
 ```javascript
 var config = {
   // 是否開啟 debug
-  debug: false,
+  debug: true,
   // chat server 位置
   domain: "https://chat.fangho.com",
   // auth server 位置
@@ -26,6 +26,23 @@ var config = {
   appName: "IMKit Demo",
   // 語系 'zh-tw' or 'en'
   lang: "zh-tw",
+  // 取得 avatar 需要的 headers
+  avatarHeaders: [
+    // {
+    //   name: 'token',
+    //   // 'variable' or 'stable'
+    //   type: 'variable',
+    //   // 變數名稱或固定的值
+    //   value: 'token'
+    // },
+    // {
+    //   name: 'stableValue',
+    //   // 'variable' or 'stable'
+    //   type: 'stable',
+    //   // 變數名稱或固定的值
+    //   value: 'testStable'
+    // }
+  ],
   layout: {
     // 是否顯示左側列表
     list: true,
@@ -60,7 +77,9 @@ var config = {
           // 限制檔案格式
           accept: ["image/png", "image/jpeg"],
           // 限制檔案大小 (MB)
-          limitSize: 5
+          limitSize: 5,
+          // 縮圖的最大寬高 (px)
+          thumbnailSize: 1500
         }
       },
       // 影片
@@ -73,7 +92,9 @@ var config = {
           // 限制檔案格式
           accept: ["video/mp4", "video/quicktime"],
           // 限制檔案大小 (MB)
-          limitSize: 5
+          limitSize: 5,
+          // 縮圖的最大寬高 (px)
+          thumbnailSize: 1500
         }
       },
       // 檔案
@@ -111,7 +132,7 @@ var config = {
     // 聊天按鈕顯示位置 'bottom' or 'right'
     actionsPosition: "bottom",
     // 限制文字長度
-    limitTextLength: 20,
+    limitTextLength: 100,
     // 圖片/影片檢視氣關閉方式，
     // 'close'：右上方叉叉
     // 'back'：左上方返回箭頭
@@ -140,6 +161,8 @@ var config = {
         color: null
       }
     },
+    // 顯示時縮圖的最大寬 (px)
+    thumbnailSize: 500,
     // 是否顯示已讀
     readReceipt: true,
     // 是否開啟回覆功能
@@ -148,7 +171,17 @@ var config = {
   // 左側聊天列表設定
   list: {
     // 是否顯示成員數
-    memberCount: true
+    memberCount: true,
+    logout: {
+      // 是否顯示登出按鈕
+      enable: true,
+      // 登出事件
+      event: function() {
+        localStorage.removeItem("client");
+        document.location.href = "demo";
+      }
+    },
+    createRoom: true
   },
   // 右側聊天資訊欄設定
   info: {
@@ -163,14 +196,29 @@ var config = {
         // 是否可編輯房間圖片
         cover: true
       },
+      // 是否可建立新房間
+      createRoom: true,
       // 是否可離開房間
       leave: true,
       // 是否可將其他人從房間移除
-      remove: true
+      remove: true,
+      // 是否可邀請成員
+      invite: true
     }
   },
   // 開啟聊天室後進入的房間 (room id)
   defaultRoom: null,
+  // 建立新房間可設定的資訊
+  createRoom: {
+    // 是否可設定房間 ID
+    id: true,
+    // 是否可設定房間名稱
+    name: true,
+    // 是否可設定房間描述
+    description: true,
+    // 是否可設定房間圖片
+    cover: true
+  },
   // 推播設定 (Firebase Cloud Messaging Config)
   // 若不使用推播，則填 null
   FCMConfig: {
