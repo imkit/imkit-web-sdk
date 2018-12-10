@@ -38,6 +38,15 @@ var config = {
     //   value: 'testStable'
     // }
   ],
+  downloadFileHeaders: [
+    // {
+    //   name: 'Authorization',
+    //   // 'variable' or 'stable'
+    //   type: 'variable',
+    //   // 變數名稱或固定的值
+    //   value: 'token'
+    // }
+  ],
   layout: {
     // 是否顯示左側列表
     list: true,
@@ -199,6 +208,14 @@ var config = {
       remove: true,
       // 是否可邀請成員
       invite: true
+    }
+  },
+  events: {
+    onAjaxError: error => {
+      if (error.RC === 401) {
+        alert(error.RM);
+        window.location.href = '../demo';
+      }
     }
   },
   // 開啟聊天室後進入的房間 (room id)
