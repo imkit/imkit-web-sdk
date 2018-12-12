@@ -20,9 +20,13 @@
 
       header {
         padding: 10px;
-        background-color: #f26f21;
+        background-color: #39701f;
         color: #fff;
         font-size: 20px;
+      }
+      header .logo {
+        max-width: 150px;
+        max-height: 20px;
       }
 
       form {
@@ -72,11 +76,13 @@
   </head>
 
   <body>
-    <header><h1>IMKit</h1></header>
+    <header>
+      <img class="logo" src="../static/logo.png" alt="" srcset="" />
+    </header>
     <form onsubmit="login(event)" id="form">
       <input type="text" placeholder="Client" id="clientID" required />
       <input type="text" placeholder="Room" id="roomID" class="hide" />
-      <input type="submit" value="GO" />
+      <input type="submit" value="Start A Free Trial" />
       <div class="loading"><div class="loader"></div></div>
     </form>
   </body>
@@ -126,10 +132,11 @@
         })
         .then(function(data) {
           api.config.token = data.token;
+          localStorage.setItem("IMKit-token", data.token);
           if (roomID) {
             getRoom();
           } else {
-            document.location.href = "../?authClientId=" + clientID;
+            document.location.href = "../";
           }
         });
     }
@@ -141,8 +148,7 @@
           for (var i = 0; i < data.members.length; i++) {
             var member = data.members[i];
             if (member.id === clientID) {
-              document.location.href =
-                "../?authClientId=" + clientID + "&room=" + roomID;
+              document.location.href = "../?room=" + roomID;
             }
           }
           joinRoom();
@@ -154,8 +160,7 @@
 
     function joinRoom() {
       api.room.joinRoom(roomID).then(function(data) {
-        document.location.href =
-          "../?authClientId=" + clientID + "&room=" + roomID;
+        document.location.href = "../?room=" + roomID;
       });
     }
 

@@ -8,7 +8,8 @@
       content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0"
     />
     <title>IMKit Demo</title>
-    <link rel="Shortcut Icon" type="image/x-icon" href="static/logo.png" />
+    <link rel="apple-touch-icon" size="192x192" href="static/favicon-192.png" />
+    <link rel="Shortcut Icon" size="16x16" href="static/favicon.ico" />
     <link rel="manifest" href="static/manifest.json" />
     <link href="static/css/reset.css" rel="stylesheet" />
     <link href="static/css/index.css" rel="stylesheet" />
@@ -28,7 +29,6 @@
     // 處理 query string
     let room = getParameterByName("room");
     let chatActionsPosition = getParameterByName("chatActionsPosition");
-    let authClientId = getParameterByName("authClientId");
     let token = getParameterByName("token");
     if (room) {
       config.defaultRoom = room;
@@ -38,16 +38,13 @@
     }
     if (token) {
       config.token = decodeURIComponent(token);
-    }
-    if (authClientId) {
-      config.authClientId = authClientId;
-      localStorage.setItem("client", authClientId);
-    } else if (localStorage.getItem("client")) {
-      config.authClientId = localStorage.getItem("client");
+      localStorage.setItem("IMKit-token", decodeURIComponent(token));
+    } else if (localStorage.getItem("IMKit-token")) {
+      config.token = localStorage.getItem("IMKit-token");
     }
 
     // 沒有設定 client，導到登入
-    if (!config.authClientId && !config.token) {
+    if (!config.token) {
       if (document.location.href.indexOf("?")) {
         let queryString = document.location.href.split("?");
         queryString.shift();

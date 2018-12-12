@@ -17,8 +17,10 @@ var config = {
   bucketName: 'chatserver-upload',
   // google api key，需要 map 取得座標地址權限
   googleApiKey: 'AIzaSyCimtHXyW8GfZ50Vx_YcFFmaBu7G2Wm2cw',
-  // app name，顯示在聊天列表上方
-  appName: 'IMKit Demo',
+  // app logo，顯示在聊天列表上方，appLogo 及 appName 都填時，logo在左邊
+  appLogo: 'https://i.imgur.com/gchEcBi.png',
+  // app name，顯示在聊天列表上方，appLogo 及 appName 都填時，name在右邊
+  appName: '',
   // 語系 'zh-tw' or 'en'
   lang: 'zh-tw',
   // 取得 avatar 需要的 headers
@@ -38,6 +40,7 @@ var config = {
     //   value: 'testStable'
     // }
   ],
+  // 下逮檔案時要帶的 headers
   downloadFileHeaders: [
     // {
     //   name: 'Authorization',
@@ -210,7 +213,9 @@ var config = {
       invite: true
     }
   },
+  // 事件們
   events: {
+    // call api 失敗時的處理
     onAjaxError: error => {
       if (error.RC === 401) {
         alert(error.RM);
