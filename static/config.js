@@ -173,7 +173,9 @@ var config = {
     // 是否顯示已讀
     readReceipt: true,
     // 是否開啟回覆功能
-    reply: true
+    reply: true,
+    // 是否開啟轉傳功能
+    forward: true
   },
   // 左側聊天列表設定
   list: {
