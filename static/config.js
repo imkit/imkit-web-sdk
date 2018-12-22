@@ -1,6 +1,6 @@
 var config = {
   // 是否開啟 debug
-  debug: true,
+  debug: false,
   // chat server 位置
   domain: 'https://chat.fangho.com',
   // auth server 位置
@@ -84,7 +84,7 @@ var config = {
           // 限制檔案格式
           accept: ['image/png', 'image/jpeg'],
           // 限制檔案大小 (MB)
-          limitSize: 5,
+          limitSize: 10,
           // 縮圖的最大寬高 (px)
           thumbnailSize: 1500
         }
@@ -99,7 +99,7 @@ var config = {
           // 限制檔案格式
           accept: ['video/mp4', 'video/quicktime'],
           // 限制檔案大小 (MB)
-          limitSize: 5,
+          limitSize: 10,
           // 縮圖的最大寬高 (px)
           thumbnailSize: 1500
         }
@@ -114,7 +114,7 @@ var config = {
           // 限制檔案格式
           accept: ['application/pdf'],
           // 限制檔案大小 (MB)
-          limitSize: 5
+          limitSize: 10
         }
       },
       // 錄音
