@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <base href="/" />
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
@@ -11,7 +12,7 @@
       rel="stylesheet"
       href="//cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"
     />
-    <link rel="stylesheet" href="../static/css/index.css" />
+    <link rel="stylesheet" href="static/css/index.css" />
     <style>
       body,
       input {
@@ -78,26 +79,30 @@
   </head>
 
   <body>
-    <header>
-      <img class="logo" src="../static/logo.png" alt="" srcset="" />
-    </header>
+    <header><img class="logo" src="static/logo.png" alt="" srcset="" /></header>
     <form onsubmit="login(event)" id="form">
-      <input type="text" placeholder="Client" id="clientID" required />
+      <input type="text" placeholder="Client ID" id="clientID" required />
+      <input type="text" placeholder="Nickname" id="nickname" />
       <input type="text" placeholder="Room" id="roomID" class="hide" />
       <input type="submit" value="Start A Free Trial" />
       <div class="loading"><div class="loader"></div></div>
     </form>
   </body>
   <script src="//cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.4/bluebird.min.js"></script>
-  <script src="../demo/imkit-js-api-v3.min.js"></script>
-  <script src="../static/config.js"></script>
+  <script src="demo/imkit-js-api-v3.min.js"></script>
+  <script src="static/config.js"></script>
   <script>
+    var loginPath = "/";
     var form = document.getElementById("form");
     var inputClientID = document.getElementById("clientID");
+    var inputNickname = document.getElementById("nickname");
     var inputRoomID = document.getElementById("roomID");
 
     if (getParameterByName("room")) {
       inputRoomID.value = getParameterByName("room");
+    }
+    if (getParameterByName("loginPath")) {
+      loginPath = decodeURIComponent(getParameterByName("loginPath"));
     }
 
     var api = new IMKitApi({
@@ -107,12 +112,14 @@
     });
 
     var clientID;
+    var nickname;
     var roomID;
     function login(event) {
       event.preventDefault();
       form.classList.add("isLoading");
 
       clientID = inputClientID.value;
+      nickname = inputNickname.value || clientID;
       roomID = inputRoomID.value;
 
       sign();
@@ -130,7 +137,7 @@
       api.auth
         .sign({
           id: clientID,
-          nickname: clientID
+          nickname: nickname
         })
         .then(function(data) {
           api.config.token = data.token;
@@ -138,7 +145,7 @@
           if (roomID) {
             getRoom();
           } else {
-            document.location.href = "../";
+            document.location.href = loginPath;
           }
         });
     }
@@ -150,7 +157,7 @@
           for (var i = 0; i < data.members.length; i++) {
             var member = data.members[i];
             if (member.id === clientID) {
-              document.location.href = "../?room=" + roomID;
+              document.location.href = loginPath + "?room=" + roomID;
             }
           }
           joinRoom();
@@ -162,7 +169,7 @@
 
     function joinRoom() {
       api.room.joinRoom(roomID).then(function(data) {
-        document.location.href = "../?room=" + roomID;
+        document.location.href = loginPath + "?room=" + roomID;
       });
     }
 

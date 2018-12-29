@@ -144,6 +144,8 @@ var config = {
     // 'close'：右上方叉叉
     // 'back'：左上方返回箭頭
     sliderReturnMode: 'close',
+    // 爬 url meta 時，是否使用異步讀取
+    asyncUrlPreview: true,
     // 自訂訊息框顏色，顏色格式：'#123456' 或 'rgba(12, 34, 56, 0.5)'
     colors: {
       // 自己發送的訊息
@@ -186,7 +188,7 @@ var config = {
       enable: true,
       // 登出事件
       event: function() {
-        localStorage.removeItem('client');
+        localStorage.removeItem('IMKit-token');
         document.location.href = 'demo';
       }
     },
@@ -217,14 +219,20 @@ var config = {
   },
   // 事件們
   events: {
+    // 是否執行開啟聊天的預設事件
+    onSetRoomActiveDefault: true,
+    // 開啟聊天室時觸發
+    onSetRoomActive: null,
     // call api 失敗時的處理
-    onAjaxError: error => {
+    onAjaxError: function(error) {
       if (error.RC === 401) {
         alert(error.RM);
         window.location.href = '../demo';
       }
     }
   },
+  // 若無設定 defaultRoom，是否自動進入列表第一個房間
+  autoEnterRoom: true,
   // 開啟聊天室後進入的房間 (room id)
   defaultRoom: null,
   // 建立新房間可設定的資訊
@@ -238,6 +246,10 @@ var config = {
     // 是否可設定房間圖片
     cover: true
   },
+  // 若為 true ，收到訊息時，無視聊天室靜音狀態，不發出任何提示音
+  alwaysMute: false,
+  // 收到訊息時是否要更改 title
+  changeTitle: true,
   // 推播設定 (Firebase Cloud Messaging Config)
   // 若不使用推播，則填 null
   FCMConfig: {

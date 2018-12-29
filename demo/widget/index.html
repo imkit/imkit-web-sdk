@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base href="/" />
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0"
+    />
+    <title>IMKit Demo (widget)</title>
+    <link rel="apple-touch-icon" size="192x192" href="static/favicon-192.png" />
+    <link rel="Shortcut Icon" size="16x16" href="static/favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"
+    />
+    <link href="demo/widget/style.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <!--圈圈-->
+    <div class="listSwitch"></div>
+    <!--widget List-->
+    <div class="widgetList">
+      <div class="widget" id="roomlist">
+        <div class="widgetHeader">
+          <div class="text"></div>
+          <div class="actionBtn close">
+            <i> <img src="demo/widget/times.svg" alt="" /> </i>
+          </div>
+        </div>
+        <iframe
+          class="widgetIframe"
+          src="demo/widget/list.html"
+          frameborder="0"
+        ></iframe>
+      </div>
+    </div>
+    <div class="template">
+      <div class="widget roomChat">
+        <div class="widgetHeader">
+          <div class="text"></div>
+          <div class="actionBtn close">
+            <i> <img src="demo/widget/times.svg" alt="" /> </i>
+          </div>
+        </div>
+        <iframe class="widgetIframe" src="" frameborder="0"></iframe>
+      </div>
+    </div>
+  </body>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      // list 開關
+      $("body").on("click", ".listSwitch", function(e) {
+        $("#roomlist").removeClass("hide");
+      });
+
+      // 關閉 list
+      $("body").on("click", "#roomlist .widgetHeader .close", function(e) {
+        $("#roomlist").addClass("hide");
+      });
+
+      // 縮小 chat
+      $("body").on("click", ".roomChat .widgetHeader", function(e) {
+        var roomChat = $(e.currentTarget).parent();
+        roomChat.toggleClass("hide");
+        if (roomChat.hasClass("hide")) {
+          roomChat.find(".text").text(
+            roomChat
+              .find(".widgetIframe")
+              .contents()
+              .find(".roomChat .roomHeader")
+              .text()
+          );
+        } else {
+          roomChat.find(".text").text("");
+        }
+      });
+
+      // 關閉 chat
+      $("body").on("click", ".roomChat .widgetHeader .close", function(e) {
+        $(e.currentTarget)
+          .parent()
+          .parent()
+          .remove();
+      });
+    });
+
+    function logout() {
+      localStorage.removeItem("IMKit-token");
+      $("#roomlist .widgetIframe").attr(
+        "src",
+        "demo/?loginPath=" + encodeURIComponent("demo/widget/list.html")
+      );
+      $(".widgetList .roomChat").remove();
+    }
+    function openRoom(room) {
+      var find = false;
+      $(".widgetList .roomChat").each(function() {
+        if ($(this).data("roomId") === room.id) {
+          find = true;
+        }
+      });
+      if (find) {
+        return;
+      }
+
+      var maxCount = Math.max(0, Math.floor($(window).width() / 360) - 2);
+      while ($(".widgetList .roomChat").length > maxCount) {
+        $(".widgetList .roomChat")
+          .eq(0)
+          .remove();
+      }
+
+      var roomChat = $(".template .roomChat").clone();
+      roomChat.data("roomId", room.id);
+      roomChat
+        .find(".widgetIframe")
+        .attr("src", "demo/widget/chat.html?room=" + room.id);
+      $(".widgetList").append(roomChat);
+    }
+  </script>
+</html>
