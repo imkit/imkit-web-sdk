@@ -15,7 +15,7 @@ var config = {
   token: '',
   // S3 bucketName
   bucketName: 'chatserver-upload',
-  // google api key，需要 map 取得座標地址權限
+  // google api key，需要啟用 Maps JavaScript API, Maps Static API, Geocoding API
   googleApiKey: 'AIzaSyCimtHXyW8GfZ50Vx_YcFFmaBu7G2Wm2cw',
   // app logo，顯示在聊天列表上方，appLogo 及 appName 都填時，logo在左邊
   appLogo: 'https://i.imgur.com/gchEcBi.png',
@@ -65,21 +65,21 @@ var config = {
         // 是否啟用
         enable: true,
         // 描述文字
-        text: '傳送表情符號'
+        text: 'Send Emoji'
       },
       // 貼圖
       sticker: {
         // 是否啟用
         enable: true,
         // 描述文字
-        text: '傳送貼圖'
+        text: 'Send Sticker'
       },
       // 圖片
       image: {
         // 是否啟用
         enable: true,
         // 描述文字
-        text: '傳送圖片',
+        text: 'Send Image',
         extra: {
           // 限制檔案格式
           accept: ['image/png', 'image/jpeg'],
@@ -94,7 +94,7 @@ var config = {
         // 是否啟用
         enable: true,
         // 描述文字
-        text: '傳送影片',
+        text: 'Send Video',
         extra: {
           // 限制檔案格式
           accept: ['video/mp4', 'video/quicktime'],
@@ -109,7 +109,7 @@ var config = {
         // 是否啟用
         enable: true,
         // 描述文字
-        text: '傳送檔案',
+        text: 'Send File',
         extra: {
           // 限制檔案格式
           accept: ['application/pdf'],
@@ -122,7 +122,7 @@ var config = {
         // 是否啟用
         enable: true,
         // 描述文字
-        text: '傳送語音',
+        text: 'Send Recorder',
         extra: {
           // 限制錄音秒數
           limitSeconds: 60
@@ -133,13 +133,13 @@ var config = {
         // 是否啟用
         enable: true,
         // 描述文字
-        text: '傳送位置'
+        text: 'Send Location'
       }
     },
     // 聊天按鈕顯示位置 'bottom' or 'right'
     actionsPosition: 'bottom',
     // 限制文字長度
-    limitTextLength: 100,
+    limitTextLength: 500,
     // 圖片/影片檢視氣關閉方式，
     // 'close'：右上方叉叉
     // 'back'：左上方返回箭頭
@@ -215,7 +215,22 @@ var config = {
       remove: true,
       // 是否可邀請成員
       invite: true
-    }
+    },
+    // 是否預設開啟成員列表
+    openMembersList: false,
+    // 要額外顯示的資訊
+    iframes: [
+      // {
+      //   // 標題
+      //   title: 'Test',
+      //   // iframe會帶入網址，並加上roomId及clientIds
+      //   url: '//imkit.io/',
+      //   // 是否預設開啟
+      //   open: true,
+      //   // 高度
+      //   height: 300
+      // }
+    ]
   },
   // 事件們
   events: {
@@ -250,6 +265,29 @@ var config = {
   alwaysMute: false,
   // 收到訊息時是否要更改 title
   changeTitle: true,
+  // 自訂的多國語
+  i18n: {
+    en: {
+      Test: 'Test',
+      'Send Emoji': 'Send Emoji',
+      'Send Sticker': 'Send Sticker',
+      'Send Image': 'Send Image',
+      'Send Video': 'Send Video',
+      'Send File': 'Send File',
+      'Send Recorder': 'Send Recorder',
+      'Send Location': 'Send Location'
+    },
+    'zh-tw': {
+      Test: '測試',
+      'Send Emoji': '傳送表情符號',
+      'Send Sticker': '傳送貼圖',
+      'Send Image': '傳送圖片',
+      'Send Video': '傳送影片',
+      'Send File': '傳送檔案',
+      'Send Recorder': '傳送錄音',
+      'Send Location': '傳送位置訊息'
+    }
+  },
   // 推播設定 (Firebase Cloud Messaging Config)
   // 若不使用推播，則填 null
   FCMConfig: {
