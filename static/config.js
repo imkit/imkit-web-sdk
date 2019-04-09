@@ -99,7 +99,7 @@ var config = {
           // 限制檔案格式
           accept: ['video/mp4', 'video/quicktime'],
           // 限制檔案大小 (MB)
-          limitSize: 10,
+          limitSize: 100,
           // 縮圖的最大寬高 (px)
           thumbnailSize: 1500
         }
@@ -112,7 +112,7 @@ var config = {
         text: 'Send File',
         extra: {
           // 限制檔案格式
-          accept: ['application/pdf'],
+          accept: ['application/pdf', 'audio/mp3'],
           // 限制檔案大小 (MB)
           limitSize: 10
         }
@@ -241,8 +241,9 @@ var config = {
     // call api 失敗時的處理
     onAjaxError: function(error) {
       if (error.RC === 401) {
-        alert(error.RM);
         window.location.href = '../demo';
+      } else {
+        alert(error.RM);
       }
     }
   },
@@ -287,6 +288,21 @@ var config = {
       'Send Recorder': '傳送錄音',
       'Send Location': '傳送位置訊息'
     }
+  },
+  // 客製功能
+  special: {
+    // 自訂房間描述
+    // renderRoomDescription: function(roomDescription) {
+    //   if (roomDescription && roomDescription.indexOf('::')) {
+    //     return roomDescription
+    //       .split('::')
+    //       .splice(1)
+    //       .join(' ');
+    //   } else {
+    //     return roomDescription;
+    //   }
+    // }
+    renderRoomDescription: null
   },
   // 推播設定 (Firebase Cloud Messaging Config)
   // 若不使用推播，則填 null
