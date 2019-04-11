@@ -3,15 +3,15 @@ var config = {
   debug: false,
   // chat server 位置
   domain: 'https://chat.fangho.com',
-  // auth server 位置
+  // auth server 位置，與 authClientId 配合取得 token，若填 token，此值可不填
   authBase: 'https://auth.imkit.io',
-  // 登入的 chat user id，與 token 擇一使用
+  // 登入的 chat user id，與 authBase 配合取得 token，若填 token，此值可不填
   authClientId: '',
   // 取得 url 預覽內容的 api 網址
   urlPreviewApi: 'https://chatkit.co/url',
   // chat server clientkey
   clientKey: 'fangho_imkit_0412_2018_001_clientkey',
-  // chat user token，與 authClientId 擇一使用
+  // chat user token，選填，若不填則需填 authBase 與 authClientId
   token: '',
   // S3 bucketName
   bucketName: 'chatserver-upload',
@@ -40,7 +40,7 @@ var config = {
     //   value: 'testStable'
     // }
   ],
-  // 下逮檔案時要帶的 headers
+  // 下載檔案時要帶的 headers
   downloadFileHeaders: [
     // {
     //   name: 'Authorization',
