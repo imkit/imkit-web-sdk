@@ -192,6 +192,9 @@ var config = {
         document.location.href = 'demo';
       }
     },
+    // 是否有置頂功能
+    sticky: true,
+    // 是否可以建立房間
     createRoom: true
   },
   // 右側聊天資訊欄設定
