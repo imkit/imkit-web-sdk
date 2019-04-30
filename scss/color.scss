@@ -1,0 +1,677 @@
+$color-primary: #deeb61;
+$color-secondary: #669c35;
+$color-tertiary: #f4a300;
+$color-link: #669c35;
+$color-error: #f00;
+$color-darkFont: #333;
+$color-lightFont: #fff;
+$color-font: $color-darkFont;
+$color-secondaryFont: lighten($color-font, 45);
+// $color-secondaryFont: darken($color-font, 45);
+$color-tertiaryFont: lighten($color-font, 60);
+// $color-tertiaryFont: darken($color-font, 60);
+$color-background: #fff;
+$color-frameLine: #eee;
+// 特殊顏色
+$color-scroll: #777;
+$color-fileLoaderErrorBackground: #f9f9f9;
+$color-avatar: #bbb;
+$color-recorder: #f03d25;
+
+$lightness-color-primary: lightness($color-primary);
+$lightness-color-secondary: lightness($color-secondary);
+$lightness-color-tertiary: lightness($color-tertiary);
+$lightness-color-background: lightness($color-background);
+$lightness-color-font: lightness($color-font);
+
+// app.scss
+#IMKitApp {
+  background-color: $color-background;
+  color: $color-font;
+  input,
+  button,
+  select,
+  textarea,
+  optgroup,
+  option {
+    color: $color-font;
+  }
+  input,
+  textarea {
+    &::placeholder {
+      color: $color-secondaryFont;
+      opacity: 1;
+    }
+    &:-ms-input-placeholder {
+      color: $color-secondaryFont;
+    }
+    &::-ms-input-placeholder {
+      color: $color-secondaryFont;
+    }
+  }
+  // Components/Avatar.scss
+  .avatar {
+    background-color: $color-background;
+    &.border {
+      border-color: $color-primary;
+    }
+    .avatarText {
+      color: $color-avatar;
+    }
+  }
+  // Components/Button.scss
+  .btn {
+    &.btn-primary {
+      background-color: $color-primary;
+      @if $lightness-color-primary > 60 {
+        color: $color-darkFont;
+      } @else {
+        color: $color-lightFont;
+      }
+      &:hover {
+        @if $lightness-color-primary > 60 {
+          background-color: darken($color-primary, 5);
+        } @else {
+          background-color: lighten($color-primary, 5);
+        }
+      }
+    }
+    &.btn-secondary {
+      background-color: $color-secondary;
+      @if $lightness-color-secondary > 60 {
+        color: $color-darkFont;
+      } @else {
+        color: $color-lightFont;
+      }
+      &:hover {
+        @if $lightness-color-secondary > 60 {
+          background-color: darken($color-secondary, 5);
+        } @else {
+          background-color: lighten($color-secondary, 5);
+        }
+      }
+    }
+    &.btn-light {
+      background-color: $color-background;
+      color: $color-font;
+      &:hover {
+        @if $lightness-color-background > 60 {
+          background-color: darken($color-background, 10);
+        } @else {
+          background-color: lighten($color-background, 10);
+        }
+      }
+    }
+  }
+  // Components/Checkbox.scss
+  .checkbox {
+    .ckeckboxOuter {
+      border-color: $color-frameLine;
+      .ckeckboxInner {
+        background-color: $color-primary;
+      }
+    }
+    &.checked {
+      .ckeckboxOuter {
+        border-color: $color-primary;
+      }
+    }
+  }
+  // Components/DivEditor.scss
+  .divEditor {
+    .placeholder {
+      color: $color-secondaryFont;
+    }
+  }
+  // Components/FileLoader.scss
+  .fileLoader {
+    .fileLoaderMain {
+      .fileLoaderImage {
+        .fileLoaderImageCover {
+          i {
+            fill: $color-primary;
+          }
+        }
+      }
+      .fileLoaderFile {
+        border-color: $color-frameLine;
+      }
+      .fileLoaderError {
+        background-color: $color-fileLoaderErrorBackground;
+      }
+      .fileLoaderLoading {
+        background-color: rgba($color-background, 0.8);
+      }
+    }
+    .fileLoaderFileInfo {
+      border-color: $color-frameLine;
+      p {
+        color: $color-secondaryFont;
+        &.fileName {
+          color: $color-font;
+        }
+      }
+    }
+  }
+  // Components/FileUploader.scss
+  .fileUploader {
+    .fileUploaderLoading {
+      background-color: rgba($color-background, 0.8);
+      .fileUploaderBar {
+        background-color: $color-primary;
+      }
+    }
+  }
+  // Components/Form.scss
+  .form {
+    .label {
+      color: $color-secondaryFont;
+    }
+    input[type="text"] {
+      border-color: rgba($color-secondaryFont, 0.5);
+    }
+  }
+  // Components/Modal.scss
+  .modal {
+    background-color: rgba(invert($color-background), 0.5);
+    .modalBox {
+      background-color: $color-background;
+      box-shadow: 0 2px 8px rgba(invert($color-background), 0.33);
+      .modalClose {
+        fill: $color-primary;
+      }
+    }
+  }
+  // Components/Scrollbar.scss
+  .scrollBar {
+    .scrollBarInner {
+      .scrollBarContent {
+        border-color: transparent;
+      }
+    }
+    .scrollBackY {
+      .scrollFrontY {
+        background-color: $color-scroll;
+      }
+    }
+  }
+  // Home/index.scss
+  .home {
+    -webkit-tap-highlight-color: transparent;
+    .pageLoading {
+      background-color: $color-background;
+    }
+    .roomHeader {
+      border-bottom-color: $color-frameLine;
+      .iconBtn {
+        &.primary {
+          fill: $color-primary;
+        }
+        &.secondary {
+          fill: $color-secondary;
+        }
+      }
+    }
+    .roomTip {
+      p {
+        color: $color-error;
+        background-color: $color-background;
+        border-color: $color-error;
+      }
+    }
+    .forwardCover {
+      background-color: rgba($color-background, 0.1);
+    }
+  }
+  // RoomChat/index.scss
+  .roomChat {
+    .roomHeader {
+      .roomHeaderText {
+        .description {
+          @if $lightness-color-font > 50 {
+            color: darken($color-font, 27);
+          } @else {
+            color: lighten($color-font, 27);
+          }
+        }
+      }
+    }
+    .dropzone {
+      border-color: $color-primary;
+    }
+    // RoomChat/RoomChatOutput/index.scss
+    .roomChatOutput {
+      .messageLoading {
+        background-color: $color-primary;
+        @if $lightness-color-primary > 60 {
+          color: $color-darkFont;
+        } @else {
+          color: $color-lightFont;
+        }
+      }
+      .list {
+        .messages {
+          // RoomChat/RoomChatOutput/RoomChatOutputMessage.scss
+          .message {
+            .timespan {
+              span {
+                background-color: $color-tertiaryFont;
+                color: $color-background;
+              }
+            }
+            .contentBox {
+              .name {
+                color: $color-secondaryFont;
+              }
+              .content {
+                &.hasReply {
+                  background-color: mix($color-font, $color-background, 7.5);
+                  .reply {
+                    background-color: rgba($color-background, 0.6);
+                    .text {
+                      background-color: transparent;
+                    }
+                  }
+                }
+                .actions {
+                  .actionsBtn {
+                    i {
+                      background-color: mix(
+                        $color-font,
+                        $color-background,
+                        7.5
+                      );
+                      fill: $color-font;
+                    }
+                  }
+                  .actionsList {
+                    background-color: $color-background;
+                    border-color: $color-secondaryFont;
+                    .actionsItem {
+                      color: $color-secondaryFont;
+                      &:hover {
+                        color: $color-font;
+                      }
+                    }
+                  }
+                }
+                .text {
+                  background-color: mix($color-font, $color-background, 7.5);
+                  color: $color-font;
+                  a {
+                    color: $color-link;
+                  }
+                  &.onlyEmoji {
+                    background-color: transparent !important;
+                    color: $color-font !important;
+                  }
+                }
+                .location {
+                  border-color: $color-frameLine;
+                  .info {
+                    border-top-color: $color-frameLine;
+                    .pos {
+                      color: $color-secondaryFont;
+                    }
+                    .address {
+                      color: $color-secondaryFont;
+                    }
+                  }
+                }
+                .messageInfo {
+                  color: $color-secondaryFont;
+                  .failed {
+                    fill: $color-error;
+                  }
+                  .sending {
+                    fill: $color-primary;
+                  }
+                }
+              }
+              .extra {
+                .UrlPreviews {
+                  // RoomChat/RoomChatOutput/UrlPreview.scss
+                  .urlPreview {
+                    border-color: $color-frameLine;
+                    color: $color-darkFont;
+                  }
+                }
+              }
+            }
+            &.self {
+              .contentBox {
+                .content {
+                  &.hasReply {
+                    background-color: $color-primary;
+                    .reply {
+                      .sender,
+                      .text {
+                        color: $color-font;
+                      }
+                    }
+                  }
+                  .actions {
+                    .actionsBtn {
+                      i {
+                        background-color: $color-primary;
+                        @if $lightness-color-primary > 60 {
+                          fill: $color-darkFont;
+                        } @else {
+                          fill: $color-lightFont;
+                        }
+                      }
+                    }
+                  }
+                  .text {
+                    background-color: $color-primary;
+                    @if $lightness-color-primary > 60 {
+                      color: $color-darkFont;
+                    } @else {
+                      color: $color-lightFont;
+                    }
+                    a {
+                      color: $color-link;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      .newMessage {
+        background-color: $color-frameLine;
+      }
+      // RoomChat/RoomChatOutput/RoomChatOutputSilder.scss
+      .roomChatOutputSilder {
+        background-color: $color-background;
+        .silderHeader {
+          border-bottom-color: $color-frameLine;
+          background-color: rgba($color-background, 0.9);
+          .silderInfo {
+            p {
+              &.silderInfoTime {
+                color: $color-secondaryFont;
+              }
+            }
+          }
+          .sliderBack,
+          .silderClose {
+            fill: $color-primary;
+          }
+        }
+        .sliderThumbs {
+          background-color: rgba($color-background, 0.9);
+          border-top-color: $color-frameLine;
+        }
+      }
+    }
+    // RoomChat/RoomChatInput/index.scss
+    .roomChatInput {
+      border-top-color: $color-frameLine;
+      .inputInner {
+        .reply {
+          border-bottom-color: $color-frameLine;
+          .replyLabel {
+            background-color: $color-primary;
+            @if $lightness-color-primary > 60 {
+              color: $color-darkFont;
+            } @else {
+              color: $color-lightFont;
+            }
+          }
+        }
+        .typing {
+          color: $color-secondaryFont;
+        }
+        .actionsPosition {
+          // RoomChat/RoomChatInput/RoomChatInputActions/index.scss
+          .roomChatInputActions {
+            .action {
+              .actionBtn {
+                fill: $color-secondaryFont;
+                stroke: $color-secondaryFont;
+              }
+              .actionBox {
+                background-color: $color-background;
+                box-shadow: 0 0 0 1px rgba(invert($color-background), 0.1),
+                  0 1px 5px rgba(invert($color-background), 0.25);
+                // RoomChat/RoomChatInput/RoomChatInputActions/Emoji.scss
+                &.emoji {
+                  .scroll {
+                    .type {
+                      .typename {
+                        color: $color-secondaryFont;
+                      }
+                    }
+                  }
+                }
+                // RoomChat/RoomChatInput/RoomChatInputActions/Sticker.scss
+                // RoomChat/RoomChatInput/RoomChatInputActions/Recorder.scss
+                &.recorder {
+                  .timestamp {
+                    color: $color-secondaryFont;
+                  }
+                  .recorderBtn {
+                    background-color: $color-recorder;
+                    @if lightness($color-recorder) > 60 {
+                      color: $color-darkFont;
+                    } @else {
+                      color: $color-lightFont;
+                    }
+
+                    &.active {
+                      .recorderText {
+                        @if lightness($color-recorder) > 60 {
+                          background-color: $color-darkFont;
+                        } @else {
+                          background-color: $color-lightFont;
+                        }
+                      }
+                    }
+                  }
+
+                  .frequency {
+                    @if $lightness-color-background > 60 {
+                      background-color: $color-darkFont;
+                    } @else {
+                      background-color: $color-lightFont;
+                    }
+                  }
+                }
+              }
+              // RoomChat/RoomChatInput/RoomChatInputActions/Location.scss
+              &.location {
+                .modalBox {
+                  .map {
+                    .marker {
+                      i {
+                        fill: $color-primary;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    // RoomChat/RoomChatForwardRooms.scss
+    .roomChatForwardRooms {
+      .roomChatForwardSending {
+        background-color: rgba($color-background, 0.5);
+      }
+    }
+  }
+  // RoomInfo/index.scss
+  .roomInfo {
+    border-left-color: $color-frameLine;
+    .roomHeader {
+      .mute {
+        fill: $color-secondaryFont;
+        &.active {
+          fill: $color-primary;
+        }
+      }
+    }
+    .roomDate {
+      border-bottom-color: $color-frameLine;
+      color: $color-secondaryFont;
+    }
+    .roomMembersCount {
+      color: $color-secondaryFont;
+      .roomMembersCountIcon {
+        fill: $color-primary;
+      }
+    }
+    .roomMembersList {
+      .list {
+        .member {
+          .roomEdit {
+            .icon {
+              fill: $color-secondaryFont;
+            }
+          }
+        }
+      }
+    }
+    .roomIframes {
+      .roomIframesItem {
+        .roomIframesItemTitle {
+          color: $color-secondaryFont;
+          border-top-color: $color-frameLine;
+          .roomIframesItemTitleIcon {
+            fill: $color-primary;
+          }
+        }
+      }
+    }
+    .roomEdit {
+      .icon {
+        fill: $color-primary;
+      }
+      .down {
+        border-color: $color-secondaryFont;
+        background-color: $color-background;
+        color: $color-secondaryFont;
+        .downItem {
+          &:hover {
+            color: $color-font;
+          }
+        }
+      }
+    }
+  }
+  // RoomList/index.scss
+  .roomList {
+    border-right-color: $color-frameLine;
+    background-color: $color-background;
+    .roomHeader {
+      .logout {
+        fill: $color-primary;
+      }
+      .notification {
+        fill: $color-secondaryFont;
+        &.active {
+          fill: $color-primary;
+        }
+      }
+    }
+    .search {
+      border-bottom-color: $color-frameLine;
+      .searchInput {
+        background-color: mix($color-frameLine, $color-background);
+        border-color: $color-frameLine;
+      }
+      .searchClear {
+        svg {
+          stroke: $color-primary;
+        }
+      }
+    }
+    .addRoomBtn {
+      background-color: $color-primary;
+      box-shadow: 0 0 0 1px rgba(invert($color-background), 0.1),
+        0 1px 5px rgba(invert($color-background), 0.25);
+      &:hover {
+        @if $lightness-color-primary > 60 {
+          background-color: darken($color-primary, 5);
+        } @else {
+          background-color: lighten($color-primary, 5);
+        }
+      }
+      .addRoomBtnIcon {
+        @if $lightness-color-primary > 60 {
+          stroke: $color-darkFont;
+        } @else {
+          stroke: $color-lightFont;
+        }
+      }
+    }
+  }
+  // RoomList/RoomListItem.scss
+  .roomListItem {
+    border-bottom-color: $color-frameLine;
+    background-color: $color-background;
+    &:hover {
+      @if $lightness-color-background > 50 {
+        background-color: darken($color-background, 3);
+      } @else {
+        background-color: lighten($color-background, 3);
+      }
+    }
+    &.active {
+      @if $lightness-color-background > 60 {
+        background-color: darken($color-background, 5);
+      } @else {
+        background-color: lighten($color-background, 5);
+      }
+    }
+    .text {
+      .textTop {
+        .nameDescription {
+          .description {
+            @if $lightness-color-font > 50 {
+              color: darken($color-font, 27);
+            } @else {
+              color: lighten($color-font, 27);
+            }
+          }
+        }
+      }
+      .textBottom {
+        @if $lightness-color-font > 50 {
+          color: darken($color-font, 40);
+        } @else {
+          color: lighten($color-font, 40);
+        }
+      }
+    }
+    .unread {
+      background-color: $color-primary;
+      @if $lightness-color-primary > 60 {
+        color: $color-darkFont;
+      } @else {
+        color: $color-lightFont;
+      }
+    }
+    .time {
+      .actions {
+        .actionsBtn {
+          fill: $color-primary;
+        }
+        .actionsList {
+          background-color: $color-background;
+          border-color: $color-secondaryFont;
+          .actionsItem {
+            color: $color-secondaryFont;
+            &:hover {
+              color: $color-font;
+            }
+          }
+        }
+      }
+    }
+  }
+}

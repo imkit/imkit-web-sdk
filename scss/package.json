@@ -1,0 +1,14 @@
+{
+  "name": "imkit-app-color",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "node-sass IMKitAppColor.scss dist/IMKitAppColor.css"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "node-sass": "^4.12.0"
+  }
+}
