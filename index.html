@@ -26,45 +26,47 @@
 
   <script src="static/config.js"></script>
   <script>
-    // 處理 query string
-    let room = getParameterByName("room");
-    let chatActionsPosition = getParameterByName("chatActionsPosition");
-    let token = getParameterByName("token");
-    if (room) {
-      config.defaultRoom = room;
-    }
-    if (chatActionsPosition) {
-      config.chat.actionsPosition = chatActionsPosition;
-    }
-    if (token) {
-      config.token = decodeURIComponent(token);
-      localStorage.setItem("IMKit-token", decodeURIComponent(token));
-    } else if (localStorage.getItem("IMKit-token")) {
-      config.token = localStorage.getItem("IMKit-token");
-    }
-
-    // 沒有設定 client，導到登入
-    if (!config.token) {
-      if (document.location.href.indexOf("?")) {
-        let queryString = document.location.href.split("?");
-        queryString.shift();
-        document.location.href = "demo?" + queryString.join("?");
-      } else {
-        document.location.href = "demo";
+    (() => {
+      // 處理 query string
+      let room = getParameterByName("room");
+      let chatActionsPosition = getParameterByName("chatActionsPosition");
+      let token = getParameterByName("token");
+      if (room) {
+        config.defaultRoom = room;
       }
-    }
+      if (chatActionsPosition) {
+        config.chat.actionsPosition = chatActionsPosition;
+      }
+      if (token) {
+        config.token = decodeURIComponent(token);
+        localStorage.setItem("IMKit-token", decodeURIComponent(token));
+      } else if (localStorage.getItem("IMKit-token")) {
+        config.token = localStorage.getItem("IMKit-token");
+      }
 
-    // INIT
-    window.ImkitJsSDK.init(config);
+      // 沒有設定 client，導到登入
+      if (!config.token) {
+        if (document.location.href.indexOf("?")) {
+          let queryString = document.location.href.split("?");
+          queryString.shift();
+          document.location.href = "demo?" + queryString.join("?");
+        } else {
+          document.location.href = "demo";
+        }
+      }
 
-    function getParameterByName(name, url) {
-      if (!url) url = window.location.href;
-      name = name.replace(/[\[\]]/g, "\\$&");
-      var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-        results = regex.exec(url);
-      if (!results) return null;
-      if (!results[2]) return "";
-      return decodeURIComponent(results[2].replace(/\+/g, " "));
-    }
+      // INIT
+      window.ImkitJsSDK.init(config);
+
+      function getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, "\\$&");
+        var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+          results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return "";
+        return decodeURIComponent(results[2].replace(/\+/g, " "));
+      }
+    })();
   </script>
 </html>
