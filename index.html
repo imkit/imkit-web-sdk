@@ -25,39 +25,9 @@
   </body>
 
   <script src="static/config.js"></script>
+  <script src="IMKit.js"></script>
   <script>
     (() => {
-      const IMKit = {};
-
-      IMKit.Object = {
-        fromEntries: entries =>
-          [...entries].reduce(
-            (object, [key, val]) => ({...object, [key]: val}),
-            {},
-          ),
-      };
-
-      IMKit.Token = {
-        KEY: "IMKit-token",
-
-        get: () => localStorage[IMKit.Token.KEY],
-
-        init: maybeToken =>
-          maybeToken
-            ? IMKit.Token.set(maybeToken)
-            : IMKit.Token.get(),
-
-        set: token => {
-          localStorage[IMKit.Token.KEY] = token;
-          return token;
-        },
-      };
-
-      IMKit.URL = {
-        getParams: () =>
-          IMKit.Object.fromEntries(new URLSearchParams(location.search))
-      };
-
       const { room, chatActionsPosition, token } = IMKit.URL.getParams();
 
       if (room) {
