@@ -136,7 +136,7 @@
         })
         .then(function(data) {
           api.config.token = data.token;
-          localStorage.setItem("IMKit-token", data.token);
+          IMKit.Token.set(data.token)
           if (roomID) {
             getRoom();
           } else {
