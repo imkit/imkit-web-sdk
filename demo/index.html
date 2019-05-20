@@ -149,11 +149,8 @@
       api.room
         .getRoom(roomID)
         .then(function(data) {
-          for (var i = 0; i < data.members.length; i++) {
-            var member = data.members[i];
-            if (member.id === clientID) {
-              document.location.href = loginPath + "?room=" + roomID;
-            }
+          if (data.members.some(member => member.id === clientID)) {
+            document.location.href = loginPath + "?room=" + roomID;
           }
           joinRoom();
         })
