@@ -35,10 +35,14 @@ body {
 
 .appLoader {
   position: absolute;
-  left: calc(50% - 18px);
-  top: calc(50% - 18px);
+  left: calc(50% - 32.5px);
+  top: calc(50% - 10.5px);
 }
 
 .boxOrientVertical {
   -webkit-box-orient: vertical;
+}
+
+.ball-pulse-sync > div {
+  background-color: #d3d3d3;
 }

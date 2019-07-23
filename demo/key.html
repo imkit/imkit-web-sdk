@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <base href="/" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>IMKit Demo</title>
+    <link rel="apple-touch-icon" size="192x192" href="static/favicon-192.png" />
+    <link rel="Shortcut Icon" size="32x32" href="static/favicon-32.png" />
+    <link
+      rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"
+    />
+    <link rel="stylesheet" href="static/css/index.css" />
+    <style>
+      body,
+      input {
+        font-family: Helvetica Neue, Microsoft JhengHei, Helvetica, Arial,
+          sans-serif;
+      }
+
+      header {
+        padding: 10px;
+        background-color: #39701f;
+        color: #fff;
+        font-size: 20px;
+      }
+      header .logo {
+        max-width: 150px;
+        max-height: 20px;
+      }
+
+      form {
+        padding: 10px;
+        box-sizing: border-box;
+        width: 300px;
+        margin: 0 auto;
+      }
+
+      input {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 10px;
+        display: block;
+        margin: 10px 0;
+        font-size: 14px;
+        letter-spacing: 1px;
+      }
+
+      input[type="submit"],
+      .button {
+        background-color: #eee;
+        cursor: pointer;
+        border: none;
+        outline: none;
+        padding: 10px;
+        font-size: 14px;
+        line-height: 1;
+        display: inline-block;
+        text-decoration: none;
+      }
+
+      input[type="submit"]:hover,
+      .button:hover {
+        background-color: #ddd;
+      }
+
+      .loading {
+        display: none;
+        text-align: center;
+      }
+
+      form.isLoading input[type="submit"] {
+        display: none;
+      }
+
+      form.isLoading .loading {
+        display: block;
+      }
+
+      .hide {
+        display: none;
+      }
+
+      .key {
+        border: #aaa solid thin;
+        margin: 10px 0;
+        min-height: 16px;
+        word-break: break-all;
+      }
+      .hideInputLabel {
+        overflow: hidden;
+      }
+      .hideInput {
+        position: absolute;
+        display: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header><img class="logo" src="static/logo.png" alt="" srcset="" /></header>
+    <form onsubmit="login(event)" id="form">
+      <input type="text" placeholder="Client ID" id="clientID" required />
+      <input type="text" placeholder="Nickname (Optional)" id="nickname" />
+      <input type="text" placeholder="Avatar Url (Optional)" id="avatarUrl" />
+      <input type="text" placeholder="Room" id="roomID" class="hide" />
+      <input type="submit" value="Start A Free Trial" />
+      <div class="loading"><div class="loader"></div></div>
+      <!--Public Key-->
+      <span>Public Key</span>
+      <a type="button" class="button" id="publicKeySave" href="javascript:;"
+        >Save</a
+      >
+      <label class="hideInputLabel">
+        <span class="button">Select</span>
+        <input
+          type="file"
+          id="publicKeyInput"
+          class="hideInput"
+          onchange="handleFileSelect(event, 'publicKey')"
+        />
+      </label>
+      <div class="key" id="publicKeyText"></div>
+      <!--Private Key-->
+      <span>Private Key</span>
+      <a type="button" class="button" id="privateKeySave" href="javascript:;"
+        >Save</a
+      >
+      <label class="hideInputLabel">
+        <span class="button">Select</span>
+        <input
+          type="file"
+          id="privateKeyInput"
+          class="hideInput"
+          onchange="handleFileSelect(event, 'privateKey')"
+        />
+      </label>
+      <div class="key" id="privateKeyText"></div>
+      <button type="button" class="button" onclick="genetateKey()">
+        Genetate Key
+      </button>
+    </form>
+  </body>
+  <script>
+    module = {};
+  </script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.4/bluebird.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jsencrypt/2.3.1/jsencrypt.min.js"></script>
+  <script src="demo/imkit-js-api-v3.min.js"></script>
+  <script src="static/config.js"></script>
+  <script>
+    var loginPath = "/";
+    var form = document.getElementById("form");
+    var inputClientID = document.getElementById("clientID");
+    var inputNickname = document.getElementById("nickname");
+    var inputAvatarUrl = document.getElementById("avatarUrl");
+    var inputRoomID = document.getElementById("roomID");
+    var privateKey = localStorage.getItem("IMKit-privateKey") || "";
+    var publicKey = localStorage.getItem("IMKit-publicKey") || "";
+
+    if (getParameterByName("room")) {
+      inputRoomID.value = getParameterByName("room");
+    }
+    if (getParameterByName("loginPath")) {
+      loginPath = decodeURIComponent(getParameterByName("loginPath"));
+    }
+
+    setPrivateKey(privateKey);
+    setPublicKey(publicKey);
+
+    var api = new IMKitApi({
+      domain: config.domain,
+      clientKey: config.clientKey,
+      authBase: config.authBase
+    });
+
+    var clientID;
+    var nickname;
+    var roomID;
+    function login(event) {
+      event.preventDefault();
+      if (!privateKey || !publicKey) {
+        alert("Please Select or Genetate Key");
+        return;
+      }
+      form.classList.add("isLoading");
+
+      clientID = inputClientID.value;
+      nickname = inputNickname.value || clientID;
+      avatarUrl = inputAvatarUrl.value || "";
+      roomID = inputRoomID.value;
+
+      localStorage.setItem("IMKit-privateKey", privateKey);
+      localStorage.setItem("IMKit-publicKey", publicKey);
+      sign();
+      // sign 拿 token
+      // 是否有填房間
+      //  沒填：轉址
+      //  有填：getRoom 確認房間是否存在
+      //   不存在：createRoom 建房間並加入
+      //   存在：確認clientID是否為成員
+      //    是：轉址
+      //    不是：加入房間後轉址
+    }
+
+    function sign() {
+      api.auth
+        .sign({
+          id: clientID,
+          nickname: nickname,
+          avatarUrl: avatarUrl,
+          publicKey: publicKey
+        })
+        .then(function(data) {
+          api.config.token = data.token;
+          localStorage.setItem("IMKit-token", data.token);
+          if (roomID) {
+            getRoom();
+          } else {
+            document.location.href = loginPath;
+          }
+        });
+    }
+
+    function getRoom() {
+      api.room
+        .getRoom(roomID)
+        .then(function(data) {
+          for (var i = 0; i < data.members.length; i++) {
+            var member = data.members[i];
+            if (member.id === clientID) {
+              document.location.href = loginPath + "?room=" + roomID;
+            }
+          }
+          joinRoom();
+        })
+        .catch(function(error) {
+          createRoom();
+        });
+    }
+
+    function joinRoom() {
+      api.room.joinRoom(roomID).then(function(data) {
+        document.location.href = loginPath + "?room=" + roomID;
+      });
+    }
+
+    function createRoom() {
+      api.room
+        .createRoom({
+          _id: roomID,
+          name: roomID
+        })
+        .then(function(data) {
+          joinRoom();
+        });
+    }
+
+    function getParameterByName(name, url) {
+      if (!url) url = window.location.href;
+      name = name.replace(/[\[\]]/g, "\\$&");
+      var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return "";
+      return decodeURIComponent(results[2].replace(/\+/g, " "));
+    }
+
+    function genetateKey() {
+      if (!window.crypto) {
+        alert("Can not genetate key");
+      }
+      var crypt = new JSEncrypt({ default_key_size: 2048 });
+      crypt.getKey();
+      setPrivateKey(crypt.getPrivateKey());
+      setPublicKey(crypt.getPublicKey());
+    }
+
+    function setPrivateKey(key) {
+      if (!key) {
+        return;
+      }
+      privateKey = key;
+      document.getElementById("privateKeyText").innerText = key;
+      document
+        .getElementById("privateKeySave")
+        .setAttribute("href", buildHref(key));
+      document
+        .getElementById("privateKeySave")
+        .setAttribute("download", "_rsa");
+    }
+
+    function setPublicKey(key) {
+      if (!key) {
+        return;
+      }
+      publicKey = key;
+      document.getElementById("publicKeyText").innerText = key;
+      document
+        .getElementById("publicKeySave")
+        .setAttribute("href", buildHref(key));
+      document
+        .getElementById("publicKeySave")
+        .setAttribute("download", "_rsa.pub");
+    }
+
+    function buildHref(data) {
+      return (
+        "data:application/octet-stream;charset=utf-8;base64," +
+        window.btoa(data)
+      );
+    }
+
+    function handleFileSelect(evt, key) {
+      var files = evt.target.files;
+
+      var file = files[0];
+      var reader = new FileReader();
+
+      reader.onload = function(e) {
+        if (key === "privateKey") {
+          setPrivateKey(window.atob(e.target.result.split(",")[1]));
+        } else {
+          setPublicKey(window.atob(e.target.result.split(",")[1]));
+        }
+      };
+
+      reader.readAsDataURL(file);
+    }
+  </script>
+</html>
