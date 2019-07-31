@@ -28,6 +28,7 @@ example:
 ```
 
 `publicKey` 在 sign 時會用到
+
 `privateKey` 請妥善保存到資料庫
 
 ### sign
@@ -53,6 +54,7 @@ example:
 ```
 
 需填入 `clientID` 及 `publicKey` ， 其他資訊為選填
+
 `clientID` 請妥善保存到資料庫
 
 ### 完整範例
@@ -127,6 +129,7 @@ example:
 ```
 
 `publicKey` 在 sign 時會用到
+
 `privateKey` 請妥善保存到資料庫
 
 ### sign
@@ -152,6 +155,7 @@ example:
 ```
 
 需填入 `clientID` 及 `publicKey` ， 其他資訊為選填
+
 `clientID` 請妥善保存到資料庫
 
 ## 建立房間並加入
@@ -178,7 +182,9 @@ example:
 ```
 
 serviceID: 客服的 clientID
+
 token: 客戶 sign 後拿到的 token
+
 `token` 可以在 `new IMKitApi()` 時設定，也可以 sign 後用 `api.config.token = token;` 修改
 
 ### 完整範例
