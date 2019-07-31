@@ -6,7 +6,9 @@
 
 如果要使用地圖位置服務功能，需先申請 Google api key
 https://developers.google.com/maps/documentation/embed/get-api-key
+
 需開通權限：
+Maps JavaScript API, Maps Static API, Geocoding API
 
 ## 建立客服
 
