@@ -147,7 +147,7 @@
     module = {};
   </script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.4/bluebird.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jsencrypt/2.3.1/jsencrypt.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/node-forge@0.7.0/dist/forge.min.js"></script>
   <script src="demo/imkit-js-api-v3.min.js"></script>
   <script src="static/config.js"></script>
   <script>
@@ -206,12 +206,13 @@
     }
 
     function sign() {
+      var _publicKey = publicKey;
       api.auth
         .sign({
           id: clientID,
           nickname: nickname,
           avatarUrl: avatarUrl,
-          publicKey: publicKey
+          publicKey: _publicKey
         })
         .then(function(data) {
           api.config.token = data.token;
@@ -269,13 +270,10 @@
     }
 
     function genetateKey() {
-      if (!window.crypto) {
-        alert("Can not genetate key");
-      }
-      var crypt = new JSEncrypt({ default_key_size: 2048 });
-      crypt.getKey();
-      setPrivateKey(crypt.getPrivateKey());
-      setPublicKey(crypt.getPublicKey());
+      api.generateRsaKey().then(function(keypair) {
+        setPrivateKey(keypair.privateKey);
+        setPublicKey(keypair.publicKey);
+      });
     }
 
     function setPrivateKey(key) {

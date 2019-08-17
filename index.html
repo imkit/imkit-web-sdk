@@ -64,7 +64,10 @@
     }
 
     // 讀取鑰匙
-    config.privateKey = localStorage.getItem("IMKit-privateKey");
+    var privateKey = localStorage.getItem("IMKit-privateKey");
+    if (privateKey) {
+      config.privateKey = privateKey;
+    }
 
     // INIT
     window.ImkitJsSDK.init(config);

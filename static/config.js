@@ -4,7 +4,7 @@ var config = {
   // chat server 位置
   domain: 'https://chat.fangho.com',
   // auth server 位置，與 authClientId 配合取得 token，若填 token，此值可不填
-  authBase: 'https://auth.fangho.com',
+  authBase: 'https://chat.fangho.com/auth',
   // 登入的 chat user id，與 authBase 配合取得 token，若填 token，此值可不填
   authClientId: '',
   // 取得 url 預覽內容的 api 網址
@@ -154,15 +154,15 @@ var config = {
       // 金流
       paymentRequest: {
         // 是否啟用
-        enable: false,
-        mobileEnable: false,
+        enable: true,
+        mobileEnable: true,
         // 描述文字
         text: 'Send Payment Request',
         extra: {
           // 支援的幣值
           currencies: ['TWD', 'USD'],
           // 請款 API
-          requestApi: '',
+          requestApi: 'https://pinchat.cc/api/request_payment',
           paymentBy: [
             {
               key: 'paypal',
@@ -245,6 +245,8 @@ var config = {
     lockText: '',
     // 點即鎖定的房間觸發事件
     lockOnClick: function() {},
+    // 是否載入所有房間
+    loadAllRoom: true,
     // 自訂顏色，顏色格式：'#123456' 或 'rgba(12, 34, 56, 0.5)'
     colors: {
       // Header 顏色設定
@@ -268,6 +270,10 @@ var config = {
     },
     // 是否有置頂功能
     sticky: true,
+    // 是否有隱藏功能
+    hidden: true,
+    // 是否可以建資料夾分類
+    folder: true,
     // 是否可以建立房間
     createRoom: true
   },
@@ -336,6 +342,8 @@ var config = {
   },
   // 若無設定 defaultRoom，是否自動進入列表第一個房間
   autoEnterRoom: true,
+  // 若無設定 defaultRoom，是否自動進入列表第一個房間，手機瀏覽時
+  autoEnterRoomMobile: false,
   // 開啟聊天室後進入的房間 (room id)
   defaultRoom: null,
   // 建立新房間可設定的資訊
@@ -393,6 +401,8 @@ var config = {
     // }
     renderRoomDescription: null
   },
+  // 在線推播的icon
+  notificationIcon: 'https://pinchat.cc/favicon/apple-touch-icon-57x57.png',
   // 推播設定 (Firebase Cloud Messaging Config)
   // 若不使用推播，則填 null
   FCMConfig: {

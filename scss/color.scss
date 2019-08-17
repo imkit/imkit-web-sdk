@@ -1,6 +1,7 @@
 $color-primary: #deeb61;
 $color-secondary: #669c35;
-$color-tertiary: #f4a300;
+$color-tertiary: #e46050;
+$color-icon: #8d9491;
 $color-link: #669c35;
 $color-error: #f00;
 $color-darkFont: #333;
@@ -17,7 +18,14 @@ $color-scroll: #777;
 $color-fileLoaderErrorBackground: #f9f9f9;
 $color-avatar: #bbb;
 $color-recorder: #f03d25;
+$color-messageTimespanBg: #f5f5f6;
+$color-messageTimespan: #1f1f1f;
+$color-fileLoadingFont: #cccccc;
+$color-chatInputBg: #fbfbfb;
+$color-messageActionBtn: #7b7d80;
+$coloe-templateFrameLine: #cccccc;
 
+$lightness-level: 60;
 $lightness-color-primary: lightness($color-primary);
 $lightness-color-secondary: lightness($color-secondary);
 $lightness-color-tertiary: lightness($color-tertiary);
@@ -63,13 +71,13 @@ $lightness-color-font: lightness($color-font);
   .btn {
     &.btn-primary {
       background-color: $color-primary;
-      @if $lightness-color-primary > 60 {
+      @if $lightness-color-primary > $lightness-level {
         color: $color-darkFont;
       } @else {
         color: $color-lightFont;
       }
       &:hover {
-        @if $lightness-color-primary > 60 {
+        @if $lightness-color-primary > $lightness-level {
           background-color: darken($color-primary, 5);
         } @else {
           background-color: lighten($color-primary, 5);
@@ -78,13 +86,13 @@ $lightness-color-font: lightness($color-font);
     }
     &.btn-secondary {
       background-color: $color-secondary;
-      @if $lightness-color-secondary > 60 {
+      @if $lightness-color-secondary > $lightness-level {
         color: $color-darkFont;
       } @else {
         color: $color-lightFont;
       }
       &:hover {
-        @if $lightness-color-secondary > 60 {
+        @if $lightness-color-secondary > $lightness-level {
           background-color: darken($color-secondary, 5);
         } @else {
           background-color: lighten($color-secondary, 5);
@@ -95,7 +103,7 @@ $lightness-color-font: lightness($color-font);
       background-color: $color-background;
       color: $color-font;
       &:hover {
-        @if $lightness-color-background > 60 {
+        @if $lightness-color-background > $lightness-level {
           background-color: darken($color-background, 10);
         } @else {
           background-color: lighten($color-background, 10);
@@ -105,14 +113,28 @@ $lightness-color-font: lightness($color-font);
   }
   // Components/Checkbox.scss
   .checkbox {
-    .ckeckboxOuter {
+    .checkboxOuter {
       border-color: $color-frameLine;
-      .ckeckboxInner {
+      .checkboxInner {
         background-color: $color-primary;
       }
     }
     &.checked {
-      .ckeckboxOuter {
+      .checkboxOuter {
+        border-color: $color-primary;
+      }
+    }
+  }
+  // Components/Checkbox.scss
+  .radio {
+    .radioOuter {
+      border-color: $color-frameLine;
+      .radioInner {
+        background-color: $color-primary;
+      }
+    }
+    &.checked {
+      .radioOuter {
         border-color: $color-primary;
       }
     }
@@ -141,6 +163,9 @@ $lightness-color-font: lightness($color-font);
       }
       .fileLoaderLoading {
         background-color: rgba($color-background, 0.8);
+        .progress {
+          color: $color-fileLoadingFont;
+        }
       }
     }
     .fileLoaderFileInfo {
@@ -167,7 +192,10 @@ $lightness-color-font: lightness($color-font);
     .label {
       color: $color-secondaryFont;
     }
-    input[type="text"] {
+    select,
+    input[type="text"],
+    input[type="email"],
+    input[type="number"] {
       border-color: rgba($color-secondaryFont, 0.5);
     }
   }
@@ -178,7 +206,7 @@ $lightness-color-font: lightness($color-font);
       background-color: $color-background;
       box-shadow: 0 2px 8px rgba(invert($color-background), 0.33);
       .modalClose {
-        fill: $color-primary;
+        fill: $color-icon;
       }
     }
   }
@@ -205,7 +233,7 @@ $lightness-color-font: lightness($color-font);
       border-bottom-color: $color-frameLine;
       .iconBtn {
         &.primary {
-          fill: $color-primary;
+          fill: $color-icon;
         }
         &.secondary {
           fill: $color-secondary;
@@ -243,7 +271,7 @@ $lightness-color-font: lightness($color-font);
     .roomChatOutput {
       .messageLoading {
         background-color: $color-primary;
-        @if $lightness-color-primary > 60 {
+        @if $lightness-color-primary > $lightness-level {
           color: $color-darkFont;
         } @else {
           color: $color-lightFont;
@@ -255,8 +283,8 @@ $lightness-color-font: lightness($color-font);
           .message {
             .timespan {
               span {
-                background-color: $color-tertiaryFont;
-                color: $color-background;
+                background-color: $color-messageTimespanBg;
+                color: $color-messageTimespan;
               }
             }
             .contentBox {
@@ -273,15 +301,15 @@ $lightness-color-font: lightness($color-font);
                     }
                   }
                 }
+                .date {
+                  background-color: $color-darkFont;
+                  color: $color-lightFont;
+                }
                 .actions {
                   .actionsBtn {
                     i {
-                      background-color: mix(
-                        $color-font,
-                        $color-background,
-                        7.5
-                      );
-                      fill: $color-font;
+                      color: $color-messageActionBtn;
+                      fill: $color-messageActionBtn;
                     }
                   }
                   .actionsList {
@@ -298,12 +326,15 @@ $lightness-color-font: lightness($color-font);
                 .text {
                   background-color: mix($color-font, $color-background, 7.5);
                   color: $color-font;
-                  a {
-                    color: $color-link;
-                  }
                   &.onlyEmoji {
                     background-color: transparent !important;
                     color: $color-font !important;
+                  }
+                  .textTag {
+                    color: $color-link;
+                  }
+                  a {
+                    color: $color-link;
                   }
                 }
                 .location {
@@ -325,6 +356,20 @@ $lightness-color-font: lightness($color-font);
                   }
                   .sending {
                     fill: $color-primary;
+                  }
+                }
+                .templateButtons {
+                  border-top-color: $coloe-templateFrameLine;
+                  .templateButton {
+                    a {
+                      color: $color-link;
+                    }
+                  }
+                }
+                // RoomChat/RoomChatOutput/TemplateCarousel.scss
+                .templateCarousel {
+                  .templateCarouselItem {
+                    border-color: $coloe-templateFrameLine;
                   }
                 }
               }
@@ -350,21 +395,9 @@ $lightness-color-font: lightness($color-font);
                       }
                     }
                   }
-                  .actions {
-                    .actionsBtn {
-                      i {
-                        background-color: $color-primary;
-                        @if $lightness-color-primary > 60 {
-                          fill: $color-darkFont;
-                        } @else {
-                          fill: $color-lightFont;
-                        }
-                      }
-                    }
-                  }
                   .text {
                     background-color: $color-primary;
-                    @if $lightness-color-primary > 60 {
+                    @if $lightness-color-primary > $lightness-level {
                       color: $color-darkFont;
                     } @else {
                       color: $color-lightFont;
@@ -397,24 +430,25 @@ $lightness-color-font: lightness($color-font);
           }
           .sliderBack,
           .silderClose {
-            fill: $color-primary;
+            fill: $color-icon;
           }
         }
         .sliderThumbs {
           background-color: rgba($color-background, 0.9);
-          border-top-color: $color-frameLine;
+          border-top-color: $color-icon;
         }
       }
     }
     // RoomChat/RoomChatInput/index.scss
     .roomChatInput {
       border-top-color: $color-frameLine;
+      background-color: $color-chatInputBg;
       .inputInner {
         .reply {
           border-bottom-color: $color-frameLine;
           .replyLabel {
             background-color: $color-primary;
-            @if $lightness-color-primary > 60 {
+            @if $lightness-color-primary > $lightness-level {
               color: $color-darkFont;
             } @else {
               color: $color-lightFont;
@@ -425,12 +459,20 @@ $lightness-color-font: lightness($color-font);
           color: $color-secondaryFont;
         }
         .actionsPosition {
+          .inputTextGroup {
+            .inputText {
+              .inputTextTag {
+                color: $color-link;
+              }
+            }
+          }
           // RoomChat/RoomChatInput/RoomChatInputActions/index.scss
           .roomChatInputActions {
             .action {
               .actionBtn {
-                fill: $color-secondaryFont;
-                stroke: $color-secondaryFont;
+                color: $color-icon;
+                fill: $color-icon;
+                stroke: $color-icon;
               }
               .actionBox {
                 background-color: $color-background;
@@ -454,7 +496,7 @@ $lightness-color-font: lightness($color-font);
                   }
                   .recorderBtn {
                     background-color: $color-recorder;
-                    @if lightness($color-recorder) > 60 {
+                    @if lightness($color-recorder) > $lightness-level {
                       color: $color-darkFont;
                     } @else {
                       color: $color-lightFont;
@@ -462,7 +504,7 @@ $lightness-color-font: lightness($color-font);
 
                     &.active {
                       .recorderText {
-                        @if lightness($color-recorder) > 60 {
+                        @if lightness($color-recorder) > $lightness-level {
                           background-color: $color-darkFont;
                         } @else {
                           background-color: $color-lightFont;
@@ -472,7 +514,7 @@ $lightness-color-font: lightness($color-font);
                   }
 
                   .frequency {
-                    @if $lightness-color-background > 60 {
+                    @if $lightness-color-background > $lightness-level {
                       background-color: $color-darkFont;
                     } @else {
                       background-color: $color-lightFont;
@@ -486,6 +528,7 @@ $lightness-color-font: lightness($color-font);
                   .map {
                     .marker {
                       i {
+                        color: $color-primary;
                         fill: $color-primary;
                       }
                     }
@@ -507,11 +550,18 @@ $lightness-color-font: lightness($color-font);
   // RoomInfo/index.scss
   .roomInfo {
     border-left-color: $color-frameLine;
+    background-color: $color-background;
     .roomHeader {
+      .bot {
+        fill: $color-secondaryFont;
+        &.active {
+          fill: $color-icon;
+        }
+      }
       .mute {
         fill: $color-secondaryFont;
         &.active {
-          fill: $color-primary;
+          fill: $color-icon;
         }
       }
     }
@@ -574,7 +624,7 @@ $lightness-color-font: lightness($color-font);
       .notification {
         fill: $color-secondaryFont;
         &.active {
-          fill: $color-primary;
+          fill: $color-icon;
         }
       }
     }
@@ -590,22 +640,55 @@ $lightness-color-font: lightness($color-font);
         }
       }
     }
-    .addRoomBtn {
-      background-color: $color-primary;
-      box-shadow: 0 0 0 1px rgba(invert($color-background), 0.1),
-        0 1px 5px rgba(invert($color-background), 0.25);
-      &:hover {
-        @if $lightness-color-primary > 60 {
-          background-color: darken($color-primary, 5);
-        } @else {
-          background-color: lighten($color-primary, 5);
+    .list {
+      .roomFolder {
+        .roomFolderItems {
+          border-left-color: $color-primary;
+        }
+        .dropzone {
+          border-color: $color-primary;
         }
       }
-      .addRoomBtnIcon {
-        @if $lightness-color-primary > 60 {
-          stroke: $color-darkFont;
-        } @else {
-          stroke: $color-lightFont;
+    }
+    .roomListActions {
+      .addFolderBtn {
+        background-color: $color-primary;
+        box-shadow: 0 0 0 1px rgba(invert($color-background), 0.1),
+          0 1px 5px rgba(invert($color-background), 0.25);
+        &:hover {
+          @if $lightness-color-primary > $lightness-level {
+            background-color: darken($color-primary, 5);
+          } @else {
+            background-color: lighten($color-primary, 5);
+          }
+        }
+        .btnIcon {
+          @if $lightness-color-primary > $lightness-level {
+            color: $color-darkFont;
+            stroke: $color-darkFont;
+          } @else {
+            color: $color-lightFont;
+            stroke: $color-lightFont;
+          }
+        }
+      }
+      .addRoomBtn {
+        background-color: $color-primary;
+        box-shadow: 0 0 0 1px rgba(invert($color-background), 0.1),
+          0 1px 5px rgba(invert($color-background), 0.25);
+        &:hover {
+          @if $lightness-color-primary > $lightness-level {
+            background-color: darken($color-primary, 5);
+          } @else {
+            background-color: lighten($color-primary, 5);
+          }
+        }
+        .btnIcon {
+          @if $lightness-color-primary > $lightness-level {
+            stroke: $color-darkFont;
+          } @else {
+            stroke: $color-lightFont;
+          }
         }
       }
     }
@@ -622,7 +705,7 @@ $lightness-color-font: lightness($color-font);
       }
     }
     &.active {
-      @if $lightness-color-background > 60 {
+      @if $lightness-color-background > $lightness-level {
         background-color: darken($color-background, 5);
       } @else {
         background-color: lighten($color-background, 5);
@@ -640,6 +723,9 @@ $lightness-color-font: lightness($color-font);
           }
         }
       }
+      .textMiddle {
+        color: $color-link;
+      }
       .textBottom {
         @if $lightness-color-font > 50 {
           color: darken($color-font, 40);
@@ -650,7 +736,7 @@ $lightness-color-font: lightness($color-font);
     }
     .unread {
       background-color: $color-primary;
-      @if $lightness-color-primary > 60 {
+      @if $lightness-color-primary > $lightness-level {
         color: $color-darkFont;
       } @else {
         color: $color-lightFont;
@@ -659,7 +745,7 @@ $lightness-color-font: lightness($color-font);
     .time {
       .actions {
         .actionsBtn {
-          fill: $color-primary;
+          fill: $color-tertiary;
         }
         .actionsList {
           background-color: $color-background;
@@ -672,6 +758,9 @@ $lightness-color-font: lightness($color-font);
           }
         }
       }
+    }
+    .roomListItemLock {
+      background-color: rgba($color-background, 0.8);
     }
   }
 }
