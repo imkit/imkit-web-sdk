@@ -1,10 +1,10 @@
-$color-primary: #deeb61;
+$color-primary: #efefef;
 $color-secondary: #669c35;
 $color-tertiary: #e46050;
 $color-icon: #8d9491;
 $color-link: #669c35;
-$color-error: #f00;
-$color-darkFont: #333;
+$color-error: #d9511f;
+$color-darkFont: #1a1a1a;
 $color-lightFont: #fff;
 $color-font: $color-darkFont;
 $color-secondaryFont: lighten($color-font, 45);
@@ -16,14 +16,16 @@ $color-frameLine: #eee;
 // 特殊顏色
 $color-scroll: #777;
 $color-fileLoaderErrorBackground: #f9f9f9;
-$color-avatar: #bbb;
+$color-avatarBorder: #1ece6d;
 $color-recorder: #f03d25;
+$color-itemBorder: #eeeff0;
 $color-messageTimespanBg: #f5f5f6;
 $color-messageTimespan: #1f1f1f;
 $color-fileLoadingFont: #cccccc;
 $color-chatInputBg: #fbfbfb;
-$color-messageActionBtn: #7b7d80;
+$color-actionBtn: #7b7d80;
 $coloe-templateFrameLine: #cccccc;
+$color-mapMarker: #fff080;
 
 $lightness-level: 60;
 $lightness-color-primary: lightness($color-primary);
@@ -59,28 +61,31 @@ $lightness-color-font: lightness($color-font);
   }
   // Components/Avatar.scss
   .avatar {
-    background-color: $color-background;
+    border-color: $color-itemBorder;
+    background-color: $color-itemBorder;
     &.border {
-      border-color: $color-primary;
+      border-color: $color-itemBorder;
+      background-color: $color-background;
     }
     .avatarText {
-      color: $color-avatar;
+      color: $color-font;
     }
   }
   // Components/Button.scss
   .btn {
     &.btn-primary {
-      background-color: $color-primary;
-      @if $lightness-color-primary > $lightness-level {
+      border-color: $color-itemBorder;
+      background-color: $color-background;
+      @if $lightness-color-background > $lightness-level {
         color: $color-darkFont;
       } @else {
         color: $color-lightFont;
       }
       &:hover {
-        @if $lightness-color-primary > $lightness-level {
-          background-color: darken($color-primary, 5);
+        @if $lightness-color-background > $lightness-level {
+          background-color: darken($color-background, 5);
         } @else {
-          background-color: lighten($color-primary, 5);
+          background-color: lighten($color-background, 5);
         }
       }
     }
@@ -100,6 +105,7 @@ $lightness-color-font: lightness($color-font);
       }
     }
     &.btn-light {
+      border-color: $color-background;
       background-color: $color-background;
       color: $color-font;
       &:hover {
@@ -147,6 +153,7 @@ $lightness-color-font: lightness($color-font);
   }
   // Components/FileLoader.scss
   .fileLoader {
+    border-color: $color-frameLine;
     .fileLoaderMain {
       .fileLoaderImage {
         .fileLoaderImageCover {
@@ -161,20 +168,21 @@ $lightness-color-font: lightness($color-font);
       .fileLoaderError {
         background-color: $color-fileLoaderErrorBackground;
       }
-      .fileLoaderLoading {
-        background-color: rgba($color-background, 0.8);
-        .progress {
-          color: $color-fileLoadingFont;
+    }
+    .fileLoaderFileInfo {
+      .info {
+        p {
+          color: $color-secondaryFont;
+          &.fileName {
+            color: $color-font;
+          }
         }
       }
     }
-    .fileLoaderFileInfo {
-      border-color: $color-frameLine;
-      p {
-        color: $color-secondaryFont;
-        &.fileName {
-          color: $color-font;
-        }
+    .fileLoaderLoading {
+      background-color: rgba($color-background, 0.8);
+      .progress {
+        color: $color-fileLoadingFont;
       }
     }
   }
@@ -184,6 +192,26 @@ $lightness-color-font: lightness($color-font);
       background-color: rgba($color-background, 0.8);
       .fileUploaderBar {
         background-color: $color-primary;
+      }
+    }
+  }
+  .tooltip {
+    > .tooltipInner {
+      background-color: $color-darkFont;
+      color: $color-lightFont;
+    }
+    &.tooltip-rm {
+      > .tooltipInner {
+        &:before {
+          border-right-color: $color-darkFont;
+        }
+      }
+    }
+    &.tooltip-cb {
+      > .tooltipInner {
+        &:before {
+          border-bottom-color: $color-darkFont;
+        }
       }
     }
   }
@@ -242,8 +270,8 @@ $lightness-color-font: lightness($color-font);
     }
     .roomTip {
       p {
-        color: $color-error;
-        background-color: $color-background;
+        color: $color-lightFont;
+        background-color: $color-error;
         border-color: $color-error;
       }
     }
@@ -293,40 +321,48 @@ $lightness-color-font: lightness($color-font);
               }
               .content {
                 &.hasReply {
-                  background-color: mix($color-font, $color-background, 7.5);
+                  border-color: $color-itemBorder;
+                  background-color: $color-background;
                   .reply {
+                    border-color: $color-itemBorder;
                     background-color: rgba($color-background, 0.6);
                     .text {
+                      border-color: transparent;
                       background-color: transparent;
                     }
+                  }
+                  .text {
+                    border-color: transparent;
+                    background-color: transparent;
                   }
                 }
                 .date {
                   background-color: $color-darkFont;
                   color: $color-lightFont;
                 }
-                .actions {
-                  .actionsBtn {
-                    i {
-                      color: $color-messageActionBtn;
-                      fill: $color-messageActionBtn;
-                    }
+                .actionsBox {
+                  svg {
+                    color: $color-actionBtn;
                   }
-                  .actionsList {
-                    background-color: $color-background;
-                    border-color: $color-secondaryFont;
-                    .actionsItem {
-                      color: $color-secondaryFont;
-                      &:hover {
-                        color: $color-font;
+                  .actions {
+                    .actionsList {
+                      background-color: $color-background;
+                      border-color: $color-secondaryFont;
+                      .actionsItem {
+                        color: $color-secondaryFont;
+                        &:hover {
+                          color: $color-font;
+                        }
                       }
                     }
                   }
                 }
                 .text {
-                  background-color: mix($color-font, $color-background, 7.5);
+                  border-color: $color-itemBorder;
+                  background-color: $color-background;
                   color: $color-font;
                   &.onlyEmoji {
+                    border-color: transparent !important;
                     background-color: transparent !important;
                     color: $color-font !important;
                   }
@@ -379,6 +415,9 @@ $lightness-color-font: lightness($color-font);
                   .urlPreview {
                     border-color: $color-frameLine;
                     color: $color-darkFont;
+                    .urlPreviewHide {
+                      fill: $color-actionBtn;
+                    }
                   }
                 }
               }
@@ -387,8 +426,10 @@ $lightness-color-font: lightness($color-font);
               .contentBox {
                 .content {
                   &.hasReply {
+                    border-color: $color-primary;
                     background-color: $color-primary;
                     .reply {
+                      border-color: $color-primary;
                       .sender,
                       .text {
                         color: $color-font;
@@ -396,6 +437,7 @@ $lightness-color-font: lightness($color-font);
                     }
                   }
                   .text {
+                    border-color: $color-primary;
                     background-color: $color-primary;
                     @if $lightness-color-primary > $lightness-level {
                       color: $color-darkFont;
@@ -441,9 +483,13 @@ $lightness-color-font: lightness($color-font);
     }
     // RoomChat/RoomChatInput/index.scss
     .roomChatInput {
-      border-top-color: $color-frameLine;
-      background-color: $color-chatInputBg;
+      background-color: $color-background;
+      .typing {
+        color: $color-secondaryFont;
+      }
       .inputInner {
+        border-top-color: $color-frameLine;
+        background-color: $color-chatInputBg;
         .reply {
           border-bottom-color: $color-frameLine;
           .replyLabel {
@@ -455,14 +501,17 @@ $lightness-color-font: lightness($color-font);
             }
           }
         }
-        .typing {
-          color: $color-secondaryFont;
-        }
         .actionsPosition {
           .inputTextGroup {
             .inputText {
               .inputTextTag {
                 color: $color-link;
+              }
+            }
+            .inputSend {
+              .sendBtn {
+                background-color: transparent;
+                color: $color-icon;
               }
             }
           }
@@ -528,10 +577,19 @@ $lightness-color-font: lightness($color-font);
                   .map {
                     .marker {
                       i {
-                        color: $color-primary;
-                        fill: $color-primary;
+                        color: $color-mapMarker;
+                        fill: $color-mapMarker;
                       }
                     }
+                  }
+                }
+              }
+              // RoomChat/RoomChatInput/RoomChatInputActions/Group.scss
+              &.group {
+                .subActions {
+                  .subActionsInner {
+                    background-color: $color-background;
+                    border-color: $color-frameLine;
                   }
                 }
               }
@@ -641,20 +699,21 @@ $lightness-color-font: lightness($color-font);
       }
     }
     .list {
-      .roomFolder {
-        .roomFolderItems {
-          border-left-color: $color-primary;
-        }
-        .dropzone {
+      .roomFolderBox {
+        &.moveToFolder {
           border-color: $color-primary;
+        }
+        .roomFolder {
+          .roomFolderItems {
+            border-left-color: $color-primary;
+          }
         }
       }
     }
     .roomListActions {
       .addFolderBtn {
-        background-color: $color-primary;
-        box-shadow: 0 0 0 1px rgba(invert($color-background), 0.1),
-          0 1px 5px rgba(invert($color-background), 0.25);
+        background-color: $color-background;
+        border-color: $color-itemBorder;
         &:hover {
           @if $lightness-color-primary > $lightness-level {
             background-color: darken($color-primary, 5);
@@ -673,9 +732,8 @@ $lightness-color-font: lightness($color-font);
         }
       }
       .addRoomBtn {
-        background-color: $color-primary;
-        box-shadow: 0 0 0 1px rgba(invert($color-background), 0.1),
-          0 1px 5px rgba(invert($color-background), 0.25);
+        background-color: $color-background;
+        border-color: $color-itemBorder;
         &:hover {
           @if $lightness-color-primary > $lightness-level {
             background-color: darken($color-primary, 5);
@@ -711,6 +769,12 @@ $lightness-color-font: lightness($color-font);
         background-color: lighten($color-background, 5);
       }
     }
+    .dragIcon {
+      &:before,
+      &:after {
+        background-color: lighten($color-icon, 15);
+      }
+    }
     .text {
       .textTop {
         .nameDescription {
@@ -742,19 +806,17 @@ $lightness-color-font: lightness($color-font);
         color: $color-lightFont;
       }
     }
-    .time {
-      .actions {
-        .actionsBtn {
-          fill: $color-tertiary;
-        }
-        .actionsList {
-          background-color: $color-background;
-          border-color: $color-secondaryFont;
-          .actionsItem {
-            color: $color-secondaryFont;
-            &:hover {
-              color: $color-font;
-            }
+    .actions {
+      .actionsBtn {
+        fill: $color-actionBtn;
+      }
+      .actionsList {
+        background-color: $color-background;
+        border-color: $color-secondaryFont;
+        .actionsItem {
+          color: $color-secondaryFont;
+          &:hover {
+            color: $color-font;
           }
         }
       }

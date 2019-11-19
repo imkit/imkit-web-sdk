@@ -1,10 +1,34 @@
+var fileUploadSetting = {
+  image: {
+    // 限制檔案格式
+    accept: ['image/png', 'image/jpeg'],
+    // 限制檔案大小 (MB)
+    limitSize: 10,
+    // 縮圖的最大寬高 (px)
+    thumbnailSize: 1500
+  },
+  video: {
+    // 限制檔案格式
+    accept: ['video/mp4', 'video/quicktime'],
+    // 限制檔案大小 (MB)
+    limitSize: 100,
+    // 縮圖的最大寬高 (px)
+    thumbnailSize: 1500
+  },
+  other: {
+    // 限制檔案格式
+    accept: ['application/pdf', 'audio/mp3', 'audio/x-m4a'],
+    // 限制檔案大小 (MB)
+    limitSize: 10
+  }
+};
 var config = {
   // 是否開啟 debug
   debug: false,
   // chat server 位置
-  domain: 'https://chat.fangho.com',
+  domain: 'https://dev.fangho.com',
   // auth server 位置，與 authClientId 配合取得 token，若填 token，此值可不填
-  authBase: 'https://chat.fangho.com/auth',
+  authBase: 'https://dev.fangho.com/auth',
   // 登入的 chat user id，與 authBase 配合取得 token，若填 token，此值可不填
   authClientId: '',
   // 取得 url 預覽內容的 api 網址
@@ -23,8 +47,8 @@ var config = {
   appLogo: 'https://i.imgur.com/gchEcBi.png',
   // app name，顯示在聊天列表上方，appLogo 及 appName 都填時，name在右邊
   appName: '',
-  // 語系 'zh-tw' or 'en'
-  lang: 'zh-tw',
+  // 語系 'zh-tw', 'en', 'ja', 'auto'
+  lang: 'auto',
   // 取得 avatar 需要的 headers
   avatarHeaders: [
     // {
@@ -60,82 +84,138 @@ var config = {
   },
   // 中間聊天區塊設定
   chat: {
+    // Typing 位置，0: 在輸入框上面, 1: 在輸入框裡面
+    modeTyping: 0,
     // 是否顯示聊天區塊的 header
     showHeader: true,
+    // 拖曳檔案上傳
+    dragdropUpload: {
+      enable: true,
+      extra: {
+        // 限制檔案格式
+        accept: fileUploadSetting.other.accept.concat(
+          fileUploadSetting.image.accept,
+          fileUploadSetting.video.accept
+        ),
+        image: {
+          // 限制檔案大小 (MB)
+          limitSize: fileUploadSetting.image.limitSize,
+          // 縮圖的最大寬高 (px)
+          thumbnailSize: fileUploadSetting.image.thumbnailSize
+        },
+        video: {
+          // 限制檔案大小 (MB)
+          limitSize: fileUploadSetting.video.limitSize,
+          // 縮圖的最大寬高 (px)
+          thumbnailSize: fileUploadSetting.video.thumbnailSize
+        },
+        other: {
+          // 限制檔案大小 (MB)
+          limitSize: fileUploadSetting.other.limitSize
+        }
+      }
+    },
     // 下方聊天工具按鈕設定
-    actions: {
-      // 表情符號
-      emoji: {
+    actions: [
+      {
+        // 貼圖
+        type: 'sticker',
         // 是否啟用
-        enable: true,
-        mobileEnable: true,
-        // 描述文字
-        text: 'Send Emoji'
-      },
-      // 貼圖
-      sticker: {
-        // 是否啟用
-        enable: true,
-        mobileEnable: true,
+        pcEnable: true,
+        padEnable: false,
+        mobileEnable: false,
         // 描述文字
         text: 'Send Sticker'
       },
-      // 圖片
-      image: {
+      {
+        // 表情符號
+        type: 'emoji',
         // 是否啟用
-        enable: true,
-        mobileEnable: true,
+        pcEnable: true,
+        padEnable: false,
+        mobileEnable: false,
+        // 描述文字
+        text: 'Send Emoji'
+      },
+      {
+        // 圖片
+        type: 'image',
+        pcEnable: true,
+        padEnable: false,
+        mobileEnable: false,
         // 描述文字
         text: 'Send Image',
         extra: {
           // 限制檔案格式
-          accept: [
-            'image/png',
-            'image/jpeg',
-            'image/heic',
-            'image/heic-sequence'
-          ],
-          // 限制檔案大小 (MB)
-          limitSize: 10,
-          // 縮圖的最大寬高 (px)
-          thumbnailSize: 1500
+          accept: fileUploadSetting.image.accept,
+          image: {
+            // 限制檔案大小 (MB)
+            limitSize: fileUploadSetting.image.limitSize,
+            // 縮圖的最大寬高 (px)
+            thumbnailSize: fileUploadSetting.image.thumbnailSize
+          }
         }
       },
-      // 影片
-      video: {
+      {
+        // 影片
+        type: 'video',
         // 是否啟用
-        enable: true,
-        mobileEnable: true,
+        pcEnable: true,
+        padEnable: false,
+        mobileEnable: false,
         // 描述文字
         text: 'Send Video',
         extra: {
           // 限制檔案格式
-          accept: ['video/mp4', 'video/quicktime'],
-          // 限制檔案大小 (MB)
-          limitSize: 100,
-          // 縮圖的最大寬高 (px)
-          thumbnailSize: 1500
+          accept: fileUploadSetting.video.accept,
+          video: {
+            // 限制檔案大小 (MB)
+            limitSize: fileUploadSetting.video.limitSize,
+            // 縮圖的最大寬高 (px)
+            thumbnailSize: fileUploadSetting.video.thumbnailSize
+          }
         }
       },
-      // 檔案
-      file: {
+      {
+        // 檔案
+        type: 'file',
         // 是否啟用
-        enable: true,
+        pcEnable: true,
+        padEnable: true,
         mobileEnable: true,
         // 描述文字
         text: 'Send File',
         extra: {
           // 限制檔案格式
-          accept: ['application/pdf', 'audio/mp3'],
-          // 限制檔案大小 (MB)
-          limitSize: 10
+          accept: fileUploadSetting.other.accept.concat(
+            fileUploadSetting.image.accept,
+            fileUploadSetting.video.accept
+          ),
+          image: {
+            // 限制檔案大小 (MB)
+            limitSize: fileUploadSetting.image.limitSize,
+            // 縮圖的最大寬高 (px)
+            thumbnailSize: fileUploadSetting.image.thumbnailSize
+          },
+          video: {
+            // 限制檔案大小 (MB)
+            limitSize: fileUploadSetting.video.limitSize,
+            // 縮圖的最大寬高 (px)
+            thumbnailSize: fileUploadSetting.video.thumbnailSize
+          },
+          other: {
+            // 限制檔案大小 (MB)
+            limitSize: fileUploadSetting.other.limitSize
+          }
         }
       },
-      // 錄音
-      recorder: {
+      {
+        // 錄音
+        type: 'recorder',
         // 是否啟用
-        enable: true,
-        mobileEnable: true,
+        pcEnable: true,
+        padEnable: false,
+        mobileEnable: false,
         // 描述文字
         text: 'Send Recorder',
         extra: {
@@ -143,19 +223,22 @@ var config = {
           limitSeconds: 60
         }
       },
-      // 位置
-      location: {
+      {
+        // 位置
+        type: 'location',
         // 是否啟用
-        enable: true,
-        mobileEnable: true,
+        pcEnable: true,
+        padEnable: false,
+        mobileEnable: false,
         // 描述文字
         text: 'Send Location'
       },
-      // 金流
-      paymentRequest: {
-        // 是否啟用
-        enable: true,
-        mobileEnable: true,
+      {
+        // 金流
+        type: 'paymentRequest',
+        pcEnable: false,
+        padEnable: false,
+        mobileEnable: false,
         // 描述文字
         text: 'Send Payment Request',
         extra: {
@@ -179,10 +262,157 @@ var config = {
             }
           ]
         }
+      },
+      {
+        // 問卷
+        type: 'questionare',
+        // 是否啟用
+        pcEnable: true,
+        padEnable: false,
+        mobileEnable: false,
+        // 描述文字
+        text: 'Send Questionare',
+        extra: {
+          // 狀態代碼
+          botState: 'LINGTELLI::'
+        }
+      },
+      {
+        // 群組
+        type: 'group',
+        // 是否啟用
+        pcEnable: false,
+        padEnable: true,
+        mobileEnable: true,
+        // 描述文字
+        text: '',
+        actions: [
+          {
+            // 貼圖
+            type: 'sticker',
+            // 是否啟用
+            pcEnable: true,
+            padEnable: true,
+            mobileEnable: true,
+            // 描述文字
+            text: 'Send Sticker'
+          },
+          {
+            // 圖片
+            type: 'image',
+            pcEnable: true,
+            padEnable: true,
+            mobileEnable: true,
+            // 描述文字
+            text: 'Send Image',
+            extra: {
+              // 限制檔案格式
+              accept: fileUploadSetting.image.accept,
+              image: {
+                // 限制檔案大小 (MB)
+                limitSize: fileUploadSetting.image.limitSize,
+                // 縮圖的最大寬高 (px)
+                thumbnailSize: fileUploadSetting.image.thumbnailSize
+              }
+            }
+          },
+          {
+            // 影片
+            type: 'video',
+            // 是否啟用
+            pcEnable: true,
+            padEnable: true,
+            mobileEnable: true,
+            // 描述文字
+            text: 'Send Video',
+            extra: {
+              // 限制檔案格式
+              accept: fileUploadSetting.video.accept,
+              video: {
+                // 限制檔案大小 (MB)
+                limitSize: fileUploadSetting.video.limitSize,
+                // 縮圖的最大寬高 (px)
+                thumbnailSize: fileUploadSetting.video.thumbnailSize
+              }
+            }
+          },
+          {
+            // 錄音
+            type: 'recorder',
+            // 是否啟用
+            pcEnable: true,
+            padEnable: true,
+            mobileEnable: true,
+            // 描述文字
+            text: 'Send Recorder',
+            extra: {
+              // 限制錄音秒數
+              limitSeconds: 60
+            }
+          },
+          {
+            // 位置
+            type: 'location',
+            // 是否啟用
+            pcEnable: true,
+            padEnable: true,
+            mobileEnable: true,
+            // 描述文字
+            text: 'Send Location'
+          },
+          {
+            // 金流
+            type: 'paymentRequest',
+            pcEnable: false,
+            padEnable: false,
+            mobileEnable: false,
+            // 描述文字
+            text: 'Send Payment Request',
+            extra: {
+              // 支援的幣值
+              currencies: ['TWD', 'USD'],
+              // 請款 API
+              requestApi: 'https://pinchat.cc/api/request_payment',
+              paymentBy: [
+                {
+                  key: 'paypal',
+                  text: 'PayPal'
+                },
+                {
+                  key: 'tappay',
+                  text: 'TapPay'
+                },
+                {
+                  currencies: ['TWD'],
+                  key: 'newebpay',
+                  text: '藍新'
+                }
+              ]
+            }
+          },
+          {
+            // 問卷
+            type: 'questionare',
+            // 是否啟用
+            pcEnable: true,
+            padEnable: true,
+            mobileEnable: true,
+            // 描述文字
+            text: 'Send Questionare',
+            extra: {
+              // 狀態代碼
+              botState: 'LINGTELLI::'
+            }
+          }
+        ]
       }
-    },
+    ],
     // 聊天按鈕顯示位置 'bottom' or 'right'
-    actionsPosition: 'bottom',
+    actionsPosition: {
+      pc: 'bottom',
+      pad: 'right',
+      mobile: 'right'
+    },
     // 限制文字長度
     limitTextLength: 500,
     // 圖片/影片檢視氣關閉方式，
@@ -205,21 +435,27 @@ var config = {
         // 背景色
         background: null,
         // 文字顏色
-        color: null
+        color: null,
+        // 邊框色
+        borderColor: null
       },
       // 其他人發送的訊息
       others: {
         // 背景色
         background: null,
         // 文字顏色
-        color: null
+        color: null,
+        // 邊框色
+        borderColor: null
       },
       // 系統訊息
       system: {
         // 背景色
         background: null,
         // 文字顏色
-        color: null
+        color: null,
+        // 邊框色
+        borderColor: null
       }
     },
     // 顯示時縮圖的最大寬 (px)
@@ -274,11 +510,17 @@ var config = {
     hidden: true,
     // 是否可以建資料夾分類
     folder: true,
+    // 是否可以設定標籤
+    tags: true,
     // 是否可以建立房間
     createRoom: true
   },
   // 右側聊天資訊欄設定
   info: {
+    // 機器人開關
+    bot: {
+      enable: true
+    },
     // 自訂顏色，顏色格式：'#123456' 或 'rgba(12, 34, 56, 0.5)'
     colors: {
       // Header 顏色設定
@@ -364,7 +606,6 @@ var config = {
   // 自訂的多國語
   i18n: {
     en: {
-      Test: 'Test',
       'Send Emoji': 'Send Emoji',
       'Send Sticker': 'Send Sticker',
       'Send Image': 'Send Image',
@@ -372,10 +613,10 @@ var config = {
       'Send File': 'Send File',
       'Send Recorder': 'Send Recorder',
       'Send Location': 'Send Location',
-      'Send Payment Request': 'Send Payment Request'
+      'Send Payment Request': 'Send Payment Request',
+      'Send Questionare': 'Send Questionare'
     },
     'zh-tw': {
-      Test: '測試',
       'Send Emoji': '傳送表情符號',
       'Send Sticker': '傳送貼圖',
       'Send Image': '傳送圖片',
@@ -383,7 +624,8 @@ var config = {
       'Send File': '傳送檔案',
       'Send Recorder': '傳送錄音',
       'Send Location': '傳送位置訊息',
-      'Send Payment Request': '傳送請款訊息'
+      'Send Payment Request': '傳送請款訊息',
+      'Send Questionare': '傳送調查問卷'
     }
   },
   // 客製功能
