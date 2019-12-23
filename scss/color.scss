@@ -24,7 +24,7 @@ $color-messageTimespan: #1f1f1f;
 $color-fileLoadingFont: #cccccc;
 $color-chatInputBg: #fbfbfb;
 $color-actionBtn: #7b7d80;
-$coloe-templateFrameLine: #cccccc;
+$color-templateFrameLine: #cccccc;
 $color-mapMarker: #fff080;
 
 $lightness-level: 60;
@@ -292,6 +292,28 @@ $lightness-color-font: lightness($color-font);
         }
       }
     }
+    .roomChatSearch {
+      border-bottom-color: $color-frameLine;
+      .searchIcon {
+        @if $lightness-color-font > 50 {
+          fill: darken($color-font, 70);
+        } @else {
+          fill: lighten($color-font, 70);
+        }
+        &.active {
+          fill: $color-font;
+        }
+      }
+      .searchMid {
+        .searchInput {
+          background-color: mix($color-frameLine, $color-background);
+          border-color: $color-frameLine;
+        }
+      }
+      .searchClose {
+        color: $color-link;
+      }
+    }
     .dropzone {
       border-color: $color-primary;
     }
@@ -307,6 +329,9 @@ $lightness-color-font: lightness($color-font);
       }
       .list {
         .messages {
+          .roomChatMore {
+            color: $color-link;
+          }
           // RoomChat/RoomChatOutput/RoomChatOutputMessage.scss
           .message {
             .timespan {
@@ -324,8 +349,7 @@ $lightness-color-font: lightness($color-font);
                   border-color: $color-itemBorder;
                   background-color: $color-background;
                   .reply {
-                    border-color: $color-itemBorder;
-                    background-color: rgba($color-background, 0.6);
+                    border-bottom-color: $color-templateFrameLine;
                     .text {
                       border-color: transparent;
                       background-color: transparent;
@@ -395,7 +419,7 @@ $lightness-color-font: lightness($color-font);
                   }
                 }
                 .templateButtons {
-                  border-top-color: $coloe-templateFrameLine;
+                  border-top-color: $color-templateFrameLine;
                   .templateButton {
                     a {
                       color: $color-link;
@@ -405,7 +429,7 @@ $lightness-color-font: lightness($color-font);
                 // RoomChat/RoomChatOutput/TemplateCarousel.scss
                 .templateCarousel {
                   .templateCarouselItem {
-                    border-color: $coloe-templateFrameLine;
+                    border-color: $color-templateFrameLine;
                   }
                 }
               }
@@ -429,7 +453,7 @@ $lightness-color-font: lightness($color-font);
                     border-color: $color-primary;
                     background-color: $color-primary;
                     .reply {
-                      border-color: $color-primary;
+                      border-bottom-color: $color-templateFrameLine;
                       .sender,
                       .text {
                         color: $color-font;
@@ -491,7 +515,7 @@ $lightness-color-font: lightness($color-font);
         border-top-color: $color-frameLine;
         background-color: $color-chatInputBg;
         .reply {
-          border-bottom-color: $color-frameLine;
+          border-bottom-color: $color-templateFrameLine;
           .replyLabel {
             background-color: $color-primary;
             @if $lightness-color-primary > $lightness-level {
@@ -538,6 +562,15 @@ $lightness-color-font: lightness($color-font);
                   }
                 }
                 // RoomChat/RoomChatInput/RoomChatInputActions/Sticker.scss
+                &.sticker {
+                  .sliderSticker {
+                    .icon {
+                      &.active {
+                        border-bottom-color: $color-secondaryFont;
+                      }
+                    }
+                  }
+                }
                 // RoomChat/RoomChatInput/RoomChatInputActions/Recorder.scss
                 &.recorder {
                   .timestamp {
@@ -627,6 +660,10 @@ $lightness-color-font: lightness($color-font);
       border-bottom-color: $color-frameLine;
       color: $color-secondaryFont;
     }
+    .roomSearch {
+      border-bottom-color: $color-frameLine;
+      color: $color-secondaryFont;
+    }
     .roomMembersCount {
       color: $color-secondaryFont;
       .roomMembersCountIcon {
@@ -706,6 +743,29 @@ $lightness-color-font: lightness($color-font);
         .roomFolder {
           .roomFolderItems {
             border-left-color: $color-primary;
+          }
+        }
+      }
+    }
+    .searchResult {
+      .searchResultTitle {
+        color: $color-actionBtn;
+      }
+      .searchResultItem {
+        &:hover {
+          @if $lightness-color-background > 50 {
+            background-color: darken($color-background, 3);
+          } @else {
+            background-color: lighten($color-background, 3);
+          }
+        }
+        .text {
+          .textBottom {
+            @if $lightness-color-font > 50 {
+              color: darken($color-font, 27);
+            } @else {
+              color: lighten($color-font, 27);
+            }
           }
         }
       }

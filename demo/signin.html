@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <base href="/" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>IMKit Demo</title>
+  <link rel="apple-touch-icon" size="192x192" href="static/favicon-192.png" />
+  <link rel="Shortcut Icon" size="32x32" href="static/favicon-32.png" />
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/@quasar/extras/material-icons/material-icons.css">
+  <link href="//cdn.jsdelivr.net/npm/quasar@^1.0.3/dist/quasar.min.css" rel="stylesheet" type="text/css">
+  <style>
+  </style>
+</head>
+
+<body>
+  <div id="q-app">
+    <q-layout view="hHh lpR fFf">
+      <q-header class="bg-primary text-white">
+        <q-toolbar class="bg-primary text-white">
+          <q-toolbar-title>
+            <img src="static/logo.png" height="30px" class="block">
+          </q-toolbar-title>
+        </q-toolbar>
+      </q-header>
+      <q-page-container>
+        <div class="q-pa-md" style="max-width: 400px;margin: 0 auto;">
+          <h4 class="title text-center q-mt-md">Sign in</h4>
+          <q-form @submit="onSubmit" class="q-gutter-md q-mb-md">
+            <div>
+              <q-input outlined v-model="mobile" label="Mobile" lazy-rules :rules="[
+                val => val && val.length > 0 || 'Please type mobile'
+              ]" />
+            </div>
+            <div>
+              <q-input outlined type="password" v-model="password" label="Password" lazy-rules :rules="[
+                val => val && val.length > 0 || 'Please type Password'
+              ]" />
+            </div>
+            <div class="row justify-between">
+              <div class="col-auto">
+                <q-btn type="a" href="demo/signup.html" label="Sign up" outline color="purple" no-caps />
+              </div>
+              <div class="col-auto">
+                <q-btn label="Sign in" size="md" type="submit" color="primary" no-caps />
+              </div>
+            </div>
+          </q-form>
+        </div>
+      </q-page-container>
+    </q-layout>
+  </div>
+</body>
+<script src="//cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.4/bluebird.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/qs/6.9.0/qs.js"></script>
+<script src="//cdn.jsdelivr.net/npm/quasar@^1.0.3/dist/quasar.ie.polyfills.umd.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/vue@latest/dist/vue.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/quasar@^1.0.3/dist/quasar.umd.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/imkit/imkit-js-lib@3.0.7/lib/imkit-js-api-v3.min.js"></script>
+<script src="demo/appServerConfig.js"></script>
+<script>
+  new Vue({
+    el: '#q-app',
+    data: function () {
+      return {
+        mobile: '',
+        password: ''
+      }
+    },
+    methods: {
+      onSubmit: function () {
+        Quasar.Loading.show();
+        let data = {
+          mobile: this.mobile,
+          password: this.password
+        }
+        axios({
+          method: 'post',
+          url: appServerConfig.domain + '/api/auth/login',
+          data: Qs.stringify(data),
+          headers: {
+            "Authorization": "Basic " + appServerConfig.authorization,
+            "Content-Type": "application/x-www-form-urlencoded"
+          }
+        }).then(function (response) {
+          if (!response.data.errorCode) {
+            //成功
+            localStorage.setItem("IMKit-token", response.data.data.data.access_token);
+            localStorage.setItem("IMKit-refreshToken", response.data.data.data.refresh_token);
+            document.location.href = 'demo/nav.html';
+          } else {
+            Quasar.Notify.create({
+              position: 'top',
+              message: response.data.message,
+              color: 'negative',
+              actions: [{ icon: 'close', color: 'white' }]
+            })
+          }
+          Quasar.Loading.hide();
+        }).catch(function (error) {
+          if (error.response && error.response.data && error.response.data.message) {
+            Quasar.Notify.create({
+              position: 'top',
+              message: error.response.data.message,
+              color: 'negative',
+              actions: [{ icon: 'close', color: 'white' }]
+            })
+          } else {
+            Quasar.Notify.create({
+              position: 'top',
+              message: error.toString(),
+              color: 'negative',
+              actions: [{ icon: 'close', color: 'white' }]
+            })
+          }
+          Quasar.Loading.hide();
+        });
+      }
+    }
+  })
+</script>
+<script>
+</script>
+
+</html>

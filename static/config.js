@@ -1,7 +1,7 @@
 var fileUploadSetting = {
   image: {
     // 限制檔案格式
-    accept: ['image/png', 'image/jpeg'],
+    accept: ['image/png', 'image/jpeg', 'image/gif'],
     // 限制檔案大小 (MB)
     limitSize: 10,
     // 縮圖的最大寬高 (px)
@@ -26,9 +26,9 @@ var config = {
   // 是否開啟 debug
   debug: false,
   // chat server 位置
-  domain: 'https://dev.fangho.com',
+  domain: 'https://chat.fangho.com',
   // auth server 位置，與 authClientId 配合取得 token，若填 token，此值可不填
-  authBase: 'https://dev.fangho.com/auth',
+  authBase: 'https://chat.fangho.com/auth',
   // 登入的 chat user id，與 authBase 配合取得 token，若填 token，此值可不填
   authClientId: '',
   // 取得 url 預覽內容的 api 網址
@@ -414,7 +414,7 @@ var config = {
       mobile: 'right'
     },
     // 限制文字長度
-    limitTextLength: 500,
+    limitTextLength: Number.MAX_SAFE_INTEGER,
     // 圖片/影片檢視氣關閉方式，
     // 'close'：右上方叉叉
     // 'back'：左上方返回箭頭
@@ -469,7 +469,65 @@ var config = {
     // 是否開啟收回訊息功能
     recall: true,
     // 是否可以下載音檔
-    audioDownload: true
+    audioDownload: true,
+    sticker: [
+      {
+        folder: 'funfunfamily',
+        icon: 'FunFunFamily-1.png',
+        prefix: 'FunFunFamily-',
+        suffix: '.png',
+        count: 40
+      },
+      {
+        folder: 'emoji',
+        icon: '1.png',
+        prefix: '',
+        suffix: '.png',
+        count: 45
+      },
+      {
+        folder: 'animal',
+        icon: '1.png',
+        prefix: '',
+        suffix: '.png',
+        count: 16
+      },
+      {
+        folder: 'food',
+        icon: '1.png',
+        prefix: '',
+        suffix: '.png',
+        count: 16
+      },
+      {
+        folder: 'natural',
+        icon: '1.png',
+        prefix: '',
+        suffix: '.png',
+        count: 32
+      },
+      {
+        folder: 'people',
+        icon: '1.png',
+        prefix: '',
+        suffix: '.png',
+        count: 16
+      },
+      {
+        folder: 'sport',
+        icon: '1.png',
+        prefix: '',
+        suffix: '.png',
+        count: 16
+      },
+      {
+        folder: 'money',
+        icon: '1.png',
+        prefix: '',
+        suffix: '.png',
+        count: 15
+      }
+    ]
   },
   // 左側聊天列表設定
   list: {
@@ -501,7 +559,7 @@ var config = {
       // 登出事件
       event: function() {
         localStorage.removeItem('IMKit-token');
-        document.location.href = 'demo';
+        window.top.location.href = 'demo';
       }
     },
     // 是否有置頂功能
@@ -576,7 +634,7 @@ var config = {
     // call api 失敗時的處理
     onAjaxError: function(error) {
       if (error.RC === 401) {
-        window.location.href = '../demo';
+        window.top.location.href = 'demo';
       } else {
         console.error(error.RM);
       }
@@ -644,7 +702,7 @@ var config = {
     renderRoomDescription: null
   },
   // 在線推播的icon
-  notificationIcon: 'https://pinchat.cc/favicon/apple-touch-icon-57x57.png',
+  notificationIcon: 'https://imkitdemo.com/static/logo.png',
   // 推播設定 (Firebase Cloud Messaging Config)
   // 若不使用推播，則填 null
   FCMConfig: {
