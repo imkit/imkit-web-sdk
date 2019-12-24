@@ -1,36 +1,36 @@
 # Config
 
-> Notice：modify `FCMConfig`，may have to adjust `messagingSenderId` in  `static/manifest.json` and `static/sw.js` 
+> Notice：modify `FCMConfig`，may have to adjust `messagingSenderId` in `static/manifest.json` and `static/sw.js`
 
 ```javascript
 var config = {
   // enable or disable debug mode.
   debug: false,
   // chat server site
-  domain: 'https://chat.fangho.com',
+  domain: "https://chat.fangho.com",
   // auth server site and authClientId can be used together and get token，if you fill token in，you can omit this value.
-  authBase: 'https://auth.fangho.com',
+  authBase: "https://auth.fangho.com",
   // Signed chat user id and authBase  can be used together and get token，if you fill token in，you can omit this value.
-  authClientId: '',
+  authClientId: "",
   // Get the api URL of the previewed url.
-  urlPreviewApi: 'https://url.imkit.io/',
+  urlPreviewApi: "https://url.imkit.io/",
   // chat server clientkey
-  clientKey: 'fangho_imkit_0412_2018_001_clientkey',
+  clientKey: "fangho_imkit_0412_2018_001_clientkey",
   // chat user token is Optional field. if you don't fill token, you need to fill authBase and authClientId in.
-  token: '',
+  token: "",
   // Message decryption key
-  privateKey: '',
+  privateKey: "",
   // S3 bucketName
-  bucketName: 'chatserver-upload',
+  bucketName: "chatserver-upload",
   // google api key，need to enable Maps JavaScript API, Maps Static API, Geocoding API
-  googleApiKey: 'AIzaSyCimtHXyW8GfZ50Vx_YcFFmaBu7G2Wm2cw',
+  googleApiKey: "AIzaSyCimtHXyW8GfZ50Vx_YcFFmaBu7G2Wm2cw",
   // app logo，showed on the top of the chat list，appLogo and appName  are filled in，logo will be show in the right side.
-  appLogo: 'https://i.imgur.com/gchEcBi.png',
+  appLogo: "https://i.imgur.com/gchEcBi.png",
   // app name，showed on the top of the chat list，appLogo and appName are filled in，name will be show in the right side.
-  appName: '',
+  appName: "",
   // language 'zh-tw' or 'en'
-  lang: 'zh-tw',
-  // Required headers when you get avatar 
+  lang: "zh-tw",
+  // Required headers when you get avatar
   avatarHeaders: [
     // {
     //   name: 'token',
@@ -47,7 +47,7 @@ var config = {
     //   value: 'testStable'
     // }
   ],
-  // download file headers 
+  // download file headers
   downloadFileHeaders: [
     // {
     //   name: 'Authorization',
@@ -67,7 +67,7 @@ var config = {
   chat: {
     // enable or disable to show chat block header
     showHeader: true,
-    // below chat tool button settings 
+    // below chat tool button settings
     actions: {
       // Emoticon
       emoji: {
@@ -75,7 +75,7 @@ var config = {
         enable: true,
         mobileEnable: true,
         // description
-        text: 'Send Emoji'
+        text: "Send Emoji"
       },
       // sticker
       sticker: {
@@ -83,7 +83,7 @@ var config = {
         enable: true,
         mobileEnable: true,
         // description
-        text: 'Send Sticker'
+        text: "Send Sticker"
       },
       // photo
       image: {
@@ -91,14 +91,14 @@ var config = {
         enable: true,
         mobileEnable: true,
         // description
-        text: 'Send Image',
+        text: "Send Image",
         extra: {
           // Restricted file format
           accept: [
-            'image/png',
-            'image/jpeg',
-            'image/heic',
-            'image/heic-sequence'
+            "image/png",
+            "image/jpeg",
+            "image/heic",
+            "image/heic-sequence"
           ],
           // Restricted file size (MB)
           limitSize: 10,
@@ -112,10 +112,10 @@ var config = {
         enable: true,
         mobileEnable: true,
         // description
-        text: 'Send Video',
+        text: "Send Video",
         extra: {
           // Restricted file format
-          accept: ['video/mp4', 'video/quicktime'],
+          accept: ["video/mp4", "video/quicktime"],
           // Restricted file size (MB)
           limitSize: 100,
           // Maximum width and height of the thumbnail (px)
@@ -128,10 +128,10 @@ var config = {
         enable: true,
         mobileEnable: true,
         // description
-        text: 'Send File',
+        text: "Send File",
         extra: {
           // Restricted file format
-          accept: ['application/pdf', 'audio/mp3'],
+          accept: ["application/pdf", "audio/mp3"],
           // Restricted file size (MB)
           limitSize: 10
         }
@@ -142,7 +142,7 @@ var config = {
         enable: true,
         mobileEnable: true,
         // description
-        text: 'Send Recorder',
+        text: "Send Recorder",
         extra: {
           // setting record limit Second
           limitSeconds: 60
@@ -154,7 +154,7 @@ var config = {
         enable: true,
         mobileEnable: true,
         // description
-        text: 'Send Location'
+        text: "Send Location"
       },
       // payment flow
       paymentRequest: {
@@ -162,38 +162,38 @@ var config = {
         enable: false,
         mobileEnable: false,
         // description
-        text: 'Send Payment Request',
+        text: "Send Payment Request",
         extra: {
           // Supported currency
-          currencies: ['TWD', 'USD'],
+          currencies: ["TWD", "USD"],
           // payment request API
-          requestApi: '',
+          requestApi: "",
           paymentBy: [
             {
-              key: 'paypal',
-              text: 'PayPal'
+              key: "paypal",
+              text: "PayPal"
             },
             {
-              key: 'tappay',
-              text: 'TapPay'
+              key: "tappay",
+              text: "TapPay"
             },
             {
-              currencies: ['TWD'],
-              key: 'newebpay',
-              text: '藍新'
+              currencies: ["TWD"],
+              key: "newebpay",
+              text: "藍新"
             }
           ]
         }
       }
     },
     // chat room button position: 'bottom' or 'right'
-    actionsPosition: 'bottom',
+    actionsPosition: "bottom",
     //   Text limit Length
     limitTextLength: 500,
     // the way to close Image, video, and viewer.
     // 'close'：the right upper fork
     // 'back'：the left upper return arrow
-    sliderReturnMode: 'close',
+    sliderReturnMode: "close",
     // use asynchronous read when getting url meta
     asyncUrlPreview: true,
     // Custom color, color format：'#123456' or 'rgba(12, 34, 56, 0.5)'
@@ -231,14 +231,23 @@ var config = {
     thumbnailSize: 500,
     // enable or disable to show read
     readReceipt: true,
-    // enable or disable to open reply fuction 
+    // enable or disable to open reply fuction
     reply: true,
     // enable or disable to open forward fuction
     forward: true,
     // enable or disable to open recall fuction
     recall: true,
     // enable or disable to download audio file
-    audioDownload: true
+    audioDownload: true,
+    sticker: [
+      {
+        folder: "funfunfamily",
+        icon: "FunFunFamily-1.png",
+        prefix: "FunFunFamily-",
+        suffix: ".png",
+        count: 40
+      }
+    ]
   },
   // left chat list settings
   list: {
@@ -247,7 +256,7 @@ var config = {
     // The number of opened rooms.Value=0 means no limit.
     maxCount: 0,
     // text is showed in locked room.
-    lockText: '',
+    lockText: "",
     // on click event in locked room
     lockOnClick: function() {},
     // Custom color, color format：'#123456' or 'rgba(12, 34, 56, 0.5)'
@@ -267,8 +276,8 @@ var config = {
       enable: true,
       // logout event
       event: function() {
-        localStorage.removeItem('IMKit-token');
-        document.location.href = 'demo';
+        localStorage.removeItem("IMKit-token");
+        document.location.href = "demo";
       }
     },
     // enable or disable to sticky the room
@@ -326,14 +335,14 @@ var config = {
   },
   // Events
   events: {
-    // enable or disable to run the default event from opening the room 
+    // enable or disable to run the default event from opening the room
     onSetRoomActiveDefault: true,
     // trigger when room is opened
     onSetRoomActive: null,
     // process in calling API failed
     onAjaxError: function(error) {
       if (error.RC === 401) {
-        window.location.href = '../demo';
+        window.location.href = "../demo";
       } else {
         console.error(error.RM);
       }
@@ -355,37 +364,37 @@ var config = {
     cover: true
   },
   // if Setting is "true" ，the room is muted and no sound is emitted when the message is received.
-  alwaysMute: false, 
+  alwaysMute: false,
   //  Set changing title when you receive the message.
   changeTitle: true,
   // Custom multi-national language
   i18n: {
     en: {
-      Test: 'Test',
-      'Send Emoji': 'Send Emoji',
-      'Send Sticker': 'Send Sticker',
-      'Send Image': 'Send Image',
-      'Send Video': 'Send Video',
-      'Send File': 'Send File',
-      'Send Recorder': 'Send Recorder',
-      'Send Location': 'Send Location',
-      'Send Payment Request': 'Send Payment Request'
+      Test: "Test",
+      "Send Emoji": "Send Emoji",
+      "Send Sticker": "Send Sticker",
+      "Send Image": "Send Image",
+      "Send Video": "Send Video",
+      "Send File": "Send File",
+      "Send Recorder": "Send Recorder",
+      "Send Location": "Send Location",
+      "Send Payment Request": "Send Payment Request"
     },
-    'zh-tw': {
-      Test: '測試',
-      'Send Emoji': '傳送表情符號',
-      'Send Sticker': '傳送貼圖',
-      'Send Image': '傳送圖片',
-      'Send Video': '傳送影片',
-      'Send File': '傳送檔案',
-      'Send Recorder': '傳送錄音',
-      'Send Location': '傳送位置訊息',
-      'Send Payment Request': '傳送請款訊息'
+    "zh-tw": {
+      Test: "測試",
+      "Send Emoji": "傳送表情符號",
+      "Send Sticker": "傳送貼圖",
+      "Send Image": "傳送圖片",
+      "Send Video": "傳送影片",
+      "Send File": "傳送檔案",
+      "Send Recorder": "傳送錄音",
+      "Send Location": "傳送位置訊息",
+      "Send Payment Request": "傳送請款訊息"
     }
   },
   // Custom function
   special: {
-    // the room's description 
+    // the room's description
     // renderRoomDescription: function(roomDescription) {
     //   if (roomDescription && roomDescription.indexOf('::')) {
     //     return roomDescription
@@ -401,13 +410,12 @@ var config = {
   // Push settings (Firebase Cloud Messaging Config)
   // if you don't use push，please fill in "null"
   FCMConfig: {
-    apiKey: 'AIzaSyDH6fgpRFaH7vIqAcGQi48wgvNf8BJ9q1I',
-    authDomain: 'fir-chat-server.firebaseapp.com',
-    databaseURL: 'https://fir-chat-server.firebaseio.com',
-    projectId: 'fir-chat-server',
-    storageBucket: 'fir-chat-server.appspot.com',
-    messagingSenderId: '970263218499'
+    apiKey: "AIzaSyDH6fgpRFaH7vIqAcGQi48wgvNf8BJ9q1I",
+    authDomain: "fir-chat-server.firebaseapp.com",
+    databaseURL: "https://fir-chat-server.firebaseio.com",
+    projectId: "fir-chat-server",
+    storageBucket: "fir-chat-server.appspot.com",
+    messagingSenderId: "970263218499"
   }
 };
-
 ```

@@ -7,29 +7,29 @@ var config = {
   // 是否開啟 debug
   debug: false,
   // chat server 位置
-  domain: 'https://chat.fangho.com',
+  domain: "https://chat.fangho.com",
   // auth server 位置，與 authClientId 配合取得 token，若填 token，此值可不填
-  authBase: 'https://auth.fangho.com',
+  authBase: "https://auth.fangho.com",
   // 登入的 chat user id，與 authBase 配合取得 token，若填 token，此值可不填
-  authClientId: '',
+  authClientId: "",
   // 取得 url 預覽內容的 api 網址
-  urlPreviewApi: 'https://url.imkit.io/',
+  urlPreviewApi: "https://url.imkit.io/",
   // chat server clientkey
-  clientKey: 'fangho_imkit_0412_2018_001_clientkey',
+  clientKey: "fangho_imkit_0412_2018_001_clientkey",
   // chat user token，選填，若不填則需填 authBase 與 authClientId
-  token: '',
+  token: "",
   // 訊息解密金鑰
-  privateKey: '',
+  privateKey: "",
   // S3 bucketName
-  bucketName: 'chatserver-upload',
+  bucketName: "chatserver-upload",
   // google api key，需要啟用 Maps JavaScript API, Maps Static API, Geocoding API
-  googleApiKey: 'AIzaSyCimtHXyW8GfZ50Vx_YcFFmaBu7G2Wm2cw',
+  googleApiKey: "AIzaSyCimtHXyW8GfZ50Vx_YcFFmaBu7G2Wm2cw",
   // app logo，顯示在聊天列表上方，appLogo 及 appName 都填時，logo在左邊
-  appLogo: 'https://i.imgur.com/gchEcBi.png',
+  appLogo: "https://i.imgur.com/gchEcBi.png",
   // app name，顯示在聊天列表上方，appLogo 及 appName 都填時，name在右邊
-  appName: '',
+  appName: "",
   // 語系 'zh-tw' or 'en'
-  lang: 'zh-tw',
+  lang: "zh-tw",
   // 取得 avatar 需要的 headers
   avatarHeaders: [
     // {
@@ -75,7 +75,7 @@ var config = {
         enable: true,
         mobileEnable: true,
         // 描述文字
-        text: 'Send Emoji'
+        text: "Send Emoji"
       },
       // 貼圖
       sticker: {
@@ -83,7 +83,7 @@ var config = {
         enable: true,
         mobileEnable: true,
         // 描述文字
-        text: 'Send Sticker'
+        text: "Send Sticker"
       },
       // 圖片
       image: {
@@ -91,14 +91,14 @@ var config = {
         enable: true,
         mobileEnable: true,
         // 描述文字
-        text: 'Send Image',
+        text: "Send Image",
         extra: {
           // 限制檔案格式
           accept: [
-            'image/png',
-            'image/jpeg',
-            'image/heic',
-            'image/heic-sequence'
+            "image/png",
+            "image/jpeg",
+            "image/heic",
+            "image/heic-sequence"
           ],
           // 限制檔案大小 (MB)
           limitSize: 10,
@@ -112,10 +112,10 @@ var config = {
         enable: true,
         mobileEnable: true,
         // 描述文字
-        text: 'Send Video',
+        text: "Send Video",
         extra: {
           // 限制檔案格式
-          accept: ['video/mp4', 'video/quicktime'],
+          accept: ["video/mp4", "video/quicktime"],
           // 限制檔案大小 (MB)
           limitSize: 100,
           // 縮圖的最大寬高 (px)
@@ -128,10 +128,10 @@ var config = {
         enable: true,
         mobileEnable: true,
         // 描述文字
-        text: 'Send File',
+        text: "Send File",
         extra: {
           // 限制檔案格式
-          accept: ['application/pdf', 'audio/mp3'],
+          accept: ["application/pdf", "audio/mp3"],
           // 限制檔案大小 (MB)
           limitSize: 10
         }
@@ -142,7 +142,7 @@ var config = {
         enable: true,
         mobileEnable: true,
         // 描述文字
-        text: 'Send Recorder',
+        text: "Send Recorder",
         extra: {
           // 限制錄音秒數
           limitSeconds: 60
@@ -154,7 +154,7 @@ var config = {
         enable: true,
         mobileEnable: true,
         // 描述文字
-        text: 'Send Location'
+        text: "Send Location"
       },
       // 金流
       paymentRequest: {
@@ -162,38 +162,38 @@ var config = {
         enable: false,
         mobileEnable: false,
         // 描述文字
-        text: 'Send Payment Request',
+        text: "Send Payment Request",
         extra: {
           // 支援的幣值
-          currencies: ['TWD', 'USD'],
+          currencies: ["TWD", "USD"],
           // 請款 API
-          requestApi: '',
+          requestApi: "",
           paymentBy: [
             {
-              key: 'paypal',
-              text: 'PayPal'
+              key: "paypal",
+              text: "PayPal"
             },
             {
-              key: 'tappay',
-              text: 'TapPay'
+              key: "tappay",
+              text: "TapPay"
             },
             {
-              currencies: ['TWD'],
-              key: 'newebpay',
-              text: '藍新'
+              currencies: ["TWD"],
+              key: "newebpay",
+              text: "藍新"
             }
           ]
         }
       }
     },
     // 聊天按鈕顯示位置 'bottom' or 'right'
-    actionsPosition: 'bottom',
+    actionsPosition: "bottom",
     // 限制文字長度
     limitTextLength: 500,
     // 圖片/影片檢視氣關閉方式，
     // 'close'：右上方叉叉
     // 'back'：左上方返回箭頭
-    sliderReturnMode: 'close',
+    sliderReturnMode: "close",
     // 爬 url meta 時，是否使用異步讀取
     asyncUrlPreview: true,
     // 自訂顏色，顏色格式：'#123456' 或 'rgba(12, 34, 56, 0.5)'
@@ -238,7 +238,16 @@ var config = {
     // 是否開啟收回訊息功能
     recall: true,
     // 是否可以下載音檔
-    audioDownload: true
+    audioDownload: true,
+    sticker: [
+      {
+        folder: "funfunfamily",
+        icon: "FunFunFamily-1.png",
+        prefix: "FunFunFamily-",
+        suffix: ".png",
+        count: 40
+      }
+    ]
   },
   // 左側聊天列表設定
   list: {
@@ -247,7 +256,7 @@ var config = {
     // 可開啟的房間數量，設 0 不限制
     maxCount: 0,
     // 鎖定的房間顯示文字
-    lockText: '',
+    lockText: "",
     // 點即鎖定的房間觸發事件
     lockOnClick: function() {},
     // 自訂顏色，顏色格式：'#123456' 或 'rgba(12, 34, 56, 0.5)'
@@ -267,8 +276,8 @@ var config = {
       enable: true,
       // 登出事件
       event: function() {
-        localStorage.removeItem('IMKit-token');
-        document.location.href = 'demo';
+        localStorage.removeItem("IMKit-token");
+        document.location.href = "demo";
       }
     },
     // 是否有置頂功能
@@ -333,7 +342,7 @@ var config = {
     // call api 失敗時的處理
     onAjaxError: function(error) {
       if (error.RC === 401) {
-        window.location.href = '../demo';
+        window.location.href = "../demo";
       } else {
         console.error(error.RM);
       }
@@ -361,26 +370,26 @@ var config = {
   // 自訂的多國語
   i18n: {
     en: {
-      Test: 'Test',
-      'Send Emoji': 'Send Emoji',
-      'Send Sticker': 'Send Sticker',
-      'Send Image': 'Send Image',
-      'Send Video': 'Send Video',
-      'Send File': 'Send File',
-      'Send Recorder': 'Send Recorder',
-      'Send Location': 'Send Location',
-      'Send Payment Request': 'Send Payment Request'
+      Test: "Test",
+      "Send Emoji": "Send Emoji",
+      "Send Sticker": "Send Sticker",
+      "Send Image": "Send Image",
+      "Send Video": "Send Video",
+      "Send File": "Send File",
+      "Send Recorder": "Send Recorder",
+      "Send Location": "Send Location",
+      "Send Payment Request": "Send Payment Request"
     },
-    'zh-tw': {
-      Test: '測試',
-      'Send Emoji': '傳送表情符號',
-      'Send Sticker': '傳送貼圖',
-      'Send Image': '傳送圖片',
-      'Send Video': '傳送影片',
-      'Send File': '傳送檔案',
-      'Send Recorder': '傳送錄音',
-      'Send Location': '傳送位置訊息',
-      'Send Payment Request': '傳送請款訊息'
+    "zh-tw": {
+      Test: "測試",
+      "Send Emoji": "傳送表情符號",
+      "Send Sticker": "傳送貼圖",
+      "Send Image": "傳送圖片",
+      "Send Video": "傳送影片",
+      "Send File": "傳送檔案",
+      "Send Recorder": "傳送錄音",
+      "Send Location": "傳送位置訊息",
+      "Send Payment Request": "傳送請款訊息"
     }
   },
   // 客製功能
@@ -401,13 +410,12 @@ var config = {
   // 推播設定 (Firebase Cloud Messaging Config)
   // 若不使用推播，則填 null
   FCMConfig: {
-    apiKey: 'AIzaSyDH6fgpRFaH7vIqAcGQi48wgvNf8BJ9q1I',
-    authDomain: 'fir-chat-server.firebaseapp.com',
-    databaseURL: 'https://fir-chat-server.firebaseio.com',
-    projectId: 'fir-chat-server',
-    storageBucket: 'fir-chat-server.appspot.com',
-    messagingSenderId: '970263218499'
+    apiKey: "AIzaSyDH6fgpRFaH7vIqAcGQi48wgvNf8BJ9q1I",
+    authDomain: "fir-chat-server.firebaseapp.com",
+    databaseURL: "https://fir-chat-server.firebaseio.com",
+    projectId: "fir-chat-server",
+    storageBucket: "fir-chat-server.appspot.com",
+    messagingSenderId: "970263218499"
   }
 };
-
 ```
