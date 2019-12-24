@@ -23,7 +23,7 @@ var api = new IMKitApi({
 });
 ```
 
-#### Create/Update user and get token
+#### Create/Update user and get token (待刪)
 
 ```javascript
 var clientID = "DemoUser";
