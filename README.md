@@ -1,8 +1,9 @@
 # IMKit Web UI SDK
 
 此為繁體中文說明。其他語系：
-English[en] (https://github.com/imkit/imkit-web-sdk/tree/master/docs/zh-tw)
-日本語[ja] 
+
+- English[en] (https://github.com/imkit/imkit-web-sdk/tree/master/docs/zh-tw)
+- 日本語[ja] 
 
 
 ## IMKit 提供在 Web 上建構即時通訊軟體所需兩個 SDK:
