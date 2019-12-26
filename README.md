@@ -2,7 +2,7 @@
 
 此為繁體中文說明。其他語系：
 
-- English[en] (https://github.com/imkit/imkit-web-sdk/tree/master/docs/zh-tw)
+- English [en](https://github.com/imkit/imkit-web-sdk/tree/master/docs/en)
 - 日本語[ja] 
 
 
