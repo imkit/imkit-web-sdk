@@ -327,7 +327,7 @@ example:
         bucketName: 'chatserver-upload',
         googleApiKey: 'AIzaSyCimtHXyW8GfZ50Vx_YcFFmaBu7G2Wm2cw',
       }
-      window.ImkitJsSDK.init(config);
+      window.IMKitUI.init(config);
     </script>
   </body>
 </html>

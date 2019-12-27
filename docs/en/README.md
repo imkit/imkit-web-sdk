@@ -8,9 +8,9 @@
 
 ```html
 <!-- CSS -->
-<link href="static/css/reset.css" rel="stylesheet">
-<link href="static/css/index.css" rel="stylesheet">
-<link href="static/css/app.css" rel="stylesheet">
+<link href="static/css/reset.css" rel="stylesheet" />
+<link href="static/css/index.css" rel="stylesheet" />
+<link href="static/css/app.css" rel="stylesheet" />
 
 <!-- JS -->
 <script type="text/javascript" src="static/js/manifest.js"></script>
@@ -28,5 +28,5 @@
 > config please read CONFIG.md
 
 ```javascript
-window.ImkitJsSDK.init(config);
+window.IMKitUI.init(config);
 ```

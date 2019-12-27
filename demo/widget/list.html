@@ -1,65 +1,66 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <base href="/" />
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0"
-    />
-    <title>IMKit Demo</title>
-    <link rel="apple-touch-icon" size="192x192" href="static/favicon-192.png" />
-    <link rel="Shortcut Icon" size="32x32" href="static/favicon-32.png" />
-    <link rel="manifest" href="static/manifest.json" />
-    <link href="static/css/reset.css" rel="stylesheet" />
-    <link href="static/css/index.css" rel="stylesheet" />
-    <link href="static/css/app.css" rel="stylesheet" />
-  </head>
 
-  <body>
-    <div id="IMKitApp"><div class="loader appLoader"></div></div>
-    <!-- built files will be auto injected -->
-    <script type="text/javascript" src="static/js/manifest.js"></script>
-    <script type="text/javascript" src="static/js/vendor.js"></script>
-    <script type="text/javascript" src="static/js/app.js"></script>
-  </body>
+<head>
+  <base href="/" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=0" />
+  <title>IMKit Demo</title>
+  <link rel="apple-touch-icon" size="192x192" href="static/favicon-192.png" />
+  <link rel="Shortcut Icon" size="32x32" href="static/favicon-32.png" />
+  <link rel="manifest" href="static/manifest.json" />
+  <link href="static/css/reset.css" rel="stylesheet" />
+  <link href="static/css/index.css" rel="stylesheet" />
+  <link href="static/css/app.css" rel="stylesheet" />
+</head>
 
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="static/config.js"></script>
-  <script>
-    $.extend(true, config, {
-      // chat user token，與 authClientId 擇一使用
-      token: localStorage.getItem("IMKit-token"),
-      // 左側聊天列表設定
-      list: {
-        logout: {
-          // 是否顯示登出按鈕
-          enable: true,
-          // 登出事件
-          event: function() {
-            window.parent.logout();
-          }
+<body>
+  <div id="IMKitApp">
+    <div class="loader appLoader"></div>
+  </div>
+  <!-- built files will be auto injected -->
+  <script type="text/javascript" src="static/js/manifest.js"></script>
+  <script type="text/javascript" src="static/js/vendor.js"></script>
+  <script type="text/javascript" src="static/js/app.js"></script>
+</body>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="static/config.js"></script>
+<script>
+  $.extend(true, config, {
+    // chat user token，與 authClientId 擇一使用
+    token: localStorage.getItem("IMKit-token"),
+    // 左側聊天列表設定
+    list: {
+      logout: {
+        // 是否顯示登出按鈕
+        enable: true,
+        // 登出事件
+        event: function () {
+          window.parent.logout();
         }
+      }
+    },
+    // 事件們
+    events: {
+      // 是否執行開啟聊天的預設事件
+      onSetRoomActiveDefault: false,
+      // 開啟聊天室時觸發
+      onSetRoomActive: function (room) {
+        window.parent.openRoom(room);
       },
-      // 事件們
-      events: {
-        // 是否執行開啟聊天的預設事件
-        onSetRoomActiveDefault: false,
-        // 開啟聊天室時觸發
-        onSetRoomActive: function(room) {
-          window.parent.openRoom(room);
-        },
-        // call api 失敗時的處理
-        onAjaxError: function(error) {
-          if (error.RC === 401) {
-            window.parent.logout();
-          }
+      // call api 失敗時的處理
+      onAjaxError: function (error) {
+        if (error.RC === 401) {
+          window.parent.logout();
         }
-      },
-      // 若無設定 defaultRoom，是否自動進入列表第一個房間
-      autoEnterRoom: false
-    });
-    // INIT
-    window.ImkitJsSDK.init(config);
-  </script>
+      }
+    },
+    // 若無設定 defaultRoom，是否自動進入列表第一個房間
+    autoEnterRoom: false
+  });
+  // INIT
+  window.IMKitUI.init(config);
+</script>
+
 </html>
