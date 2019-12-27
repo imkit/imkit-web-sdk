@@ -245,7 +245,7 @@ var config = {
           // 支援的幣值
           currencies: ['TWD', 'USD'],
           // 請款 API
-          requestApi: 'https://pinchat.cc/api/request_payment',
+          requestApi: '',
           paymentBy: [
             {
               key: 'paypal',
