@@ -472,59 +472,43 @@ var config = {
     audioDownload: true,
     sticker: [
       {
-        folder: 'funfunfamily',
-        icon: 'FunFunFamily-1.png',
-        prefix: 'FunFunFamily-',
-        suffix: '.png',
+        folder: 'FunFunFamily',
+        icon: 'FunFunFamily-1',
         count: 40
       },
       {
         folder: 'emoji',
-        icon: '1.png',
-        prefix: '',
-        suffix: '.png',
+        icon: 'emoji-1',
         count: 45
       },
       {
         folder: 'animal',
-        icon: '1.png',
-        prefix: '',
-        suffix: '.png',
+        icon: 'animal-1',
         count: 16
       },
       {
         folder: 'food',
-        icon: '1.png',
-        prefix: '',
-        suffix: '.png',
+        icon: 'food-1',
         count: 16
       },
       {
         folder: 'natural',
-        icon: '1.png',
-        prefix: '',
-        suffix: '.png',
+        icon: 'natural-1',
         count: 32
       },
       {
         folder: 'people',
-        icon: '1.png',
-        prefix: '',
-        suffix: '.png',
+        icon: 'people-1',
         count: 16
       },
       {
         folder: 'sport',
-        icon: '1.png',
-        prefix: '',
-        suffix: '.png',
+        icon: 'sport-1',
         count: 16
       },
       {
         folder: 'money',
-        icon: '1.png',
-        prefix: '',
-        suffix: '.png',
+        icon: 'money-1',
         count: 15
       }
     ]

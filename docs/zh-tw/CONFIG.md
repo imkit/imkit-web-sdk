@@ -241,10 +241,8 @@ var config = {
     audioDownload: true,
     sticker: [
       {
-        folder: "funfunfamily",
-        icon: "FunFunFamily-1.png",
-        prefix: "FunFunFamily-",
-        suffix: ".png",
+        folder: "FunFunFamily",
+        icon: "FunFunFamily-1",
         count: 40
       }
     ]
