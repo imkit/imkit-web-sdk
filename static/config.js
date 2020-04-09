@@ -42,7 +42,7 @@ var config = {
   // S3 bucketName
   bucketName: 'chatserver-upload',
   // google api key，需要啟用 Maps JavaScript API, Maps Static API, Geocoding API
-  googleApiKey: 'AIzaSyCimtHXyW8GfZ50Vx_YcFFmaBu7G2Wm2cw',
+  googleApiKey: 'AIzaSyBECFunCq-6PruaLbHPLYW-XNDZC7YO6Lo',
   // app logo，顯示在聊天列表上方，appLogo 及 appName 都填時，logo在左邊
   appLogo: 'https://i.imgur.com/gchEcBi.png',
   // app name，顯示在聊天列表上方，appLogo 及 appName 都填時，name在右邊
@@ -630,6 +630,17 @@ var config = {
   autoEnterRoomMobile: false,
   // 開啟聊天室後進入的房間 (room id)
   defaultRoom: null,
+  // room admin 客製化設定
+  roomOwner: {
+    // room admin ID
+    id: '',
+    // room admin
+    avatarUrl: '',
+    // room name
+    name: ''
+  },
+  // 搜尋時要 filter 的 roomTag
+  roomTag: '',
   // 建立新房間可設定的資訊
   createRoom: {
     // 是否可設定房間 ID
