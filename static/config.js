@@ -707,5 +707,8 @@ var config = {
     projectId: 'fir-chat-server',
     storageBucket: 'fir-chat-server.appspot.com',
     messagingSenderId: '970263218499'
+  },
+  quickReply: {
+    items: []
   }
 };
