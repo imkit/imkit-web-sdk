@@ -591,7 +591,9 @@ var config = {
       // 是否可將其他人從房間移除
       remove: true,
       // 是否可邀請成員
-      invite: true
+      invite: true,
+      // 是否能搜尋對話
+      hasSearch: true
     },
     // 是否預設開啟成員列表
     openMembersList: false,
