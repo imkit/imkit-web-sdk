@@ -92,9 +92,7 @@ For example, ydu cna build a tab in the tab bar for users to check Chat Room Lis
 
 ## How IMKit Web SDK Works?
 
-首先，要跟您告知，IMKit SDK 的運作需要和您的網站緊密結合。
-
-這邊分成**三部分**來說明基本運作流程。所謂的基本是指概念上的流程，實際上的執行細節稍後詳述。這邊先給您一個概念，讓您可以快速理解。
+First of all, you need to know that IMKit Web SDK must be integrated to the work flow of your website closely. We will introduce how IMKit Web SDK works by following 3 parts. Here we only provide the concept, and we'll explain more in next chapter.
 
 ### Part 1. Create User
 
