@@ -81,8 +81,6 @@ Beofre you adopt IMKit Web SDK, you must have a website with existing member sys
 > Example 1. A C2C E-commerce platform
 > You can provide a **button** for users to chat with product sellers directly. This **button** is the trigger point to start the chat.
 
--
-
 > Example 2. A C2C Real-Estate Platform
 > You can provide a **button** for house buyers to chat with house owners directly. This **button** is also the trigger point to start the chat.
 
