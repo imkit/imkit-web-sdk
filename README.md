@@ -2,7 +2,7 @@
 
 This is Traditional Chinese introduction. You can use the link below to read in other languages.
 
-- English [en](https://github.com/imkit/imkit-web-sdk/tree/master/docs/en)
+- [English](https://github.com/imkit/imkit-web-sdk/tree/master/docs/en)
 - 日本語
 
 ## IMKit 提供在 Web 上建構即時通訊軟體所需兩個 SDK:
