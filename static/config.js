@@ -639,7 +639,9 @@ var config = {
     // room admin
     avatarUrl: '',
     // room name
-    name: ''
+    name: '',
+    // room title
+    title: ''
   },
   // 搜尋時要 filter 的 roomTag
   roomTag: '',
