@@ -9,11 +9,11 @@
 
 ## 概念介紹
 
-- [關於 IMKit Web SDK](https://github.com/imkit/imkit-web-sdk/blob/master/docs/zh-tw/CONCEPT.md#about-imkit-web-sdk)
-- [什麼是 In-Web Chat ?](https://github.com/imkit/imkit-web-sdk/blob/master/docs/zh-tw/CONCEPT.md#in-web-chat)
-- [聊天元素](https://github.com/imkit/imkit-web-sdk/blob/master/docs/zh-tw/CONCEPT.md#component-of-chat)
-- [使用 IMKit 前的情境設計](https://github.com/imkit/imkit-web-sdk/blob/master/docs/en/CONCEPT.md#chat-scenario-design)
-- [IMKit Web SDK 的基本運作流程](https://github.com/imkit/imkit-web-sdk/blob/master/docs/zh-tw/CONCEPT.md#how-imkit-web-sdk-works)
+- [關於 IMKit Web SDK](https://github.com/imkit/imkit-web-sdk/blob/master/docs/zh-tw/CONCEPT.md#%E9%97%9C%E6%96%BC-imkit-web-sdk)
+- [什麼是 In-Web Chat ?](https://github.com/imkit/imkit-web-sdk/blob/master/docs/zh-tw/CONCEPT.md#%E4%BB%80%E9%BA%BC%E6%98%AF-in-web-chat-)
+- [聊天元素](https://github.com/imkit/imkit-web-sdk/blob/master/docs/zh-tw/CONCEPT.md#%E8%81%8A%E5%A4%A9%E5%85%83%E7%B4%A0)
+- [使用 IMKit 前的情境設計](https://github.com/imkit/imkit-web-sdk/blob/master/docs/zh-tw/CONCEPT.md#%E4%BD%BF%E7%94%A8-imkit-%E5%89%8D%E7%9A%84%E6%83%85%E5%A2%83%E8%A8%AD%E8%A8%88)
+- [IMKit Web SDK 的基本運作流程](https://github.com/imkit/imkit-web-sdk/blob/master/docs/zh-tw/CONCEPT.md#imkit-web-sdk-%E7%9A%84%E5%9F%BA%E6%9C%AC%E9%81%8B%E4%BD%9C%E6%B5%81%E7%A8%8B)
 
 ## 開始使用 IMKit Web SDK
 
@@ -146,8 +146,8 @@ localStorage.removeItem('IMKit-token');
 ## 其他文件
 
 - [自定義貼圖](https://github.com/imkit/imkit-web-sdk/blob/master/docs/zh-tw/STICKER.md): 新增自定義貼圖至 Chat SDK。
-- [未讀數](https://github.com/imkit/imkit-web-sdk/blob/master/docs/en/APILIB.md#badge): 計算聊天室未讀數。
-- [聊天室與使用者管理](https://github.com/imkit/imkit-web-sdk/blob/master/docs/en/APILIB.md): 管理使用者與聊天室。
+- [未讀數](https://github.com/imkit/imkit-web-sdk/blob/master/docs/zh-tw/APILIB.md#badge): 計算聊天室未讀數。
+- [聊天室與使用者管理](https://github.com/imkit/imkit-web-sdk/blob/master/docs/zh-tw/APILIB.md): 管理使用者與聊天室。
 - [Chat Server API](https://github.com/FUNTEKco/chat-server-document/wiki): 使用 [IMKit Dashboard](https://dashboard.imkit.io/) 提供的 **API Key** 及 **Chat Server URL** 呼叫 Chat Server API 以實現更多對談場景功能。
 - [IMKit JavaScript API](https://github.com/imkit/imkit-js-lib): 透過 **IMKit JavaScript API** 建立自己的 Chat UI。
 - [IMKit Dashboard](https://dashboard.imkit.io/): Chat Server 管理後台，包括數據統計及 Chat Server 管理。
