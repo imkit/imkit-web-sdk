@@ -141,9 +141,9 @@ api.room
   });
 ```
 
-### Step 7. Remove an User from Chat Room
+### Step 7. Logout
 
-Remove user from the room by removing its token.
+Logout user from chat server.
 
 ```jsx
 localStorage.removeItem('IMKit-token');
