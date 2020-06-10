@@ -27,7 +27,7 @@ You can explore more languages as below.
 
 If you are ready to integrate chat to your service, follow the step-by-step instructions below.
 
-### Step 1. Create a IMKit application from IMKit Dashboard
+### Step 1. Create a IMKit Application from IMKit Dashboard
 
 1. Please visit [IMKit Dashboard](https://dashboard.imkit.io/) and create a new account.
 2. Create a new application in [IMKit Dashboard](https://dashboard.imkit.io/).
@@ -102,7 +102,7 @@ api.me
   });
 ```
 
-### Step 6. Create A New Chat Room And Invite User
+### Step 6. Create a New Chat Room and Invite User
 
 
 #### `1 on 1 Chat`
@@ -143,7 +143,7 @@ api.room
   });
 ```
 
-### Step 7. Remove An User From Chat Room
+### Step 7. Remove an User from Chat Room
 
 Remove user from the room by removing its token.
 
