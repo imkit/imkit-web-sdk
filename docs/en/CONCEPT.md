@@ -55,7 +55,7 @@ In general, your website will get a token to indentify user login status as user
 
 > Chat Server needs to save a set of memeber data from your website. This set of member data doesn't collect confidential data. It only needs to contain chat related information like Display Name and Avatar.
 
-### Part 2: Create Chat Room And Add Users to Chat Room
+### Part 2: Create Chat Room and Add Users to Chat Room
 
 Next, we will **Create Chat Room** and **Add Users to Chat Room**. 
 
