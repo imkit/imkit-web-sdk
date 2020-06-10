@@ -61,7 +61,7 @@ git clone https://github.com/imkit/imkit-web-sdk
 
 - 請閱讀 [IMKit Auth](https://github.com/FUNTEKco/chat-server-document/wiki#external-auth-service) 了解關於 Auth 方式的相關資訊。
 
-- 請閱讀 [CONFIG.md](https://github.com/imkit/imkit-web-sdk/blob/master/docs/en/CONFIG.md) 了解更多關於 Configuration 的參數設定。
+- 請閱讀 [CONFIG.md](https://github.com/imkit/imkit-web-sdk/blob/master/docs/zh-tw/CONFIG.md) 了解更多關於 Configuration 的參數設定。
 
 - 將從 [IMKit Dashboard](https://dashboard.imkit.io/) 獲得的 `Chat Server URL` 及 `Client Key` 填入 `static/config.js`。
 
