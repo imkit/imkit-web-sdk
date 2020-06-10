@@ -1,15 +1,15 @@
 # IMKit Web SDK
 
-[FUNTEK](http://funtek.co/) provides the chat API and SDK to be integrated with your Web service and enable real-time communications for all users.
+[FUNTEK](http://funtek.co/) provides the chat API and SDK to be integrated with your web service and to enable real-time communications for all users.
 
-You can explore more languages as below.
+You can explore more versions in different languages as below.
 
 - [Chinese](https://github.com/imkit/imkit-web-sdk/blob/master/docs/zh-tw/README.md)
 - Japanese
 
 ## Sample
 
-- [Basic Sample](https://github.com/imkit/imkit-web-sdk/tree/master/demo), using [IMKit Web SDK](https://github.com/imkit/imkit-web-sdk/).
+- [Basic Sample](https://github.com/imkit/imkit-web-sdk/blob/master/docs/en/DEMO.md), using [IMKit Web SDK](https://github.com/imkit/imkit-web-sdk/).
 - [Widget Sample](https://github.com/imkit/imkit-web-sdk/blob/master/demo/iframe.html), using [IMKit Web SDK](https://github.com/imkit/imkit-web-sdk/).
 
 > You can also visit [PinChat](https://pinchat.me) and sign up an account to experience chat functions of IMKit Web SDK.
@@ -17,25 +17,28 @@ You can explore more languages as below.
 ## Concept
 
 - [About IMKit Web SDK](https://github.com/imkit/imkit-web-sdk/blob/master/docs/en/CONCEPT.md#about-imkit-web-sdk)
-- [What Is In-Web Chat](https://github.com/imkit/imkit-web-sdk/blob/master/docs/en/CONCEPT.md#in-web-chat)
+- [What Is In-Web Chat?](https://github.com/imkit/imkit-web-sdk/blob/master/docs/en/CONCEPT.md#in-web-chat)
 - [Component of Chat](https://github.com/imkit/imkit-web-sdk/blob/master/docs/en/CONCEPT.md#component-of-chat)
 - [Chat Scenario](https://github.com/imkit/imkit-web-sdk/blob/master/docs/en/CONCEPT.md#chat-scenario-design)
-- [How IMKit Web SDK Works](https://github.com/imkit/imkit-web-sdk/blob/master/docs/en/CONCEPT.md#how-imkit-web-sdk-works)
+- [How IMKit Web SDK Works?](https://github.com/imkit/imkit-web-sdk/blob/master/docs/en/CONCEPT.md#how-imkit-web-sdk-works)
 
 
 ## Get Started
 
-If you are ready to integrate chat to your service, follow the step-by-step instructions below.
+If you are ready to integrate chat to your service, please follow instructions step-by-step as below.
 
 ### Step 1. Create a Chat Application from IMKit Dashboard
 
-1. Please visit [IMKit Dashboard](https://dashboard.imkit.io/) and create a new account.
+1. Visit [IMKit Dashboard](https://dashboard.imkit.io/) and create a new account.
 2. Create a new application.
 3. Each applicaiton has its own `Chat Server URL`, `API Key`, and `Client Key`.
 
+> 1. Use `Chat Server URL` and `Client Key` to initialize the connection of chat server and SDK intalled in your web service.
+> 2. Use `Chat Server URL` and `API Key` to call chat server api for more chat functions.
+
 ### Step 2. Download the Web SDK
 
-Clone SDK and put static folder to target path.
+Clone Web SDK and put its `static` folder to target path.
 
 ```bash
 git clone https://github.com/imkit/imkit-web-sdk
@@ -64,7 +67,7 @@ Add following code to `index.html`.
 
 ### Step 4. Initialize the Web SDK
 
-- Read [IMKit Auth](https://github.com/FUNTEKco/chat-server-document/wiki#external-auth-service) to know how to set up auth service.
+- Read [IMKit Auth](https://github.com/FUNTEKco/chat-server-document/wiki#external-auth-service) to set up auth service.
 
 - Read [CONFIG.md](https://github.com/imkit/imkit-web-sdk/blob/master/docs/en/CONFIG.md) for more configuration settings.
 
