@@ -1,5 +1,5 @@
 # Privacy Policy
-FUNTEK Software Inc., hereinafter referred to as **FUNTEK**, regards great importance to the personal privacy of members and complies with the relevant laws and regulations to protect privacy and personal data. The following is the privacy and personal data protection policy of [IMKit Chat Solution Service](https://imkit.io/) and iOS SDK, Android SDK, Web SDK, Chat Server (hereinafter **IMKit**) , which will explain which personal data will be collected and how the data will be used, and other important matters related to your privacy (hereinafter referred to as **This Policy**).
+[FUNTEK Software Inc.](http://funtek.co/), hereinafter referred to as **FUNTEK**, regards great importance to the personal privacy of members and complies with the relevant laws and regulations to protect privacy and personal data. The following is the privacy and personal data protection policy of [IMKit Chat Solution Service](https://imkit.io/) and iOS SDK, Android SDK, Web SDK, Chat Server (hereinafter **IMKit**) , which will explain which personal data will be collected and how the data will be used, and other important matters related to your privacy (hereinafter referred to as **This Policy**).
 
 ## 1. Acquisition of Personal Data
 
