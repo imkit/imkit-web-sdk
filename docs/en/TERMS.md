@@ -1,6 +1,6 @@
 # Terms Agreement
 
-This terms and conditions set out herein (hereinafter the **T&C**) are the mutual agreement entered into between the services, including [IMKit Chat Solution Service](https://imkit.io/) and iOS SDK, Android SDK, Web SDK, Chat Server (hereinafter the **IMKit**), provided [FUNTEK Software Inc.](http://funtek.co/) (hereinafter the **FUNTEK**) and IMKit users (hereinafter the “user”).
+This terms and conditions set out herein (hereinafter the **T&C**) are the mutual agreement entered into between the services, including [IMKit Chat Solution Service](https://imkit.io/) and iOS SDK, Android SDK, Web SDK, Chat Server (hereinafter the **IMKit**), provided [FUNTEK Software Inc.](http://funtek.co/) (hereinafter the **FUNTEK**) and IMKit users (hereinafter the **User**).
 
 ## 1. Definition
 Unless the context otherwise requires, words importing the singular shall include the plural and vice versa and words importing a specific gender shall include the other genders (male, female or neuter). In this T&C, except as otherwise set forth herein, capitalized terms have the following meanings:
