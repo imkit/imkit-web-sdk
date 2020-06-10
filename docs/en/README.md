@@ -65,7 +65,7 @@ Add following code to `index.html`.
 
 - Read [CONFIG.md](https://github.com/imkit/imkit-web-sdk/blob/master/docs/en/CONFIG.md) for more configuration settings.
 
-- Insert `Chat Server URL` and `Client Key` from [IMKit Dashboard](https://dashboard.imkit.io/) to [CONFIG.md](https://github.com/imkit/imkit-web-sdk/blob/master/docs/en/CONFIG.md).
+- Insert `Chat Server URL` and `Client Key` from [IMKit Dashboard](https://dashboard.imkit.io/) to `static/config.js`.
 
 
 ```jsx
@@ -154,6 +154,7 @@ localStorage.removeItem('IMKit-token');
 - [Chat Server API](https://github.com/FUNTEKco/chat-server-document/wiki): Use **API Key** and **Chat Server URL** provided in [IMKit Dashboard](https://dashboard.imkit.io/) to call APIs and fulfill actual scenario.
 - [IMKit JavaScript API](https://github.com/imkit/imkit-js-lib): Build own chat UI by **IMKit JavaScript API**.
 - [IMKit Dashboard](https://dashboard.imkit.io/): Chat server management.
+
 
 ## Terms & Privacy
 
