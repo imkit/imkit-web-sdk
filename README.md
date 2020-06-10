@@ -70,7 +70,7 @@ Add following code to `index.html`.
 
 - Read [CONFIG.md](https://github.com/imkit/imkit-web-sdk/blob/master/docs/en/CONFIG.md) for more configuration settings.
 
-- Insert `Chat Server URL` and `Client Key` from [IMKit Dashboard](https://dashboard.imkit.io/) to [CONFIG.md](https://github.com/imkit/imkit-web-sdk/blob/master/docs/en/CONFIG.md).
+- Insert `Chat Server URL` and `Client Key` from [IMKit Dashboard](https://dashboard.imkit.io/) to `static/config.js`.
 
 
 ```jsx
