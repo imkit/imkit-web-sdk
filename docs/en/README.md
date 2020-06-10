@@ -148,12 +148,12 @@ localStorage.removeItem('IMKit-token');
 
 ## Documentation
 
-- [Customized Stickers](https://github.com/imkit/imkit-web-sdk/blob/master/docs/zh-tw/STICKER.md): Add your own stickers to chat room.
+- [Customized Stickers](https://github.com/imkit/imkit-web-sdk/blob/master/docs/zh-tw/STICKER.md): Add own stickers to chat SDK.
 - [Badge Usage](https://github.com/imkit/imkit-web-sdk/blob/master/docs/en/APILIB.md#badge): Count the unread badges.
-- [User and Room Management](https://github.com/imkit/imkit-web-sdk/blob/master/docs/en/APILIB.md)
-- [Chat Server API](https://github.com/FUNTEKco/chat-server-document/wiki): You can use the **API Key** and **Chat Server URL** provided in [IMKit Dashboard](https://dashboard.imkit.io/) to call these APIs and to fulfill the scenario in your service.
-- [IMKit JavaScript API](https://github.com/imkit/imkit-js-lib): You can also build your own chat UI by **IMKit JavaScript API**.
-- [IMKit Dashboard](https://dashboard.imkit.io/)
+- [User and Room Management](https://github.com/imkit/imkit-web-sdk/blob/master/docs/en/APILIB.md): Manage users and rooms.
+- [Chat Server API](https://github.com/FUNTEKco/chat-server-document/wiki): Use the **API Key** and **Chat Server URL** provided in [IMKit Dashboard](https://dashboard.imkit.io/) to call these APIs and to fulfill the actual scenario.
+- [IMKit JavaScript API](https://github.com/imkit/imkit-js-lib): Build own chat UI by **IMKit JavaScript API**.
+- [IMKit Dashboard](https://dashboard.imkit.io/): Chat server management.
 
 ## Terms & Privacy
 
