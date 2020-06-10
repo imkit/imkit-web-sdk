@@ -156,9 +156,10 @@ localStorage.removeItem('IMKit-token');
 - [Customized Stickers](https://github.com/imkit/imkit-web-sdk/blob/master/docs/zh-tw/STICKER.md): Add own stickers to chat SDK.
 - [Badge Usage](https://github.com/imkit/imkit-web-sdk/blob/master/docs/en/APILIB.md#badge): Count the unread badges.
 - [User and Room Management](https://github.com/imkit/imkit-web-sdk/blob/master/docs/en/APILIB.md): Manage users and rooms.
-- [Chat Server API](https://github.com/FUNTEKco/chat-server-document/wiki): Use the **API Key** and **Chat Server URL** provided in [IMKit Dashboard](https://dashboard.imkit.io/) to call these APIs and to fulfill the actual scenario.
+- [Chat Server API](https://github.com/FUNTEKco/chat-server-document/wiki): Use **API Key** and **Chat Server URL** provided in [IMKit Dashboard](https://dashboard.imkit.io/) to call APIs and fulfill actual scenario.
 - [IMKit JavaScript API](https://github.com/imkit/imkit-js-lib): Build own chat UI by **IMKit JavaScript API**.
 - [IMKit Dashboard](https://dashboard.imkit.io/): Chat server management.
+
 
 ## Terms & Privacy
 
