@@ -22,10 +22,10 @@
 
 If you are ready to integrate chat to your service, follow the step-by-step instructions below.
 
-### Step 1. Create a IMKit Application from IMKit Dashboard
+### Step 1. Create a Chat Application from IMKit Dashboard
 
 1. Please visit [IMKit Dashboard](https://dashboard.imkit.io/) and create a new account.
-2. Create a new application in [IMKit Dashboard](https://dashboard.imkit.io/).
+2. Create a new application.
 3. Each applicaiton has its own `Chat Server URL`, `API Key`, and `Client Key`.
 
 ### Step 2. Download the Web SDK
@@ -58,8 +58,6 @@ Add following code to `index.html`.
 ```
 
 ### Step 4. Initialize the Web SDK
-
-
 
 - Read [IMKit Auth](https://github.com/FUNTEKco/chat-server-document/wiki#external-auth-service) to know how to set up auth service.
 
