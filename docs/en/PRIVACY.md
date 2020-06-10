@@ -8,14 +8,16 @@ FUNTEK Software Inc., hereinafter referred to as **FUNTEK**, regards great impor
 (2) When you are using the IMKit service, IMKit may collect the following information:
 
 - Your usage information, including but not limited to: usage history, query information, etc .;
-
 - Technical data, such as: URL, IP address, browser type, operating system information, language and visit time, location information, etc., and IMKit uses cookies to provide functions on each web page.
 
 (3) In order to provide you with correct and fast services, you will be asked to provide member account information or personal contact information when you use IMKit, such as: account change application, feedback.
 
 ## 2. Usage of Personal Data
 
-(1) The information collected by IMKit will be used for the following purposes: a. The basic personal information you provide (such as Email) will be used as the basis for determining the identity of the member; the contact information you provide will be used as a contact or other updates related to IMKit. b. Your usage data and technical data in IMKit will be used to improve IMKit or develop new services.
+(1) The information collected by IMKit will be used for the following purposes.
+
+- The basic personal information you provide (such as Email) will be used as the basis for determining the identity of the member; the contact information you provide will be used as a contact or other updates related to IMKit.
+- Your usage data and technical data in IMKit will be used to improve IMKit or develop new services.
 
 (2) IMKit may share comprehensive non-personal data with third parties. **Comprehensive non-personal data** refers to data that is recorded about users and collected in groups. After grouping, these data no longer reflect or point to a specific identifiable user.
 
