@@ -16,11 +16,11 @@ You can explore more languages as below.
 
 ## Concept
 
-- About IMKit Web SDK
-- What Is In-Web Chat
-- Components of Chat
-- Chat Scenarios
-- How IMKit Web SDK Works
+- [About IMKit Web SDK](https://github.com/imkit/imkit-web-sdk/blob/master/docs/en/CONCEPT.md#about-imkit-web-sdk)
+- [What Is In-Web Chat](https://github.com/imkit/imkit-web-sdk/blob/master/docs/en/CONCEPT.md#in-web-chat)
+- [Component of Chat](https://github.com/imkit/imkit-web-sdk/blob/master/docs/en/CONCEPT.md#component-of-chat)
+- [Chat Scenario](https://github.com/imkit/imkit-web-sdk/blob/master/docs/en/CONCEPT.md#chat-scenario-design)
+- [How IMKit Web SDK Works](https://github.com/imkit/imkit-web-sdk/blob/master/docs/en/CONCEPT.md#how-imkit-web-sdk-works)
 
 
 ## Get Started
