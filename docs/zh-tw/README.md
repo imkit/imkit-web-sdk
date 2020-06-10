@@ -1,6 +1,6 @@
 # IMKit Web SDK
 
-[FUNTEK](http://funtek.co/) 提供 Chat API 與 SDK，可整合至網站服務流程中，協助提供網站即時通訊功能，讓使用者可以在網站中進行對談。
+[FUNTEK](http://funtek.co/) 提供 Chat API 與 SDK，可整合至網站服務流程中，協助網站建立即時通訊功能，讓使用者可以在網站中進行對談。
 
 ## 使用範例
 
@@ -59,7 +59,7 @@ git clone https://github.com/imkit/imkit-web-sdk
 
 ### Step 4. 初始化 Web SDK
 
-- 請閱讀 [IMKit Auth](https://github.com/FUNTEKco/chat-server-document/wiki#external-auth-service) 了解關於 Auth 方式相關資訊。
+- 請閱讀 [IMKit Auth](https://github.com/FUNTEKco/chat-server-document/wiki#external-auth-service) 了解關於 Auth 方式的相關資訊。
 
 - 請閱讀 [CONFIG.md](https://github.com/imkit/imkit-web-sdk/blob/master/docs/en/CONFIG.md) 了解更多關於 Configuration 的參數設定。
 
