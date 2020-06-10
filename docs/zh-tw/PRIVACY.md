@@ -1,6 +1,6 @@
 # 隱私權政策
 
-樂堤科技有限公司(以下稱「**FUNTEK**」)重視旗下產品 [IMKit 網站](https://imkit.io/ )及相關之 iOS/Android App（以下稱「**IMKit**」) 的使用者隱私權，IMKit 承諾尊重使用 IMKit 的用戶（以下稱「**您**」）的隱私，並對您的個人資料加以保密。
+[樂堤科技有限公司](http://funtek.co/)(以下稱「**FUNTEK**」)重視旗下產品 [IMKit 網站](https://imkit.io/ )及相關之 iOS/Android App（以下稱「**IMKit**」) 的使用者隱私權，IMKit 承諾尊重使用 IMKit 的用戶（以下稱「**您**」）的隱私，並對您的個人資料加以保密。
 
 ## 一、個人資料的取得
 
