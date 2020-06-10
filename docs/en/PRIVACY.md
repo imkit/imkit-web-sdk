@@ -3,7 +3,7 @@
 
 ## 1. Acquisition of Personal Data
 
-(1) When you register as a IMKit member, you will be asked to enter a registered account number (email address), member name, and contact phone number.
+(1) When you register as a IMKit member, you will be asked to enter a registered account number (email address).
 
 (2) When you are using the IMKit service, IMKit may collect the following information:
 
