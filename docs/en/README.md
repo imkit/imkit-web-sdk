@@ -2,11 +2,6 @@
 
 [FUNTEK](http://funtek.co/) provides the chat API and SDK to be integrated with your Web service and enable real-time communications for all users.
 
-You can explore more languages as below.
-
-- [Chinese](https://github.com/imkit/imkit-web-sdk/blob/master/docs/zh-tw/README.md)
-- Japanese
-
 ## Sample
 
 - [Basic Sample](https://github.com/imkit/imkit-web-sdk/tree/master/demo), using [IMKit Web SDK](https://github.com/imkit/imkit-web-sdk/).
