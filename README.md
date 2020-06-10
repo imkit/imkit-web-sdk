@@ -151,10 +151,16 @@ Remove user from the room by removing its token.
 localStorage.removeItem('IMKit-token');
 ```
 
-## More
+## Documentation
 
-- [Add Customized Stickers](https://github.com/imkit/imkit-web-sdk/blob/master/docs/zh-tw/STICKER.md): Add your own stickers to chat room.
-- [APIs to Get Badges](https://github.com/imkit/imkit-web-sdk/blob/master/docs/en/APILIB.md#badge): Count the unread badges.
-- [APIs to Manage User & Room ](https://github.com/imkit/imkit-web-sdk/blob/master/docs/en/APILIB.md)
+- [Customized Stickers](https://github.com/imkit/imkit-web-sdk/blob/master/docs/zh-tw/STICKER.md): Add your own stickers to chat room.
+- [Badge Usage](https://github.com/imkit/imkit-web-sdk/blob/master/docs/en/APILIB.md#badge): Count the unread badges.
+- [User and Room Management](https://github.com/imkit/imkit-web-sdk/blob/master/docs/en/APILIB.md)
 - [Chat Server API](https://github.com/FUNTEKco/chat-server-document/wiki): You can use the **API Key** and **Chat Server URL** provided in [IMKit Dashboard](https://dashboard.imkit.io/) to call these APIs and to fulfill the scenario in your service.
 - [IMKit JavaScript API](https://github.com/imkit/imkit-js-lib): You can also build your own chat UI by **IMKit JavaScript API**.
+- [IMKit Dashboard](https://dashboard.imkit.io/)
+
+## Terms & Privacy
+
+- [Terms Agreement](https://github.com/imkit/imkit-web-sdk/blob/master/docs/en/TERMS.md)
+- [Privacy Policy](https://github.com/imkit/imkit-web-sdk/blob/master/docs/en/PRIVACY.md)
