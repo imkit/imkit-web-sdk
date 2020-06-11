@@ -1,3 +1,5 @@
 scss/node_modules/
 scss/dist/
 scss/package-lock.json
+docs/en/.DS_Store
+docs/zh-tw/.DS_Store
