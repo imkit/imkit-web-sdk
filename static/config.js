@@ -488,61 +488,62 @@ debug: false,
 		    createRoom: true
   		},
 
+  	// Room Detail Settings (refer to )
 
-  // 右側聊天資訊欄設定
-  info: {
-    // 機器人開關
-    bot: {
-      enable: true
-    },
-    // 自訂顏色，顏色格式：'#123456' 或 'rgba(12, 34, 56, 0.5)'
-    colors: {
-      // Header 顏色設定
-      header: {
-        // 背景色
-        background: null,
-        // 文字顏色
-        color: null
-      }
-    },
-    // 是否可編輯
-    edit: {
-      // 是否可編輯房間
-      room: {
-        // 是否可編輯房間名稱
-        name: true,
-        // 是否可編輯房間描述
-        description: true,
-        // 是否可編輯房間圖片
-        cover: true
-      },
-      // 是否可建立新房間
-      createRoom: true,
-      // 是否可離開房間
-      leave: true,
-      // 是否可將其他人從房間移除
-      remove: true,
-      // 是否可邀請成員
-      invite: true,
-      // 是否能搜尋對話
-      hasSearch: true
-    },
-    // 是否預設開啟成員列表
-    openMembersList: false,
-    // 要額外顯示的資訊
-    iframes: [
-      // {
-      //   // 標題
-      //   title: 'Test',
-      //   // iframe會帶入網址，並加上roomId及clientIds
-      //   url: '//imkit.io/',
-      //   // 是否預設開啟
-      //   open: true,
-      //   // 高度
-      //   height: 300
-      // }
-    ]
-  },
+		info: {
+    		// 機器人開關
+    		bot: {
+      			enable: true
+    			},
+    		// 自訂顏色，顏色格式：'#123456' 或 'rgba(12, 34, 56, 0.5)'
+    		colors: {
+      			// Header 顏色設定
+      			header: {
+        			// 背景色
+        			background: null,
+			        // 文字顏色
+			        color: null
+      				}
+    			},
+    
+    		// 是否可編輯
+    		edit: {
+      			// 是否可編輯房間
+      			room: {
+        			// 是否可編輯房間名稱
+        			name: true,
+        			// 是否可編輯房間描述
+			        description: true,
+			        // 是否可編輯房間圖片
+			        cover: true
+      				},
+		        // 是否可建立新房間
+		        createRoom: true,
+		        // 是否可離開房間
+		        leave: true,
+		        // 是否可將其他人從房間移除
+		        remove: true,
+		        // 是否可邀請成員
+		        invite: true,
+		        // 是否能搜尋對話
+		        hasSearch: true
+    			},
+		    // 是否預設開啟成員列表
+		    openMembersList: false,
+		    // 要額外顯示的資訊
+		    iframes: [
+		      // {
+		      //   // 標題
+		      //   title: 'Test',
+		      //   // iframe會帶入網址，並加上roomId及clientIds
+		      //   url: '//imkit.io/',
+		      //   // 是否預設開啟
+		      //   open: true,
+		      //   // 高度
+		      //   height: 300
+		      // }
+		    ]
+  		},
   // 事件們
   events: {
     // call api 失敗時的處理
@@ -570,7 +571,7 @@ debug: false,
     name: '',
     // room title
     title: ''
-  },
+    },
   // 搜尋時要 filter 的 roomTag
   roomTag: '',
   // 建立新房間可設定的資訊
@@ -584,12 +585,19 @@ debug: false,
     // 是否可設定房間圖片
     cover: true
   },
+  
   // 若為 true ，收到訊息時，無視聊天室靜音狀態，不發出任何提示音
   alwaysMute: false,
+  
+
   // 收到訊息時是否要更改 title
   changeTitle: true,
+  
+
   // 在線推播的icon
   notificationIcon: 'https://imkitdemo.com/static/logo.png',
+  
+
   // 推播設定 (Firebase Cloud Messaging Config)
   // 若不使用推播，則填 null
   FCMConfig: {
@@ -600,6 +608,8 @@ debug: false,
     storageBucket: 'fir-chat-server.appspot.com',
     messagingSenderId: '970263218499'
   },
+
+
   quickReply: {
     items: []
   }
