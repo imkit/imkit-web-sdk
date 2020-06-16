@@ -535,7 +535,7 @@ var config = {
       }
     ]
   },
-  // room list (refer: https://imgur.com/4E5DK8U)
+  // room list (refer to https://imgur.com/4E5DK8U)
   list: {
     // sorting of room list. 'null' or 'createdTime'
     sort: null,
@@ -551,26 +551,27 @@ var config = {
         color: null
       }
     },
-    // 是否顯示成員數
+    // display count of members in the room
     memberCount: true,
+    // logout button (refer to https://imgur.com/n1UpOrd)
     logout: {
-      // 是否顯示登出按鈕
+      // display logout button
       enable: true,
-      // 登出事件
+      // event as clicking logout button (default: remove user token)
       event: function() {
         localStorage.removeItem('IMKit-token');
-        window.top.location.href = 'demo';
       }
     },
-    // 是否有置頂功能
+    // room managemt tools
+    // display option of sticking room on the top of room list (refer to https://imgur.com/ISPFrRr)
     sticky: true,
-    // 是否有隱藏功能
+    // display option of hidding room from room list (refer to https://imgur.com/lTNXgk4)
     hidden: true,
-    // 是否可以建資料夾分類
+    // display option of creating folder (refer to https://imgur.com/LHL3aYm)
     folder: true,
-    // 是否可以設定標籤
+    // display option of adding room tag (refer to https://imgur.com/0oxd181)
     tags: true,
-    // 是否可以建立房間
+    // display button of creating a new chat room (refer to https://imgur.com/XiUqCyZ)
     createRoom: true
   },
   // 右側聊天資訊欄設定
