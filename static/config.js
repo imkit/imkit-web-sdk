@@ -545,8 +545,8 @@ var config = {
     lockText: '',
     // 點即鎖定的房間觸發事件
     lockOnClick: function() {},
-    // 是否載入所有房間
-    loadAllRoom: true,
+    
+    numberOfRoomsForFirstLoad: 60,
     // 自訂顏色，顏色格式：'#123456' 或 'rgba(12, 34, 56, 0.5)'
     colors: {
       // Header 顏色設定
@@ -635,10 +635,6 @@ var config = {
   },
   // 事件們
   events: {
-    // 是否執行開啟聊天的預設事件
-    onSetRoomActiveDefault: true,
-    // 開啟聊天室時觸發
-    onSetRoomActive: null,
     // call api 失敗時的處理
     onAjaxError: function(error) {
       if (error.RC === 401) {
@@ -682,46 +678,6 @@ var config = {
   alwaysMute: false,
   // 收到訊息時是否要更改 title
   changeTitle: true,
-  // 自訂的多國語
-  i18n: {
-    en: {
-      'Send Emoji': 'Send Emoji',
-      'Send Sticker': 'Send Sticker',
-      'Send Image': 'Send Image',
-      'Send Video': 'Send Video',
-      'Send File': 'Send File',
-      'Send Recorder': 'Send Recorder',
-      'Send Location': 'Send Location',
-      'Send Payment Request': 'Send Payment Request',
-      'Send Questionare': 'Send Questionare'
-    },
-    'zh-tw': {
-      'Send Emoji': '傳送表情符號',
-      'Send Sticker': '傳送貼圖',
-      'Send Image': '傳送圖片',
-      'Send Video': '傳送影片',
-      'Send File': '傳送檔案',
-      'Send Recorder': '傳送錄音',
-      'Send Location': '傳送位置訊息',
-      'Send Payment Request': '傳送請款訊息',
-      'Send Questionare': '傳送調查問卷'
-    }
-  },
-  // 客製功能
-  special: {
-    // 自訂房間描述
-    // renderRoomDescription: function(roomDescription) {
-    //   if (roomDescription && roomDescription.indexOf('::')) {
-    //     return roomDescription
-    //       .split('::')
-    //       .splice(1)
-    //       .join(' ');
-    //   } else {
-    //     return roomDescription;
-    //   }
-    // }
-    renderRoomDescription: null
-  },
   // 在線推播的icon
   notificationIcon: 'https://imkitdemo.com/static/logo.png',
   // 推播設定 (Firebase Cloud Messaging Config)
