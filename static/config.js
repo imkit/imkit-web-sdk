@@ -1,54 +1,71 @@
 var fileUploadSetting = {
   image: {
-    // 限制檔案格式
+    // image file format
     accept: ['image/png', 'image/jpeg', 'image/gif'],
-    // 限制檔案大小 (MB)
+    // max image file size (MB)
     limitSize: 10,
     // 縮圖的最大寬高 (px)
     thumbnailSize: 1500
   },
   video: {
-    // 限制檔案格式
+    // video file format
     accept: ['video/mp4', 'video/quicktime'],
-    // 限制檔案大小 (MB)
+    // max image file size (MB)
     limitSize: 100,
     // 縮圖的最大寬高 (px)
     thumbnailSize: 1500
   },
   other: {
-    // 限制檔案格式
+    // other file format
     accept: ['application/pdf', 'audio/mp3', 'audio/x-m4a'],
-    // 限制檔案大小 (MB)
+    // max file size (MB)
     limitSize: 10
   }
 };
+
+
 var config = {
+
   // 是否開啟 debug
   debug: false,
-  // chat server 位置
+  // chat server url (create own chat server from https://dashboard.imkit.io/)
   domain: 'https://chat.fangho.com',
   // auth server 位置，與 authClientId 配合取得 token，若填 token，此值可不填
   authBase: 'https://chat.fangho.com/auth',
   // 登入的 chat user id，與 authBase 配合取得 token，若填 token，此值可不填
   authClientId: '',
+
+
   // 取得 url 預覽內容的 api 網址
   urlPreviewApi: 'https://url.imkit.io/',
+  
   // chat server clientkey
   clientKey: 'fangho_imkit_0412_2018_001_clientkey',
   // chat user token，選填，若不填則需填 authBase 與 authClientId
   token: '',
-  // 訊息解密金鑰
+
+
+  // private key
   privateKey: '',
+  
+
   // S3 bucketName
   bucketName: 'chatserver-upload',
   // google api key，需要啟用 Maps JavaScript API, Maps Static API, Geocoding API
   googleApiKey: 'AIzaSyBECFunCq-6PruaLbHPLYW-XNDZC7YO6Lo',
+
+
   // app logo，顯示在聊天列表上方，appLogo 及 appName 都填時，logo在左邊
   appLogo: 'https://i.imgur.com/gchEcBi.png',
-  // app name，顯示在聊天列表上方，appLogo 及 appName 都填時，name在右邊
+   // app name，顯示在聊天列表上方，appLogo 及 appName 都填時，name在右邊
   appName: '',
-  // 語系 'zh-tw', 'en', 'ja', 'auto'
+
+
+  // langauge setting 'zh-tw', 'en', 'ja', 'auto' ('auto' means depending on browser)
   lang: 'auto',
+  
+
+
   // 取得 avatar 需要的 headers
   avatarHeaders: [
     // {
@@ -76,13 +93,17 @@ var config = {
     //   value: 'token'
     // }
   ],
+
+
+
+
   layout: {
-    // 是否顯示左側列表
+    // display room list in the left side (https://i.imgur.com/4E5DK8U.png)
     list: true,
-    // 是否顯示右側資訊欄
+    // display room detail in the right side (https://i.imgur.com/k12UstU.png)
     info: true
   },
-  // 中間聊天區塊設定
+  // chat block setting (https://i.imgur.com/TcrBvtB.png)
   chat: {
     // Typing 位置，0: 在輸入框上面, 1: 在輸入框裡面
     modeTyping: 0,
@@ -92,64 +113,65 @@ var config = {
     dragdropUpload: {
       enable: true,
       extra: {
-        // 限制檔案格式
+        // file format
         accept: fileUploadSetting.other.accept.concat(
           fileUploadSetting.image.accept,
           fileUploadSetting.video.accept
         ),
         image: {
-          // 限制檔案大小 (MB)
+          // max image file size (MB)
           limitSize: fileUploadSetting.image.limitSize,
           // 縮圖的最大寬高 (px)
           thumbnailSize: fileUploadSetting.image.thumbnailSize
         },
         video: {
-          // 限制檔案大小 (MB)
+          // max video file size (MB)
           limitSize: fileUploadSetting.video.limitSize,
           // 縮圖的最大寬高 (px)
           thumbnailSize: fileUploadSetting.video.thumbnailSize
         },
         other: {
-          // 限制檔案大小 (MB)
+          // max other file size (MB)
           limitSize: fileUploadSetting.other.limitSize
         }
       }
     },
-    // 下方聊天工具按鈕設定
+    // chat tool setting (https://i.imgur.com/Wrwe4yl.png)
     actions: [
       {
-        // 貼圖
+        // send sticker
         type: 'sticker',
-        // 是否啟用
+        // enable "send sticker" on different devices
         pcEnable: true,
         padEnable: false,
         mobileEnable: false,
-        // 描述文字
+        // 描述文字 -> 應該放到 i18n 中
         text: 'Send Sticker'
       },
       {
-        // 表情符號
+        // send emoji
         type: 'emoji',
-        // 是否啟用
+        // enable "send emoji" on different devices
         pcEnable: true,
         padEnable: false,
         mobileEnable: false,
-        // 描述文字
+        // 描述文字 -> 應該放到 i18n 中
         text: 'Send Emoji'
       },
       {
-        // 圖片
+        // send image
         type: 'image',
+        // enable "send image" on different devices
         pcEnable: true,
         padEnable: false,
         mobileEnable: false,
-        // 描述文字
+        // 描述文字 -> 應該放到 i18n 中
         text: 'Send Image',
         extra: {
-          // 限制檔案格式
+          // image file format
           accept: fileUploadSetting.image.accept,
           image: {
-            // 限制檔案大小 (MB)
+            // max image file size (MB)
             limitSize: fileUploadSetting.image.limitSize,
             // 縮圖的最大寬高 (px)
             thumbnailSize: fileUploadSetting.image.thumbnailSize
@@ -157,19 +179,19 @@ var config = {
         }
       },
       {
-        // 影片
+        // send video
         type: 'video',
-        // 是否啟用
+        // enable "send video" on different devices
         pcEnable: true,
         padEnable: false,
         mobileEnable: false,
-        // 描述文字
+        // 描述文字 -> 應該放到 i18n 中
         text: 'Send Video',
         extra: {
-          // 限制檔案格式
+          // video file format
           accept: fileUploadSetting.video.accept,
           video: {
-            // 限制檔案大小 (MB)
+            // max video file size (MB)
             limitSize: fileUploadSetting.video.limitSize,
             // 縮圖的最大寬高 (px)
             thumbnailSize: fileUploadSetting.video.thumbnailSize
@@ -177,60 +199,60 @@ var config = {
         }
       },
       {
-        // 檔案
+        // send file
         type: 'file',
-        // 是否啟用
+        // enable "send file" on different devices
         pcEnable: true,
         padEnable: true,
         mobileEnable: true,
-        // 描述文字
+        // 描述文字 -> 應該放到 i18n 中
         text: 'Send File',
         extra: {
-          // 限制檔案格式
+          // file format
           accept: fileUploadSetting.other.accept.concat(
             fileUploadSetting.image.accept,
             fileUploadSetting.video.accept
           ),
           image: {
-            // 限制檔案大小 (MB)
+            // max image file size (MB)
             limitSize: fileUploadSetting.image.limitSize,
             // 縮圖的最大寬高 (px)
             thumbnailSize: fileUploadSetting.image.thumbnailSize
           },
           video: {
-            // 限制檔案大小 (MB)
+            // max video file size (MB)
             limitSize: fileUploadSetting.video.limitSize,
             // 縮圖的最大寬高 (px)
             thumbnailSize: fileUploadSetting.video.thumbnailSize
           },
           other: {
-            // 限制檔案大小 (MB)
+            // max other file size (MB)
             limitSize: fileUploadSetting.other.limitSize
           }
         }
       },
       {
-        // 錄音
+        // send recording
         type: 'recorder',
-        // 是否啟用
+        // enable "send recording" on different devices
         pcEnable: true,
         padEnable: false,
         mobileEnable: false,
-        // 描述文字
+        // 描述文字 -> 應該放到 i18n 中
         text: 'Send Recorder',
         extra: {
-          // 限制錄音秒數
+          // max time of recording (seconds)
           limitSeconds: 60
         }
       },
       {
-        // 位置
+        // send location
         type: 'location',
-        // 是否啟用
+        // enable "send location" on different devices
         pcEnable: true,
         padEnable: false,
         mobileEnable: false,
-        // 描述文字
+        // 描述文字 -> 應該放到 i18n 中
         text: 'Send Location'
       },
       {
