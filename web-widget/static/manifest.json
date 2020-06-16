@@ -1,0 +1,16 @@
+{
+  "short_name": "FANGHO",
+  "name": "FANGHO",
+  "icons": [
+    {
+      "src": "/static/images/logo.png",
+      "type": "image/png",
+      "sizes": "61x63"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#ecf0f2",
+  "display": "fullscreen",
+  "theme_color": "#34aeab",
+  "gcm_sender_id": "103953800507"
+}
