@@ -535,25 +535,19 @@ var config = {
       }
     ]
   },
-  // 左側聊天列表設定
+  // room list (refer: https://imgur.com/4E5DK8U)
   list: {
-    // 排序方式，有效值 null, 'createdTime'
+    // sorting of room list. 'null' or 'createdTime'
     sort: null,
-    // 可開啟的房間數量，設 0 不限制
-    maxCount: 0,
-    // 鎖定的房間顯示文字
-    lockText: '',
-    // 點即鎖定的房間觸發事件
-    lockOnClick: function() {},
-    
+	// number of loaded rooms as openning room list  
     numberOfRoomsForFirstLoad: 60,
-    // 自訂顏色，顏色格式：'#123456' 或 'rgba(12, 34, 56, 0.5)'
+    // set room list color. color fomat: '#123456' or 'rgba(12, 34, 56, 0.5)'
     colors: {
-      // Header 顏色設定
+      // header color
       header: {
-        // 背景色
+        // background color
         background: null,
-        // 文字顏色
+        // text color
         color: null
       }
     },
