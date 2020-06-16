@@ -23,86 +23,50 @@ var fileUploadSetting = {
   }
 };
 
-
 var config = {
 
-  // 是否開啟 debug
+  // debug mode
   debug: false,
-  // chat server url (create own chat server from https://dashboard.imkit.io/)
-  domain: 'https://chat.fangho.com',
-  // auth server 位置，與 authClientId 配合取得 token，若填 token，此值可不填
-  authBase: 'https://chat.fangho.com/auth',
-  // 登入的 chat user id，與 authBase 配合取得 token，若填 token，此值可不填
+
+  // Chat Servrer Settings
+  // Please create your chat server from 'https://dashboard.imkit.io/' and get your own configurations
+  // Please refer to 'https://github.com/FUNTEKco/chat-server-document/wiki#client-auth-flow' for auth flow  
+  // chat server url
+  domain: 'https://sample.imkit.io',
+  // chat server clientkey 
+  clientKey: 'ClientkeySample1234',
+  // client id
   authClientId: '',
-
-
-  // 取得 url 預覽內容的 api 網址
-  urlPreviewApi: 'https://url.imkit.io/',
-  
-  // chat server clientkey
-  clientKey: 'fangho_imkit_0412_2018_001_clientkey',
-  // chat user token，選填，若不填則需填 authBase 與 authClientId
+  // chat user token
   token: '',
 
-
-  // private key
-  privateKey: '',
-  
-
-  // S3 bucketName
-  bucketName: 'chatserver-upload',
-  // google api key，需要啟用 Maps JavaScript API, Maps Static API, Geocoding API
-  googleApiKey: 'AIzaSyBECFunCq-6PruaLbHPLYW-XNDZC7YO6Lo',
-
-
-  // app logo，顯示在聊天列表上方，appLogo 及 appName 都填時，logo在左邊
+  // Application Settings
+  // You can display your app logo and app name on the top of room list (refer to https://i.imgur.com/nlnxe6p.png)
+  // App logo will be on the left, and app name will be on the right
+  // app logo url
   appLogo: 'https://i.imgur.com/gchEcBi.png',
-   // app name，顯示在聊天列表上方，appLogo 及 appName 都填時，name在右邊
+  // app name
   appName: '',
-
-
   // langauge setting 'zh-tw', 'en', 'ja', 'auto' ('auto' means depending on browser)
   lang: 'auto',
-  
 
-
-  // 取得 avatar 需要的 headers
-  avatarHeaders: [
-    // {
-    //   name: 'token',
-    //   // 'variable' or 'stable'
-    //   type: 'variable',
-    //   // 變數名稱或固定的值
-    //   value: 'token'
-    // },
-    // {
-    //   name: 'stableValue',
-    //   // 'variable' or 'stable'
-    //   type: 'stable',
-    //   // 變數名稱或固定的值
-    //   value: 'testStable'
-    // }
-  ],
-  // 下載檔案時要帶的 headers
-  downloadFileHeaders: [
-    // {
-    //   name: 'Authorization',
-    //   // 'variable' or 'stable'
-    //   type: 'variable',
-    //   // 變數名稱或固定的值
-    //   value: 'token'
-    // }
-  ],
-
-
-
-
+  // Chat Layout SettingS
   layout: {
     // display room list in the left side (https://i.imgur.com/4E5DK8U.png)
     list: true,
     // display room detail in the right side (https://i.imgur.com/k12UstU.png)
     info: true
   },
+
+  // 3rd Party Service Settings
+  // Please don't change config below unless you have your own service
+  // url parser api (refer to https://i.imgur.com/VRNyC1k.png)
+  urlPreviewApi: 'https://url.imkit.io/',
+  // google api key 
+  googleApiKey: 'AIzaSyBECFunCq-6PruaLbHPLYW-XNDZC7YO6Lo',
+  // S3 bucketName
+  bucketName: 'chatserver-upload',
+
   // chat block setting (https://i.imgur.com/TcrBvtB.png)
   chat: {
     // Typing 位置，0: 在輸入框上面, 1: 在輸入框裡面
@@ -535,7 +499,7 @@ var config = {
       }
     ]
   },
-  // room list (refer to https://imgur.com/4E5DK8U)
+  // room list (refer to https://i.imgur.com/4E5DK8U.png)
   list: {
     // sorting of room list. 'null' or 'createdTime'
     sort: null,
@@ -553,7 +517,7 @@ var config = {
     },
     // display count of members in the room
     memberCount: true,
-    // logout button (refer to https://imgur.com/n1UpOrd)
+    // logout button (refer to https://i.imgur.com/n1UpOrd.png)
     logout: {
       // display logout button
       enable: true,
@@ -563,15 +527,15 @@ var config = {
       }
     },
     // room managemt tools
-    // display option of sticking room on the top of room list (refer to https://imgur.com/ISPFrRr)
+    // display option of sticking room on the top of room list (refer to https://i.imgur.com/ISPFrRr.png)
     sticky: true,
-    // display option of hidding room from room list (refer to https://imgur.com/lTNXgk4)
+    // display option of hidding room from room list (refer to https://i.imgur.com/lTNXgk4.png)
     hidden: true,
-    // display option of creating folder (refer to https://imgur.com/LHL3aYm)
+    // display option of creating folder (refer to https://i.imgur.com/LHL3aYm.png)
     folder: true,
-    // display option of adding room tag (refer to https://imgur.com/0oxd181)
+    // display option of adding room tag (refer to https://i.imgur.com/0oxd181.png)
     tags: true,
-    // display button of creating a new chat room (refer to https://imgur.com/XiUqCyZ)
+    // display button of creating a new chat room (refer to https://i.imgur.com/XiUqCyZ.png)
     createRoom: true
   },
   // 右側聊天資訊欄設定
@@ -688,4 +652,38 @@ var config = {
   quickReply: {
     items: []
   }
+
+  // private key
+  privateKey: '',
+
+   // 取得 avatar 需要的 headers
+  avatarHeaders: [
+    // {
+    //   name: 'token',
+    //   // 'variable' or 'stable'
+    //   type: 'variable',
+    //   // 變數名稱或固定的值
+    //   value: 'token'
+    // },
+    // {
+    //   name: 'stableValue',
+    //   // 'variable' or 'stable'
+    //   type: 'stable',
+    //   // 變數名稱或固定的值
+    //   value: 'testStable'
+    // }
+  ],
+  // 下載檔案時要帶的 headers
+  downloadFileHeaders: [
+    // {
+    //   name: 'Authorization',
+    //   // 'variable' or 'stable'
+    //   type: 'variable',
+    //   // 變數名稱或固定的值
+    //   value: 'token'
+    // }
+  ],
+
+
+
 };
