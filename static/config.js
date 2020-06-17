@@ -71,6 +71,63 @@ debug: false,
 			// S3 bucketName
 			bucketName: 'chatserver-upload',
 
+},
+
+    // Default Room Settings
+    	// open default chat room as entering chat service
+    	// 'true': open chat room with room id of defaultRoom
+    	// 'false': open the first chat room in room list
+
+        // enter default room
+  		autoEnterRoom: false,
+		// enter default room (on mobile)
+		autoEnterRoomMobile: false,
+		// default room id as accessing to chat 
+		defaultRoom: null,
+
+	// Room List Settings (refer to https://i.imgur.com/4E5DK8U.png)
+	  	list: {
+		    // sorting of room list. 
+		    // option: 'null' or 'createdTime'
+		    sort: null,
+			// number of loaded rooms as openning room list  
+		    numberOfRoomsForFirstLoad: 60,
+		    // set room list color
+		    // color fomat: '#123456' or 'rgba(12, 34, 56, 0.5)'
+		    colors: {
+		    	// header color
+		    	header: {
+		        	// background color
+			        background: null,
+			        // text color
+			        color: null
+		      		}
+		    	},
+			    // display count of members in the room
+			    memberCount: true,
+			    // logout button (refer to https://i.imgur.com/n1UpOrd.png)
+			    logout: {
+			    	// display logout button
+			    	enable: true,
+			    	// event as clicking logout button (default: remove user token)
+		      		event: function() {
+		        		localStorage.removeItem('IMKit-token');
+		    			}
+		    		},
+		    
+		    // Room Managemt Tools
+			    // display option of sticking room on the top of room list (refer to https://i.imgur.com/ISPFrRr.png)
+			    sticky: true,
+			    // display option of hidding room from room list (refer to https://i.imgur.com/lTNXgk4.png)
+			    hidden: true,
+			    // display option of creating folder (refer to https://i.imgur.com/LHL3aYm.png)
+			    folder: true,
+			    // display option of adding room tag (refer to https://i.imgur.com/0oxd181.png)
+			    tags: true,
+			    // display button of creating a new chat room (refer to https://i.imgur.com/XiUqCyZ.png)
+			    createRoom: true
+	  		},
+
 	// Chat Block Setting (refer to https://i.imgur.com/TcrBvtB.png)
 		chat: {
     		// Typing 位置，0: 在輸入框上面, 1: 在輸入框裡面
@@ -445,135 +502,101 @@ debug: false,
     ]
 },
 
-  	// Room List Settings (refer to https://i.imgur.com/4E5DK8U.png)
-  	list: {
-	    // sorting of room list. 
-	    // option: 'null' or 'createdTime'
-	    sort: null,
-		// number of loaded rooms as openning room list  
-	    numberOfRoomsForFirstLoad: 60,
-	    // set room list color
-	    // color fomat: '#123456' or 'rgba(12, 34, 56, 0.5)'
-	    colors: {
-	    	// header color
-	    	header: {
-	        	// background color
-		        background: null,
-		        // text color
-		        color: null
-	      		}
-	    	},
-		    // display count of members in the room
-		    memberCount: true,
-		    // logout button (refer to https://i.imgur.com/n1UpOrd.png)
-		    logout: {
-		    	// display logout button
-		    	enable: true,
-		    	// event as clicking logout button (default: remove user token)
-	      		event: function() {
-	        		localStorage.removeItem('IMKit-token');
-	    			}
-	    		},
-	    
-	    // Room Managemt Tools
-		    // display option of sticking room on the top of room list (refer to https://i.imgur.com/ISPFrRr.png)
-		    sticky: true,
-		    // display option of hidding room from room list (refer to https://i.imgur.com/lTNXgk4.png)
-		    hidden: true,
-		    // display option of creating folder (refer to https://i.imgur.com/LHL3aYm.png)
-		    folder: true,
-		    // display option of adding room tag (refer to https://i.imgur.com/0oxd181.png)
-		    tags: true,
-		    // display button of creating a new chat room (refer to https://i.imgur.com/XiUqCyZ.png)
-		    createRoom: true
-  		},
+  	
 
-  	// Room Detail Settings (refer to )
+  	// Room Detail Settings (refer to https://i.imgur.com/L7zQbgj.png)
 
 		info: {
-    		// 機器人開關
+    		// button of chatbot (refer to https://i.imgur.com/qLxhKCB.png)
     		bot: {
+      			// enbable chatbot
       			enable: true
     			},
-    		// 自訂顏色，顏色格式：'#123456' 或 'rgba(12, 34, 56, 0.5)'
+    		// color setting of room detail
+    		// color format: '#123456' or 'rgba(12, 34, 56, 0.5)'
     		colors: {
-      			// Header 顏色設定
+      			// header color (refer to https://i.imgur.com/hnbfuJV.png)
       			header: {
-        			// 背景色
+        			// background color
         			background: null,
-			        // 文字顏色
+			        // text color
 			        color: null
       				}
     			},
     
-    		// 是否可編輯
+    		// room detail editing
     		edit: {
-      			// 是否可編輯房間
+      			// setting of 'room editing' button (refer to https://i.imgur.com/Z24rhVr.png)
       			room: {
-        			// 是否可編輯房間名稱
+        			// enable 'chage group name'
         			name: true,
-        			// 是否可編輯房間描述
+        			// enable 'change group description'
 			        description: true,
-			        // 是否可編輯房間圖片
+			        // enable 'chagne group cover'
 			        cover: true
       				},
-		        // 是否可建立新房間
+		        // display 'create a new room' button (refer to https://i.imgur.com/7g6vGyh.png)
 		        createRoom: true,
-		        // 是否可離開房間
+		        // 是否可離開房間 => we don't have UI right now. consider to remove?
 		        leave: true,
-		        // 是否可將其他人從房間移除
+		        // display 'remove user' button (refer to https://i.imgur.com/ocOJdl4.png)
 		        remove: true,
-		        // 是否可邀請成員
+		        // enable 'group invitee' (refer to https://i.imgur.com/o2qDsuZ.png)
 		        invite: true,
-		        // 是否能搜尋對話
+		        // enable 'search in converstation' (refer to https://i.imgur.com/rv4fLyH.png)
 		        hasSearch: true
     			},
-		    // 是否預設開啟成員列表
+		    // open group member list by default (refer to https://i.imgur.com/fCWkgIP.png)
 		    openMembersList: false,
-		    // 要額外顯示的資訊
-		    iframes: [
-		      // {
-		      //   // 標題
-		      //   title: 'Test',
-		      //   // iframe會帶入網址，並加上roomId及clientIds
-		      //   url: '//imkit.io/',
-		      //   // 是否預設開啟
-		      //   open: true,
-		      //   // 高度
-		      //   height: 300
-		      // }
-		    ]
+		    
+		    // iframe settings
+
+		    	// iframe in the bottom right of chat (refer to https://i.imgur.com/0xZPvtH.png)
+		    	// insert your customized button or display any inforation related to your service scenario
+			    iframes: [
+			    	{
+			        	// title of iframe
+			      		title: 'Test',
+			      		// insert url to iframe with room id and client ids
+			      		url: '//imkit.io/',
+			      		// open iframe by default
+			      		open: true,
+			      		// height of iframe
+			      		height: 300
+			      	}
+			    ]
   		},
-  // 事件們
-  events: {
-    // call api 失敗時的處理
-    onAjaxError: function(error) {
-      if (error.RC === 401) {
-        window.top.location.href = 'demo';
-      } else {
-        console.error(error.RM);
-      }
-    }
-  },
-  // 若無設定 defaultRoom，是否自動進入列表第一個房間
-  autoEnterRoom: true,
-  // 若無設定 defaultRoom，是否自動進入列表第一個房間，手機瀏覽時
-  autoEnterRoomMobile: false,
-  // 開啟聊天室後進入的房間 (room id)
-  defaultRoom: null,
-  // room admin 客製化設定
-  roomOwner: {
-    // room admin ID
-    id: '',
-    // room admin
-    avatarUrl: '',
-    // room name
-    name: '',
-    // room title
-    title: ''
-    },
+
+  	// Notification Settings (Receiving Message)
+
+		// mute all notifcation as receiving new message
+		alwaysMute: false,
+		// change document title as receiving new message (refer to https://i.imgur.com/maM2K70.png)
+		changeTitle: true,
+		// icon on push notification of browser (refer to https://i.imgur.com/bpv5OCN.png)
+		notificationIcon: 'https://imkitdemo.com/static/logo.png',
+ 
+
+ 	// Firebase Cloud Messaging Settings
+ 		
+ 		// please visit https://firebase.google.com/docs/cloud-messaging?authuser=0 
+ 		// you can modify the configs below as yours
+ 		// if you don't use push notification, you can set it as 'null'
+	  	FCMConfig: {
+		    apiKey: 'AIzaSyDH6fgpRFaH7vIqAcGQi48wgvNf8BJ9q1I',
+		    authDomain: 'fir-chat-server.firebaseapp.com',
+		    databaseURL: 'https://fir-chat-server.firebaseio.com',
+		    projectId: 'fir-chat-server',
+		    storageBucket: 'fir-chat-server.appspot.com',
+		    messagingSenderId: '970263218499'
+  		
+  quickReply: {
+    items: []
+  }
+
   // 搜尋時要 filter 的 roomTag
   roomTag: '',
+  
   // 建立新房間可設定的資訊
   createRoom: {
     // 是否可設定房間 ID
@@ -585,34 +608,6 @@ debug: false,
     // 是否可設定房間圖片
     cover: true
   },
-  
-  // 若為 true ，收到訊息時，無視聊天室靜音狀態，不發出任何提示音
-  alwaysMute: false,
-  
-
-  // 收到訊息時是否要更改 title
-  changeTitle: true,
-  
-
-  // 在線推播的icon
-  notificationIcon: 'https://imkitdemo.com/static/logo.png',
-  
-
-  // 推播設定 (Firebase Cloud Messaging Config)
-  // 若不使用推播，則填 null
-  FCMConfig: {
-    apiKey: 'AIzaSyDH6fgpRFaH7vIqAcGQi48wgvNf8BJ9q1I',
-    authDomain: 'fir-chat-server.firebaseapp.com',
-    databaseURL: 'https://fir-chat-server.firebaseio.com',
-    projectId: 'fir-chat-server',
-    storageBucket: 'fir-chat-server.appspot.com',
-    messagingSenderId: '970263218499'
-  },
-
-
-  quickReply: {
-    items: []
-  }
 
 
 /*
@@ -694,3 +689,27 @@ debug: false,
           botState: 'LINGTELLI::'
         }
       },
+
+ // 事件們
+  events: {
+    // call api 失敗時的處理
+    onAjaxError: function(error) {
+      if (error.RC === 401) {
+        window.top.location.href = 'demo';
+      } else {
+        console.error(error.RM);
+      }
+    }
+  },
+
+  // room admin 客製化設定
+  roomOwner: {
+    // room admin ID
+    id: '',
+    // room admin
+    avatarUrl: '',
+    // room name
+    name: '',
+    // room title
+    title: ''
+    },
