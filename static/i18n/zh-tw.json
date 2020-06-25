@@ -122,5 +122,14 @@
   "Load more...": "載入更多……",
   "Close": "關閉",
   "No results found for \"{keyword}\"": "查無符合「{keyword}」的結果",
-  "You were mentioned": "您已被標註。"
+  "You were mentioned": "您已被標註。",
+  "Send Emoji": "傳送表情符號",
+  "Send Sticker": "傳送貼圖",
+  "Send Image": "傳送圖片",
+  "Send Video": "傳送影片",
+  "Send File": "傳送檔案",
+  "Send Recorder": "傳送錄音",
+  "Send Location": "傳送位置訊息",
+  "Send Payment Request": "傳送請款訊息",
+  "Send Questionare": "傳送調查問卷"
 }

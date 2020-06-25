@@ -122,5 +122,14 @@
   "Load more...": "Load more...",
   "Close": "Close",
   "No results found for \"{keyword}\"": "No results found for \"{keyword}\"",
-  "You were mentioned": "You were mentioned."
+  "You were mentioned": "You were mentioned.",
+  "Send Emoji": "Send Emoji",
+  "Send Sticker": "Send Sticker",
+  "Send Image": "Send Image",
+  "Send Video": "Send Video",
+  "Send File": "Send File",
+  "Send Recorder": "Send Recorder",
+  "Send Location": "Send Location",
+  "Send Payment Request": "Send Payment Request",
+  "Send Questionare": "Send Questionare"
 }
