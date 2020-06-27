@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>imkit demo</title>
+		<!-- CSS -->
+		<link href="static/css/reset.css" rel="stylesheet" />
+		<link href="static/css/index.css" rel="stylesheet" />
+		<link href="static/css/app.css" rel="stylesheet" />
+
+		<!-- JS -->
+		<script type="text/javascript" src="static/js/manifest.js"></script>
+		<script type="text/javascript" src="static/js/vendor.js"></script>
+		<script type="text/javascript" src="static/js/app.js"></script>
+	</head>
+	<body>
+		<div id="IMKitApp">
+			<div class="loader appLoader" ></div>
+		</div>
+	</body>
+	<script>
+		const config = {
+			domain: "https://howard7.imkit.io",
+			clientKey: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhcGlLZXkiOiIySllwWWhEYVFsSVFsRFN2VkxDTExvMk1QekZmVm05allweHcydnVCcm1rPSIsImNyZWF0ZUF0IjoxNTkxOTcyNTc2NDE0LCJjbGllbnRJZCI6IjJiM2JkNWNjLTRhODYtNGE0MC1hMTU0LTE2NDA0MDE0ZGE4OCJ9.bdIWOcPfDrNuLRszgtrQDaQiow_X-WolzjDhtiLEED8",
+			token: "fVy7YhqBZqEzNO9LhMmcyA==",
+			privateKey: ""
+		}
+		window.IMKitUI.init(config);
+	</script>
+</html>
