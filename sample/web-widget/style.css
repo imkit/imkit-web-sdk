@@ -14,11 +14,13 @@ body {
   background-repeat: no-repeat;
   background-position: center;
   opacity: 0.7;
-  cursor: pointer; }
+  cursor: pointer; 
+}
   .listSwitch.up {
     z-index: 1; }
   .listSwitch:hover {
     opacity: 1;
+    cursor: pointer;
     box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06), 0 2px 32px rgba(0, 0, 0, 0.16); }
 
 .widgetList {
@@ -77,8 +79,8 @@ body {
       display: block;
       border: none; }
   .widgetList #roomlist.hide {
-    bottom: -490px;
-    margin-right: -260px; }
+    display: none;
+  }
   .widgetList #roomlist .widgetHeader {
     cursor: default; }
 

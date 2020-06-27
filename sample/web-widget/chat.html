@@ -25,9 +25,8 @@
 </body>
 
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="static/config.js"></script>
 <script>
-  $.extend(true, config, {
+  const config = {
     // chat user token，與 authClientId 擇一使用
     domain: "https://howard7.imkit.io",
     clientKey: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhcGlLZXkiOiIySllwWWhEYVFsSVFsRFN2VkxDTExvMk1QekZmVm05allweHcydnVCcm1rPSIsImNyZWF0ZUF0IjoxNTkxOTcyNTc2NDE0LCJjbGllbnRJZCI6IjJiM2JkNWNjLTRhODYtNGE0MC1hMTU0LTE2NDA0MDE0ZGE4OCJ9.bdIWOcPfDrNuLRszgtrQDaQiow_X-WolzjDhtiLEED8",
@@ -36,26 +35,12 @@
       // 是否顯示左側列表
       list: false
     },
-    // 事件們
-    events: {
-      // 是否執行開啟聊天的預設事件
-      onSetRoomActiveDefault: false,
-      // 開啟聊天室時觸發
-      onSetRoomActive: function (room) {
-        window.parent.openRoom(room);
-      },
-      // call api 失敗時的處理
-      onAjaxError: function (error) {
-        if (error.RC === 401) {
-          window.parent.logout();
-        }
-      }
-    },
     // 開啟聊天室後進入的房間 (room id)
     defaultRoom: getParameterByName("room"),
     alwaysMute: true,
-    changeTitle: false
-  });
+    changeTitle: false,
+    info: { bot: { enable: false } }
+  };
 
   // INIT
   window.IMKitUI.init(config);
