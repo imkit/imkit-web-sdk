@@ -75,8 +75,12 @@ Add following code to `index.html`.
 
 
 ```jsx
-<script src="static/config.js"></script>
 <script>
+	const config = {
+		domain: "https://howard7.imkit.io",
+		clientKey: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhcGlLZXkiOiIySllwWWhEYVFsSVFsRFN2VkxDTExvMk1QekZmVm05allweHcydnVCcm1rPSIsImNyZWF0ZUF0IjoxNTkxOTcyNTc2NDE0LCJjbGllbnRJZCI6IjJiM2JkNWNjLTRhODYtNGE0MC1hMTU0LTE2NDA0MDE0ZGE4OCJ9.bdIWOcPfDrNuLRszgtrQDaQiow_X-WolzjDhtiLEED8",
+		token: "fVy7YhqBZqEzNO9LhMmcyA=="
+	}
 	window.IMKitUI.init(config);
 </script>
 ```
