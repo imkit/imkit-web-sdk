@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <base href="/" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>IMKit Demo</title>
+  <link rel="apple-touch-icon" size="192x192" href="static/favicon-192.png" />
+  <link rel="Shortcut Icon" size="32x32" href="static/favicon-32.png" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css" />
+  <link rel="stylesheet" href="static/css/index.css" />
+  <style>
+    body,
+    input {
+      font-family: Helvetica Neue, Microsoft JhengHei, Helvetica, Arial,
+        sans-serif;
+    }
+
+    header {
+      padding: 10px;
+      background-color: #39701f;
+      color: #fff;
+      font-size: 20px;
+    }
+
+    header .logo {
+      max-width: 150px;
+      max-height: 20px;
+    }
+
+    form {
+      padding: 10px;
+      box-sizing: border-box;
+      width: 300px;
+      margin: 0 auto;
+    }
+
+    input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 10px;
+      display: block;
+      margin: 10px 0;
+      font-size: 14px;
+      letter-spacing: 1px;
+      border: #333 solid thin;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+    }
+
+    input[type="submit"],
+    .button {
+      background-color: #eee;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      padding: 10px;
+      font-size: 14px;
+      line-height: 1;
+      display: inline-block;
+      text-decoration: none;
+    }
+
+    input[type="submit"]:hover,
+    .button:hover {
+      background-color: #ddd;
+    }
+
+    .loading {
+      display: none;
+      text-align: center;
+    }
+
+    form.isLoading input[type="submit"] {
+      display: none;
+    }
+
+    form.isLoading .loading {
+      display: block;
+    }
+
+    .hide {
+      display: none;
+    }
+
+    .key {
+      border: #aaa solid thin;
+      margin: 10px 0;
+      min-height: 16px;
+      word-break: break-all;
+    }
+
+    .hideInputLabel {
+      overflow: hidden;
+    }
+
+    .hideInput {
+      position: absolute;
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <header><img class="logo" src="static/logo.png" alt="" srcset="" /></header>
+  <form onsubmit="login(event)" id="form">
+    <input type="text" placeholder="Client ID" id="clientID" required />
+    <input type="text" placeholder="Nickname (Optional)" id="nickname" />
+    <input type="text" placeholder="Avatar Url (Optional)" id="avatarUrl" />
+    <input type="text" placeholder="Room" id="roomID" class="hide" />
+    <input type="submit" value="Start A Free Trial" />
+    <div class="loading">
+      <div class="loader"></div>
+    </div>
+  </form>
+</body>
+<script>
+  module = {};
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.4/bluebird.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/imkit/imkit-js-lib@3.0.7/lib/imkit-js-api-v3.min.js"></script>
+<script>
+  var loginPath = "/";
+  var form = document.getElementById("form");
+  var inputClientID = document.getElementById("clientID");
+  var inputNickname = document.getElementById("nickname");
+  var inputAvatarUrl = document.getElementById("avatarUrl");
+  var inputRoomID = document.getElementById("roomID");
+
+  if (getParameterByName("room")) {
+    inputRoomID.value = getParameterByName("room");
+  }
+  if (getParameterByName("loginPath")) {
+    loginPath = decodeURIComponent(getParameterByName("loginPath"));
+  }
+
+  var api = new IMKitApi({
+    domain: 'https://chat.fangho.com',
+    clientKey: 'fangho_imkit_0412_2018_001_clientkey',
+    authBase: 'https://chat.fangho.com/auth'
+  });
+
+  var clientID;
+  var nickname;
+  var roomID;
+  function login(event) {
+    event.preventDefault();
+    form.classList.add("isLoading");
+
+    clientID = inputClientID.value;
+    nickname = inputNickname.value || clientID;
+    avatarUrl = inputAvatarUrl.value || null;
+    roomID = inputRoomID.value;
+
+    sign();
+    // sign 拿 token
+    // 是否有填房間
+    //  沒填：轉址
+    //  有填：getRoom 確認房間是否存在
+    //   不存在：createRoom 建房間並加入
+    //   存在：確認clientID是否為成員
+    //    是：轉址
+    //    不是：加入房間後轉址
+  }
+
+  function sign() {
+    console.log(window.IMKitUI)
+    api.auth
+      .sign({
+        id: clientID,
+        nickname: nickname,
+        avatarUrl: avatarUrl
+      })
+      .then(function (data) {
+        try {
+          localStorage.setItem("IMKit-token", data.token);
+        } catch (error) {
+          console.error(error)
+        }
+        if (roomID) {
+          getRoom();
+        } else {
+          document.location.href = loginPath;
+        }
+      });
+  }
+
+  function getRoom() {
+    api.room
+      .getRoom(roomID)
+      .then(function (data) {
+        for (var i = 0; i < data.members.length; i++) {
+          var member = data.members[i];
+          if (member.id === clientID) {
+            document.location.href = loginPath + "?room=" + roomID;
+          }
+        }
+        joinRoom();
+      })
+      .catch(function (error) {
+        createRoom();
+      });
+  }
+
+  function joinRoom() {
+    api.room.joinRoom(roomID).then(function (data) {
+      document.location.href = loginPath + "?room=" + roomID;
+    });
+  }
+
+  function createRoom() {
+    api.room
+      .createRoom({
+        _id: roomID,
+        name: roomID
+      })
+      .then(function (data) {
+        joinRoom();
+      });
+  }
+
+  function getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+      results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return "";
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+  }
+</script>
+
+</html>

@@ -1,0 +1,86 @@
+body {
+  font-family: Helvetica Neue, Microsoft JhengHei, Helvetica, Arial, sans-serif; }
+
+.listSwitch {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-image: url(/static/favicon-192.png);
+  background-color: #deeb61;
+  background-size: 60%;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.7;
+  cursor: pointer; }
+  .listSwitch.up {
+    z-index: 1; }
+  .listSwitch:hover {
+    opacity: 1;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06), 0 2px 32px rgba(0, 0, 0, 0.16); }
+
+.widgetList {
+  position: fixed;
+  height: 0;
+  right: 0;
+  bottom: 490px;
+  white-space: nowrap;
+  direction: rtl; }
+  .widgetList .widget {
+    margin-right: 20px;
+    bottom: 0;
+    position: relative;
+    background-color: #fff;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+    transition: bottom, 0.3s;
+    display: inline-block;
+    direction: ltr; }
+    .widgetList .widget.hide {
+      bottom: -455px; }
+    .widgetList .widget .widgetHeader {
+      width: 100%;
+      height: 30px;
+      white-space: nowrap;
+      background-color: #deeb61;
+      display: flex;
+      cursor: pointer; }
+      .widgetList .widget .widgetHeader .text {
+        flex-grow: 1;
+        flex-shrink: 1;
+        line-height: 30px;
+        color: #333;
+        padding: 0 8px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        width: 100%; }
+      .widgetList .widget .widgetHeader .actionBtn {
+        flex-grow: 0;
+        flex-shrink: 0;
+        width: 30px;
+        height: 30px;
+        display: inline-block;
+        box-sizing: border-box;
+        padding: 8px;
+        opacity: 0.6;
+        cursor: pointer; }
+        .widgetList .widget .widgetHeader .actionBtn:hover {
+          opacity: 1; }
+        .widgetList .widget .widgetHeader .actionBtn i img {
+          display: block;
+          width: 100%;
+          height: 100%; }
+    .widgetList .widget .widgetIframe {
+      width: 340px;
+      height: 460px;
+      display: block;
+      border: none; }
+  .widgetList #roomlist.hide {
+    bottom: -490px;
+    margin-right: -260px; }
+  .widgetList #roomlist .widgetHeader {
+    cursor: default; }
+
+.template {
+  display: none; }
