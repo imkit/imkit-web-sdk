@@ -121,7 +121,7 @@
   module = {};
 </script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.4/bluebird.min.js"></script>
-<script src="//cdn.jsdelivr.net/gh/imkit/imkit-js-lib@3.0.7/lib/imkit-js-api-v3.min.js"></script>
+<script src="//cdn.jsdelivr.net/gh/imkit/imkit-js-lib@3.0.18/lib/imkit-js-api-v3.web.js"></script>
 <script>
   var loginPath = "/";
   var form = document.getElementById("form");
@@ -139,8 +139,7 @@
 
   var api = new IMKitApi({
     domain: 'https://chat.fangho.com',
-    clientKey: 'fangho_imkit_0412_2018_001_clientkey',
-    authBase: 'https://chat.fangho.com/auth'
+    clientKey: 'fangho_imkit_0412_2018_001_clientkey'
   });
 
   var clientID;
@@ -170,13 +169,12 @@
     console.log(window.IMKitUI)
     api.auth
       .sign({
-        id: clientID,
-        nickname: nickname,
-        avatarUrl: avatarUrl
+        id: clientID
       })
       .then(function (data) {
+        console.log(data)
         try {
-          localStorage.setItem("IMKit-token", data.token);
+          localStorage.setItem("IMKit-token", data.result.token);
         } catch (error) {
           console.error(error)
         }
