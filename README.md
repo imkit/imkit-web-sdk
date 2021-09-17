@@ -8,11 +8,9 @@ You can explore more versions in different languages as below.
 - Japanese
 
 ## Sample
-
-- [Basic Sample](https://github.com/imkit/imkit-web-sdk/blob/master/docs/en/DEMO.md), using [IMKit Web SDK](https://github.com/imkit/imkit-web-sdk/).
-- [Widget Sample](https://github.com/imkit/imkit-web-sdk/blob/master/demo/iframe.html), using [IMKit Web SDK](https://github.com/imkit/imkit-web-sdk/).
-
-> You can also visit [PinChat](https://pinchat.me) and sign up an account to experience chat functions of IMKit Web SDK.
+                 
+- [Basic Sample](https://github.com/imkit/imkit-web-sdk/blob/master/docs/en/README.md)
+- [Widget Sample](https://github.com/imkit/imkit-web-sdk/blob/master/demo/iframe.html)
 
 ## Concept
 
