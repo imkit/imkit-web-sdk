@@ -196,6 +196,7 @@
   "Send Request.Message.date.title": "リクエストの日付と時刻メッセージを送ります",
   "Send Request.Message.text.title": "リクエストのテキストメッセージを送信",
   "Request Reply Message": "要求応答メッセージ",
+  "Request.Reply.Message.tooltip": "返信メッセージを要求します",
   "Request.Message.title": "題名",
   "Request.Message.title.placeholder": "タイトルを入力してください",
   "Request.Message.email": "Eメール",

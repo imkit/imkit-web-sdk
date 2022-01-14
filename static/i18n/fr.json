@@ -192,6 +192,7 @@
   "Send Request.Message.date": "Date d'envoi de la demande et le message de temps",
   "Send Request.Message.text": "Envoyer des messages texte de demande",
   "Request Reply Message": "Demande message de réponse",
+  "Request.Reply.Message.tooltip": "Demander un message de réponse",
   "Request.Message.title": "Titre",
   "Request.Message.title.placeholder": "S'il vous plaît entrer un titre",
   "Request.Message.email": "E-mail",

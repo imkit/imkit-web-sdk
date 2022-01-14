@@ -196,6 +196,7 @@
   "Send Request.Message.date.title": "요청 날짜 및 시간 메시지 보내기",
   "Send Request.Message.text.title": "요청 문자 메시지를 보내기",
   "Request Reply Message": "요청 응답 메시지",
+  "Request.Reply.Message.tooltip": "회신 메시지 요청",
   "Request.Message.title": "표제",
   "Request.Message.title.placeholder": "제목을 입력하세요",
   "Request.Message.email": "이메일",

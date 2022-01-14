@@ -195,6 +195,7 @@
   "Send Request.Message.date.title": "傳送請求日期時間訊息",
   "Send Request.Message.text.title": "傳送請求文字訊息",
   "Request Reply Message": "請求回覆訊息",
+  "Request.Reply.Message.tooltip": "請求回覆訊息",
   "Request.Message.title": "標題",
   "Request.Message.title.placeholder": "請輸入標題",
   "Request.Message.email": "信箱",
