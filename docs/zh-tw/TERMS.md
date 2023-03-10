@@ -1,6 +1,6 @@
 # 使用者條款
 
-本使用條款是就[樂堤科技有限公司](http://funtek.co/)（以下稱「**FUNTEK**」）以所擁有之 [IMKit 網站](https://imkit.io/)及相關之 iOS/Android App（以下稱「**IMKit**」) 的使用條件（以下稱「**本條款**」）， 由使用本服務的用戶（以下稱「**您**」）與本公司間訂定的條款。關於 IMKit 就個人資料之保護政策請參閱 [IMKit 隱私權政策](https://github.com/imkit/imkit-web-sdk/blob/master/docs/zh-tw/PRIVACY.md)。
+本使用條款是就[樂堤科技有限公司](http://funtek.co/)（以下稱「**FUNTEK**」）以所擁有之 [IMKit 網站](https://imkit.io/)及相關之 iOS、Android、Web（以下稱「**IMKit**」) 的使用條件（以下稱「**本條款**」）， 由使用本服務的用戶（以下稱「**您**」）與本公司間訂定的條款。關於 IMKit 就個人資料之保護政策請參閱 [IMKit 隱私權政策](https://github.com/imkit/imkit-web-sdk/blob/master/docs/zh-tw/PRIVACY.md)。
 
 ## ㄧ、定義
 
