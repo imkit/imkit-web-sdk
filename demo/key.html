@@ -48,7 +48,7 @@
         letter-spacing: 1px;
       }
 
-      input[type="submit"],
+      input[type='submit'],
       .button {
         background-color: #eee;
         cursor: pointer;
@@ -61,7 +61,7 @@
         text-decoration: none;
       }
 
-      input[type="submit"]:hover,
+      input[type='submit']:hover,
       .button:hover {
         background-color: #ddd;
       }
@@ -71,7 +71,7 @@
         text-align: center;
       }
 
-      form.isLoading input[type="submit"] {
+      form.isLoading input[type='submit'] {
         display: none;
       }
 
@@ -150,27 +150,27 @@
   <script src="//cdn.jsdelivr.net/npm/node-forge@0.7.0/dist/forge.min.js"></script>
   <script src="//cdn.jsdelivr.net/gh/imkit/imkit-js-lib@3.0.22/lib/imkit-js-api-v3.web.js"></script>
   <script>
-    var loginPath = "/";
-    var form = document.getElementById("form");
-    var inputClientID = document.getElementById("clientID");
-    var inputNickname = document.getElementById("nickname");
-    var inputAvatarUrl = document.getElementById("avatarUrl");
-    var inputRoomID = document.getElementById("roomID");
-    var privateKey = localStorage.getItem("IMKit-privateKey") || "";
-    var publicKey = localStorage.getItem("IMKit-publicKey") || "";
+    var loginPath = '/';
+    var form = document.getElementById('form');
+    var inputClientID = document.getElementById('clientID');
+    var inputNickname = document.getElementById('nickname');
+    var inputAvatarUrl = document.getElementById('avatarUrl');
+    var inputRoomID = document.getElementById('roomID');
+    var privateKey = localStorage.getItem('IMKit-privateKey') || '';
+    var publicKey = localStorage.getItem('IMKit-publicKey') || '';
 
-    if (getParameterByName("room")) {
-      inputRoomID.value = getParameterByName("room");
+    if (getParameterByName('room')) {
+      inputRoomID.value = getParameterByName('room');
     }
-    if (getParameterByName("loginPath")) {
-      loginPath = decodeURIComponent(getParameterByName("loginPath"));
+    if (getParameterByName('loginPath')) {
+      loginPath = decodeURIComponent(getParameterByName('loginPath'));
     }
 
     setPrivateKey(privateKey);
     setPublicKey(publicKey);
 
     var api = new IMKitApi({
-      domain: 'https://chat.fangho.com',
+      domain: 'https://imkit-dev.funtek.io',
       clientKey: 'fangho_imkit_0412_2018_001_clientkey'
     });
 
@@ -180,18 +180,18 @@
     function login(event) {
       event.preventDefault();
       if (!privateKey || !publicKey) {
-        alert("Please Select or Genetate Key");
+        alert('Please Select or Genetate Key');
         return;
       }
-      form.classList.add("isLoading");
+      form.classList.add('isLoading');
 
       clientID = inputClientID.value;
       nickname = inputNickname.value || clientID;
-      avatarUrl = inputAvatarUrl.value || "";
+      avatarUrl = inputAvatarUrl.value || '';
       roomID = inputRoomID.value;
 
-      localStorage.setItem("IMKit-privateKey", privateKey);
-      localStorage.setItem("IMKit-publicKey", publicKey);
+      localStorage.setItem('IMKit-privateKey', privateKey);
+      localStorage.setItem('IMKit-publicKey', publicKey);
       sign();
       // sign 拿 token
       // 是否有填房間
@@ -215,9 +215,9 @@
         .then(function(data) {
           api.config.token = data.token;
           try {
-            localStorage.setItem("IMKit-token", data.result.token);
+            localStorage.setItem('IMKit-token', data.result.token);
           } catch (error) {
-            console.error(error)
+            console.error(error);
           }
           if (roomID) {
             getRoom();
@@ -234,7 +234,7 @@
           for (var i = 0; i < data.members.length; i++) {
             var member = data.members[i];
             if (member.id === clientID) {
-              document.location.href = loginPath + "?room=" + roomID;
+              document.location.href = loginPath + '?room=' + roomID;
             }
           }
           joinRoom();
@@ -246,7 +246,7 @@
 
     function joinRoom() {
       api.room.joinRoom(roomID).then(function(data) {
-        document.location.href = loginPath + "?room=" + roomID;
+        document.location.href = loginPath + '?room=' + roomID;
       });
     }
 
@@ -263,12 +263,12 @@
 
     function getParameterByName(name, url) {
       if (!url) url = window.location.href;
-      name = name.replace(/[\[\]]/g, "\\$&");
-      var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+      name = name.replace(/[\[\]]/g, '\\$&');
+      var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
         results = regex.exec(url);
       if (!results) return null;
-      if (!results[2]) return "";
-      return decodeURIComponent(results[2].replace(/\+/g, " "));
+      if (!results[2]) return '';
+      return decodeURIComponent(results[2].replace(/\+/g, ' '));
     }
 
     function genetateKey() {
@@ -283,13 +283,13 @@
         return;
       }
       privateKey = key;
-      document.getElementById("privateKeyText").innerText = key;
+      document.getElementById('privateKeyText').innerText = key;
       document
-        .getElementById("privateKeySave")
-        .setAttribute("href", buildHref(key));
+        .getElementById('privateKeySave')
+        .setAttribute('href', buildHref(key));
       document
-        .getElementById("privateKeySave")
-        .setAttribute("download", "_rsa");
+        .getElementById('privateKeySave')
+        .setAttribute('download', '_rsa');
     }
 
     function setPublicKey(key) {
@@ -297,18 +297,18 @@
         return;
       }
       publicKey = key;
-      document.getElementById("publicKeyText").innerText = key;
+      document.getElementById('publicKeyText').innerText = key;
       document
-        .getElementById("publicKeySave")
-        .setAttribute("href", buildHref(key));
+        .getElementById('publicKeySave')
+        .setAttribute('href', buildHref(key));
       document
-        .getElementById("publicKeySave")
-        .setAttribute("download", "_rsa.pub");
+        .getElementById('publicKeySave')
+        .setAttribute('download', '_rsa.pub');
     }
 
     function buildHref(data) {
       return (
-        "data:application/octet-stream;charset=utf-8;base64," +
+        'data:application/octet-stream;charset=utf-8;base64,' +
         window.btoa(data)
       );
     }
@@ -320,10 +320,10 @@
       var reader = new FileReader();
 
       reader.onload = function(e) {
-        if (key === "privateKey") {
-          setPrivateKey(window.atob(e.target.result.split(",")[1]));
+        if (key === 'privateKey') {
+          setPrivateKey(window.atob(e.target.result.split(',')[1]));
         } else {
-          setPublicKey(window.atob(e.target.result.split(",")[1]));
+          setPublicKey(window.atob(e.target.result.split(',')[1]));
         }
       };
 
